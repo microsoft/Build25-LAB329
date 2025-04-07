@@ -10,6 +10,7 @@
 - [Prerequisites](#prerequisites)
 - [Lab Objectives](#lab-objectives)
 - [What is Knowledge Distillation?](#what-is-knowledge-distillation)
+- [Knowledge Distillation Flow Chart](#knowledge-distillation-flow-chart)
 - [Option 1: Cloud-Based Distillation Using Azure AI Foundry](#option-1-cloud-based-distillation-using-azure-ai-foundry)
 - [Option 2: Local-Based Distillation](#option-2-local-based-distillation)
 - [Evaluating Your Distilled Model](#evaluating-your-distilled-model)
@@ -52,13 +53,36 @@ The process works as follows:
 3. A smaller model (like DistilGPT-2) is trained to produce similar outputs given the same prompts
 4. The resulting student model is more efficient while preserving much of the teacher's capabilities
 
-![Distillation Process Diagram](needaimage.png)
-
 Distillation offers several benefits:
 - Faster inference times
 - Lower computational resource requirements
 - Reduced deployment costs
 - Possibility of on-device AI applications
+
+## Knowledge Distillation Flow Chart
+
+```mermaid
+flowchart TD
+    A[Teacher Model Preparation] --> A1[Choose large pre-trained teacher model]
+    A1 --> A2[Fine-tune teacher on task-specific data if needed]
+    A2 --> B[Dataset Selection]
+    B --> B1[Curate and preprocess training dataset]
+    B1 --> B2[Include labeled data or generate pseudo-labels with teacher]
+    B2 --> C[Knowledge Distillation]
+    C --> C1[Pass training data through teacher model]
+    C1 --> C2[Extract probabilities/representations as soft labels]
+    C2 --> D[Student Model Training]
+    D --> D1[Initialize smaller student model]
+    D1 --> D2[Train student using hard and soft labels]
+    D2 --> E[Optimization]
+    E --> E1[Apply loss functions to minimize teacher-student difference]
+    E1 --> E2[Regularize student model for better generalization]
+    E2 --> F[Evaluation]
+    F --> F1[Assess student performance with validation metrics]
+    F1 --> F2[Compare student performance with teacher]
+    F2 --> G[Deployment]
+    G --> G1[Deploy smaller, optimized student model to production]
+```
 
 Now let's get started with the practical implementation!
 

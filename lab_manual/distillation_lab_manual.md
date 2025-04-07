@@ -62,7 +62,7 @@ Distillation offers several benefits:
 ## Knowledge Distillation Flow Chart
 
 ```mermaid
-flowchart TD
+graph TD
     A[Teacher Model Preparation] --> A1[Choose large pre-trained teacher model]
     A1 --> A2[Fine-tune teacher on task-specific data if needed]
     A2 --> B[Dataset Selection]

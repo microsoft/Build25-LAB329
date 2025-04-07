@@ -1,13 +1,20 @@
-Local A100 GPU Implementation Overview
+## Local A100 GPU Implementation Overview
 
-local_gpu_train.py: A script specifically optimized for training on A100 GPUs with features like:
-
-Mixed precision training (FP16) for improved performance
-Multi-GPU support with Distributed Data Parallel (DDP)
-Gradient accumulation for training with larger batch sizes
-Automatic detection of available GPUs
+- local_gpu_train.py: A script specifically optimized for training on A100 GPUs with features like:
+- Mixed precision training (FP16) for improved performance
+- Multi-GPU support with Distributed Data Parallel (DDP)
+- Gradient accumulation for training with larger batch sizes
+- Automatic detection of available GPUs
 generate_local_data.py: A script to generate training data locally using OpenAI models without requiring Azure
 
+Requirements:
+- Azure [A100 Compute Instance with GPU support](https://learn.microsoft.com/azure/virtual-machines/sizes/gpu-accelerated/nca100v4-series?tabs=sizebasic)
+- Python 3.8 or higher
+- PyTorch 1.9 or higher with CUDA support
+- Transformers library from Hugging Face
+- OpenAI API key for data generation (if using OpenAI models)
+
+## Edit Requirememnts.txt to support Local Deploment
 requirements.txt: Added necessary dependencies for local A100 GPU training ensure you uncomment libraries required
 
 ## Unit tests: 

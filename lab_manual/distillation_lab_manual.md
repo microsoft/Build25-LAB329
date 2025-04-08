@@ -86,6 +86,33 @@ flowchart TD
 
 Now let's get started with the practical implementation!
 
+## Clone the GitHub Repo and resources to your Local Machine 
+
+To clone a repository, you can follow these steps:
+
+1. **Install Git**: If Git is not already installed on your machine, download and install it from [git-scm.com](https://git-scm.com/).
+
+2. **Get the Repository URL**: Clone the repository `https://github.com/microsoft/Build25-LAB329`.
+
+3. **Open a Terminal or Command Prompt**: On Windows, use Command Prompt, PowerShell, or a Git Bash terminal. On macOS or Linux, use a terminal.
+
+4. **Navigate to Your Desired Folder**: Use the `cd` command to move into the directory where you want the repository to be cloned:
+   ```
+   cd path/to/your/folder
+   ```
+
+5. **Clone the Repository**: Use the `git clone` command followed by the repository URL:
+   ```
+   git clone https://github.com/microsoft/Build25-LAB329 
+   ```
+
+6. **Access the Cloned Repository**: After cloning, navigate to the directory of the cloned repository:
+   ```
+   cd repository
+   ```
+
+Now you’re ready to work with the repository on your local machine!
+
 ## Option 1: Cloud-Based Distillation Using Azure AI Foundry
 
 Azure AI Foundry provides a managed environment for large-scale machine learning tasks. This approach is ideal for distilling larger models or when you need substantial compute resources.

@@ -24,7 +24,12 @@ from config.config import (
     LEARNING_RATE,
     NUM_EPOCHS,
     MAX_SEQ_LENGTH,
-    STUDENT_MODEL_NAME
+    STUDENT_MODEL_NAME,
+    AZURE_OPENAI_ENDPOINT,
+    AZURE_OPENAI_API_KEY,
+    AZURE_OPENAI_API_VERSION,
+    AZURE_OPENAI_DEPLOYMENT_NAME,
+    TEACHER_MODEL_NAME
 )
 
 def parse_args():
@@ -47,6 +52,11 @@ def parse_args():
         default="./outputs",
         help="Directory to save the model"
     )
+    parser.add_argument(
+        "--use_azure_openai",
+        action="store_true",
+        help="Flag to use Azure OpenAI services"
+    )
     return parser.parse_args()
 
 def train():
@@ -59,6 +69,18 @@ def train():
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
+    
+    # Log Azure OpenAI configuration if using it
+    if args.use_azure_openai:
+        print(f"Using Azure OpenAI with deployment: {AZURE_OPENAI_DEPLOYMENT_NAME}")
+        print(f"Azure OpenAI endpoint: {AZURE_OPENAI_ENDPOINT}")
+        print(f"Teacher model: {TEACHER_MODEL_NAME}")
+        
+        # Set environment variables for Azure OpenAI
+        os.environ["OPENAI_API_TYPE"] = "azure"
+        os.environ["OPENAI_API_BASE"] = AZURE_OPENAI_ENDPOINT
+        os.environ["OPENAI_API_KEY"] = AZURE_OPENAI_API_KEY
+        os.environ["OPENAI_API_VERSION"] = AZURE_OPENAI_API_VERSION
     
     # Load the student model and tokenizer
     print(f"Loading student model: {args.student_model}")

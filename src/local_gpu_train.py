@@ -29,7 +29,12 @@ from config.config import (
     LEARNING_RATE,
     NUM_EPOCHS,
     MAX_SEQ_LENGTH,
-    STUDENT_MODEL_NAME
+    STUDENT_MODEL_NAME,
+    AZURE_OPENAI_ENDPOINT,
+    AZURE_OPENAI_API_KEY,
+    AZURE_OPENAI_API_VERSION,
+    AZURE_OPENAI_DEPLOYMENT_NAME,
+    TEACHER_MODEL_NAME
 )
 
 # Set up logging
@@ -106,6 +111,11 @@ def parse_args():
         type=int,
         default=-1,
         help="For distributed training: local_rank"
+    )
+    parser.add_argument(
+        "--use_azure_openai",
+        action="store_true",
+        help="Flag to use Azure OpenAI services for generating additional training data"
     )
     return parser.parse_args()
 
@@ -297,6 +307,18 @@ def main():
     
     # Create output directory
     os.makedirs(args.output_dir, exist_ok=True)
+    
+    # Configure Azure OpenAI if requested
+    if args.use_azure_openai:
+        logger.info(f"Using Azure OpenAI with deployment: {AZURE_OPENAI_DEPLOYMENT_NAME}")
+        logger.info(f"Azure OpenAI endpoint: {AZURE_OPENAI_ENDPOINT}")
+        logger.info(f"Teacher model: {TEACHER_MODEL_NAME}")
+        
+        # Set environment variables for Azure OpenAI
+        os.environ["OPENAI_API_TYPE"] = "azure"
+        os.environ["OPENAI_API_BASE"] = AZURE_OPENAI_ENDPOINT
+        os.environ["OPENAI_API_KEY"] = AZURE_OPENAI_API_KEY
+        os.environ["OPENAI_API_VERSION"] = AZURE_OPENAI_API_VERSION
     
     # Detect number of GPUs
     world_size = torch.cuda.device_count()

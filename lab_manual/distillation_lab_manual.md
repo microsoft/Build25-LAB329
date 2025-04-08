@@ -11,7 +11,7 @@
 - [Lab Objectives](#lab-objectives)
 - [What is Knowledge Distillation?](#what-is-knowledge-distillation)
 - [Knowledge Distillation Flow Chart](#knowledge-distillation-flow-chart)
-- [Option 1: Cloud-Based Distillation Using Azure AI Foundry](#option-1-cloud-based-distillation-using-azure-ai-foundry)
+- [Option 1: Cloud-Based Distillation Using Microsoft Azure AI Foundry](#option-1-cloud-based-distillation-using-microsoft-azure-ai-foundry)
 - [Option 2: Local-Based Distillation](#option-2-local-based-distillation)
 - [Evaluating Your Distilled Model](#evaluating-your-distilled-model)
 - [Conclusion](#conclusion)
@@ -22,7 +22,7 @@
 Welcome to the Model Distillation Lab! In this hands-on session, you will learn how to distill knowledge from large language models like GPT-4o into smaller, more efficient models. This technique allows you to create compact models that can run faster and with fewer resources while still maintaining much of the capability of their larger counterparts.
 
 This lab manual provides step-by-step instructions for two distillation approaches:
-1. **Cloud-based distillation** using Azure AI Foundry (for those with Azure access)
+1. **Cloud-based distillation** using Microsoft Azure AI Foundry (for those with Azure access)
 2. **Local-based distillation** on your own machine (for everyone)
 
 By the end of this lab, you'll understand the principles of knowledge distillation and have practical experience implementing it using Python and popular machine learning frameworks.
@@ -32,7 +32,7 @@ By the end of this lab, you'll understand the principles of knowledge distillati
 - Basic Python programming knowledge
 - Familiarity with machine learning concepts
 - A computer with internet access
-- For cloud-based approach: Azure account with access to Azure AI Foundry
+- For cloud-based approach: Azure account with access to Microsoft Azure AI Foundry
 - For local-based approach: Python 3.7+ installed on your machine
 
 ## Lab Objectives
@@ -113,9 +113,9 @@ To clone a repository, you can follow these steps:
 
 Now you’re ready to work with the repository on your local machine!
 
-## Option 1: Cloud-Based Distillation Using Azure AI Foundry
+## Option 1: Cloud-Based Distillation Using Microsoft Azure AI Foundry
 
-Azure AI Foundry provides a managed environment for large-scale machine learning tasks. This approach is ideal for distilling larger models or when you need substantial compute resources.
+Microsoft Azure AI Foundry provides a managed environment for large-scale machine learning tasks. This approach is ideal for distilling larger models or when you need substantial compute resources.
 
 ### Step 1: Configure Your Environment (5 minutes)
 
@@ -123,7 +123,7 @@ Azure AI Foundry provides a managed environment for large-scale machine learning
 2. Update the Azure configuration settings with your credentials:
 
 ```python
-# Azure AI Foundry Configuration
+# Microsoft Azure AI Foundry Configuration
 AZURE_ML_SUBSCRIPTION_ID = "your-subscription-id"
 AZURE_ML_RESOURCE_GROUP = "your-resource-group"
 AZURE_ML_WORKSPACE_NAME = "your-workspace-name"
@@ -160,16 +160,16 @@ You can adjust the number of examples based on your time constraints. For this l
 
 ### Step 3: Launch the Distillation Job (5 minutes)
 
-The script from Step 2 automatically launches a distillation training job in Azure AI Foundry after generating the data. You'll see output like:
+The script from Step 2 automatically launches a distillation training job in Microsoft Azure AI Foundry after generating the data. You'll see output like:
 
 ```
 Distillation job created with ID: job-123456-789
-You can monitor the job in the Azure AI Foundry portal.
+You can monitor the job in the Microsoft Azure AI Foundry portal.
 ```
 
 ### Step 4: Monitor Training Progress (20 minutes)
 
-1. Navigate to the Azure AI Foundry portal
+1. Navigate to the Microsoft Azure AI Foundry portal
 2. Go to your workspace
 3. Select "Jobs" in the left navigation
 4. Find and click on your distillation job
@@ -184,14 +184,14 @@ While the job runs, take some time to review the `distillation_train.py` script 
 
 Once training completes:
 
-1. In the Azure AI Foundry portal, navigate to "Models"
+1. In the Microsoft Azure AI Foundry portal, navigate to "Models"
 2. Find your newly registered model (default name: "DistilledModel")
 3. You can now:
    - Download the model for local use
    - Deploy it as an endpoint
    - Use it in other Azure ML pipelines
 
-Congratulations! You've successfully distilled knowledge from GPT-4o into a smaller model using Azure AI Foundry.
+Congratulations! You've successfully distilled knowledge from GPT-4o into a smaller model using Microsoft Azure AI Foundry.
 
 ## Option 2: Local-Based Distillation
 
@@ -304,7 +304,7 @@ Knowledge distillation is a powerful technique for creating more efficient model
 
 - [Knowledge Distillation in NLP (Blog Post)](https://towardsdatascience.com/knowledge-distillation-in-natural-language-processing-9f758493cfff)
 - [Hugging Face Transformers Documentation](https://huggingface.co/docs/transformers/index)
-- [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)
+- [Microsoft Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)
 - [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)
 - [DistilBERT Paper: Smaller, faster, cheaper, lighter Transformer models](https://arxiv.org/abs/1910.01108)
 

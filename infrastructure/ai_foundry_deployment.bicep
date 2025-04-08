@@ -1,4 +1,4 @@
-@description('Project name for the AI Foundry Hub')
+@description('Project name for the Microsoft Azure AI Foundry Hub')
 param projectName string
 
 @description('Azure region to deploy resources')
@@ -173,7 +173,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = if (enablePrivate
   }
 }
 
-// AI Foundry Hub Project
+// Microsoft Azure AI Foundry Hub Project
 resource aiFoundryProject 'Microsoft.MachineLearningServices/workspaces@2023-06-01-preview' = {
   name: aiFoundryProjectName
   location: location
@@ -181,9 +181,8 @@ resource aiFoundryProject 'Microsoft.MachineLearningServices/workspaces@2023-06-
   identity: {
     type: 'SystemAssigned'
   }
-  properties: {
-    friendlyName: 'AI Foundry Hub - ${projectName}'
-    description: 'AI Foundry Hub Project for ${projectName}'
+  properties: {    friendlyName: 'Microsoft Azure AI Foundry Hub - ${projectName}'
+    description: 'Microsoft Azure AI Foundry Hub Project for ${projectName}'
     storageAccount: storageAccount.id
     containerRegistry: acr.id
     keyVault: keyVault.id

@@ -1,5 +1,5 @@
 """
-Training script for model distillation in Azure AI Foundry.
+Training script for model distillation in Microsoft Azure AI Foundry.
 This script trains a smaller student model to mimic the outputs of LLM.
 """
 

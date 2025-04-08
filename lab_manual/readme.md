@@ -4,7 +4,7 @@ This lab manual is designed specifically for beginners and includes:
 
 - Introduction section explaining knowledge distillation concepts
 - Detailed instructions for both:
-- Cloud-based distillation using Azure AI Foundry
+- Cloud-based distillation using Microsoft Azure AI Foundry
 - Local-based distillation for those without Azure access
 - Time allocations for each step to ensure completion within the specified:
 - 50 minutes for hands-on activities

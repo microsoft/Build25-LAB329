@@ -1,13 +1,13 @@
 """
-Configuration settings for the distillation project using Azure AI Foundry portal with Llama-4-Scout-17B-16E as teacher and Phi-4 as student.
+Configuration settings for the distillation project using Microsoft Azure AI Foundry portal with Llama-4-Scout-17B-16E as teacher and Phi-4 as student.
 """
 
-# Azure AI Foundry Configuration
+# Microsoft Azure AI Foundry Configuration
 AZURE_ML_SUBSCRIPTION_ID = "your-subscription-id"
 AZURE_ML_RESOURCE_GROUP = "your-resource-group"
 AZURE_ML_WORKSPACE_NAME = "your-workspace-name"
 
-# Azure AI Foundry Model Configuration
+# Microsoft Azure AI Foundry Model Configuration
 AZURE_OPENAI_ENDPOINT = "https://your-endpoint.openai.azure.com/"
 AZURE_OPENAI_API_KEY = "your-api-key"
 AZURE_OPENAI_API_VERSION = "2023-12-01-preview"  # Update with the latest API version

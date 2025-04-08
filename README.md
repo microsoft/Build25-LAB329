@@ -1,5 +1,5 @@
 # Build 2025 Lab329 
-## Fine-Tune End-to-End Distillation Models with Azure OpenAI Service and Azure AI Foundry Project Structure
+## Fine-Tune End-to-End Distillation Models with Azure OpenAI Service and Microsoft Azure AI Foundry Project Structure
 
 The solution consists of the following components:
 
@@ -10,7 +10,7 @@ The solution consists of the following components:
 1. Utility Modules:
 
     1. openai_utils.py: Handles interactions with the Azure OpenAI API to generate responses from the teacher model.
-    1. azure_ml_utils.py: Provides functionality to interact with Azure ML and AI Foundry services.
+    1. azure_ml_utils.py: Provides functionality to interact with Azure ML and Microsoft Azure AI Foundry services.
     1. data_utils.py: Contains utilities for data processing, dataset creation, and data loading.
     1. Training Script (src/distillation_train.py): The core training script that runs in Azure ML to perform the actual distillation process.
     1. Main Orchestration Script (src/distill_llama_to_phi.py): Orchestrates the entire distillation workflow.
@@ -22,7 +22,7 @@ The solution implements knowledge distillation, where a smaller, more efficient 
 
 1. Prepare and Register Dataset: The generated training examples are saved and registered as a dataset in Azure ML.
 
-1. Submit Training Job: A distillation job is created and submitted to Azure AI Foundry, which trains the student model to mimic the LLMs responses.
+1. Submit Training Job: A distillation job is created and submitted to Microsoft Azure AI Foundry, which trains the student model to mimic the LLMs responses.
 
 1. Monitor and Register Model: The training job is monitored, and upon completion, the distilled model is registered in Azure ML.
 
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 ```
 python src/distill_llama_to_phi.py --num_examples 200 --student_model Phi-4 --compute_target your-compute-target
 ```
-4. Monitor the job in the Azure AI Foundry portal.
+4. Monitor the job in the Microsoft Azure AI Foundry portal.
 
 5. Once completed, you can access and use your distilled model in your applications.
 
@@ -50,7 +50,7 @@ You can customize this solution by:
 - Adjusting the training hyperparameters in config.py
 - Extending the distillation process with advanced techniques like temperature scaling or additional loss functions
 
-This solution provides a complete framework for distilling knowledge from LLM into SLM, more efficient models using Azure AI Foundry's infrastructure.
+This solution provides a complete framework for distilling knowledge from LLM into SLM, more efficient models using Microsoft Azure AI Foundry's infrastructure.
 
 ## Contributing
 

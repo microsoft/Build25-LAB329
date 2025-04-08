@@ -1,9 +1,9 @@
-# Microsoft AI Foundry Hub Project Setup Guide
+# Microsoft Azure AI Foundry Hub Project Setup Guide
 
 This guide provides step-by-step instructions for setting up a [Microsoft Azure AI Foundry](https://ai.azure.com) Hub Project, deploying Llama-4-Scout-17B-16E as a teacher model and Phi-4 as a student model, and configuring a Standard_ND96isr_H100_v5 compute node. The guide is organized into logical sections to facilitate the setup process.
 
 ## Table of Contents
-1. [Introduction to Microsoft AI Foundry](#introduction-to-microsoft-ai-foundry)
+1. [Introduction to Microsoft Azure AI Foundry](#introduction-to-microsoft-azure-ai-foundry)
 2. [Prerequisites](#prerequisites)
 3. [Creating an AI Foundry Hub Project](#creating-an-ai-foundry-hub-project)
 4. [Setting Up Azure Resources](#setting-up-azure-resources)
@@ -14,9 +14,9 @@ This guide provides step-by-step instructions for setting up a [Microsoft Azure 
 9. [Automation with Bicep Templates](#automation-with-bicep-templates)
 10. [Troubleshooting](#troubleshooting)
 
-## Introduction to Microsoft AI Foundry
+## Introduction to Microsoft Azure AI Foundry
 
-Microsoft AI Foundry is a platform designed to simplify the deployment and management of advanced AI models in Azure. It provides the infrastructure and tools needed to deploy and operate large language models like GPT-4o efficiently.
+Microsoft Azure AI Foundry is a platform designed to simplify the deployment and management of advanced AI models in Azure. It provides the infrastructure and tools needed to deploy and operate large language models like GPT-4o efficiently.
 
 ### Key Features
 - Streamlined model deployment
@@ -32,7 +32,7 @@ Before you begin, ensure you have the following:
 - An active Azure subscription with appropriate permissions
 - Azure CLI installed and configured (version 2.40.0 or later)
 - Bicep CLI installed (version 0.9.1 or later)
-- Access to Microsoft AI Foundry service
+- Access to Microsoft Azure AI Foundry service
 - Quota for Standard_ND96isr_H100_v5 GPUs in your target region
 - Service principal with contributor access to your subscription
 - Knowledge of your organization's networking requirements
@@ -257,11 +257,11 @@ az deployment group create \
 
 If you encounter issues not covered in this guide:
 
-1. Check the [Microsoft AI Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
+1. Check the [Microsoft Azure AI Foundry documentation](https://learn.microsoft.com/azure/ai-foundry/)
 2. Open a support ticket through the Azure portal
 3. Post on Microsoft Q&A with tag "ai-foundry"
 4. Check for service health notifications in the Azure portal
 
 ---
 
-This guide is current as of April 2025. Microsoft AI Foundry services and features may change over time. Always refer to the official documentation for the most up-to-date information.
+This guide is current as of April 2025. Microsoft Azure AI Foundry services and features may change over time. Always refer to the official documentation for the most up-to-date information.

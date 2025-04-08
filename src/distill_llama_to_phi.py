@@ -1,10 +1,10 @@
 """
-Main script for knowledge distillation from Llama-4-Scout-17B-16E to Phi-4 in Azure AI Foundry portal.
+Main script for knowledge distillation from Llama-4-Scout-17B-16E to Phi-4 in Microsoft Azure AI Foundry portal.
 
 This script performs the following steps:
 1. Generates training examples using Llama-4-Scout-17B-16E as the teacher model
 2. Prepares and registers the dataset in Azure ML
-3. Submits a distillation job to Azure AI Foundry using Phi-4 as the student model
+3. Submits a distillation job to Microsoft Azure AI Foundry using Phi-4 as the student model
 4. Monitors the job and registers the final model
 
 Usage:
@@ -58,7 +58,7 @@ def main():
     
     # Parse arguments
     args = parse_args()
-      print("Starting knowledge distillation process from Llama-4-Scout-17B-16E to Phi-4 in Azure AI Foundry...")
+      print("Starting knowledge distillation process from Llama-4-Scout-17B-16E to Phi-4 in Microsoft Azure AI Foundry...")
     
     # Step 1: Generate training examples using Llama-4-Scout-17B-16E
     print(f"Generating {args.num_examples} training examples using {TEACHER_MODEL_NAME}...")
@@ -102,8 +102,8 @@ def main():
     
     print(f"Successfully registered dataset: {dataset.name}, version: {dataset.version}")
     
-    # Step 3: Submit distillation job to Azure AI Foundry
-    print("Submitting distillation job to Azure AI Foundry...")
+    # Step 3: Submit distillation job to Microsoft Azure AI Foundry
+    print("Submitting distillation job to Microsoft Azure AI Foundry...")
     
     # The source directory should include all necessary scripts for training
     source_dir = os.path.dirname(os.path.abspath(__file__))
@@ -122,7 +122,7 @@ def main():
         return
     
     print(f"Distillation job created with ID: {job.id}")
-    print(f"You can monitor the job in the Azure AI Foundry portal.")
+    print(f"You can monitor the job in the Microsoft Azure AI Foundry portal.")
     print(f"Once completed, the distilled model will be registered as '{STUDENT_MODEL_NAME}'.")
 
 if __name__ == "__main__":

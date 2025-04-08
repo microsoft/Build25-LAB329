@@ -1,5 +1,5 @@
 """
-Utility functions for interacting with Azure Machine Learning and AI Foundry.
+Utility functions for interacting with Azure Machine Learning and Microsoft Azure AI Foundry.
 """
 
 import os

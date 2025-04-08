@@ -1,6 +1,6 @@
-# AI Foundry Deployment Guide
+# Microsoft Azure AI Foundry Deployment Guide
 
-This guide provides step-by-step instructions for deploying the AI Foundry infrastructure using the Azure Bicep template (`ai_foundry_deployment.bicep`).
+This guide provides step-by-step instructions for deploying the Microsoft Azure AI Foundry infrastructure using the Azure Bicep template (`ai_foundry_deployment.bicep`).
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ This guide provides step-by-step instructions for deploying the AI Foundry infra
 
 The deployment creates the following Azure resources:
 
-- **Azure Machine Learning Workspace**: AI Foundry Hub project environment
+- **Azure Machine Learning Workspace**: Microsoft Azure AI Foundry Hub project environment
 - **Storage Account**: For storing models and training data (with HNS enabled)
 - **Azure Container Registry**: For storing Docker images
 - **Key Vault**: For secure storage of secrets
@@ -141,7 +141,7 @@ az deployment group show \
 
 | Parameter | Description | Default Value |
 |-----------|-------------|---------------|
-| projectName | Name for your AI Foundry project | (Required) |
+| projectName | Name for your Microsoft Azure AI Foundry project | (Required) |
 | location | Azure region to deploy resources | Resource group location |
 | environmentType | Environment type (dev, test, prod) | dev |
 | gpuSku | GPU SKU for compute nodes | Standard_ND96isr_H100_v5 |

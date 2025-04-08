@@ -1,6 +1,6 @@
 """
 Local GPU training script for model distillation using A100 GPU.
-This script trains a smaller student model to mimic the outputs of GPT-4o without requiring Azure ML.
+This script trains a smaller Phi-4 student model to mimic the outputs of Llama-4-Scout-17B-16E without requiring Azure ML.
 """
 
 import os
@@ -52,11 +52,10 @@ def parse_args():
         type=str,
         required=True,
         help="Path to the JSONL file containing training data"
-    )
-    parser.add_argument(
+    )    parser.add_argument(
         "--student_model",
         type=str,
-        default="distilgpt2",
+        default=STUDENT_MODEL_NAME,
         help="The student model architecture to use"
     )
     parser.add_argument(

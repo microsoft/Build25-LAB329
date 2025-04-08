@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Test runner for DistillationGPT4o project.
+Test runner for Distillation project.
 This script runs all unit tests in the project.
 
 Usage:

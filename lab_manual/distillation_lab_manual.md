@@ -132,7 +132,7 @@ AZURE_ML_WORKSPACE_NAME = "your-workspace-name"
 AZURE_OPENAI_ENDPOINT = "https://your-endpoint.openai.azure.com/"
 AZURE_OPENAI_API_KEY = "your-api-key"
 AZURE_OPENAI_API_VERSION = "2023-12-01-preview"
-AZURE_OPENAI_DEPLOYMENT_NAME = "gpt-4o"  # Your GPT-4o deployment name
+AZURE_OPENAI_DEPLOYMENT_NAME = "llama-scout-teacher"  # Your Llama-4-Scout-17B-16E deployment name
 ```
 
 3. Install the required dependencies:
@@ -146,7 +146,7 @@ pip install -r requirements.txt
 The first step in distillation is generating training examples using the teacher model (GPT-4o):
 
 ```bash
-python src/distill_gpt4o.py --num_examples 50 --student_model distilgpt2
+python src/distill_llama_to_phi.py --num_examples 50 --student_model Phi-4
 ```
 
 This script:

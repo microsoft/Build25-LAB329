@@ -1,11 +1,11 @@
-# Unit tests for your DistillationGPT4o project.
+# Unit tests for your Distillation project.
 
 ## Test Files:
 
 - test_data_utils.py: Tests for dataset handling, JSONL file operations, and data preparation
 - test_openai_utils.py: Tests for OpenAI client initialization and response generation
 - test_azure_ml_utils.py: Tests for Azure ML operations like client initialization, dataset and model registration
-- test_distill_gpt4o.py: Tests for main script functionality and command-line argument parsing
+- test_distill_llama_to_phi.py: Tests for main script functionality and command-line argument parsing for distilling Llama-4-Scout-17B-16E (teacher model) to Phi-4 (student model)
 - test_distillation_train.py: Tests for the training process and its components
 - test_local_gpu_train.py:  Test for the local GPU implementation
 

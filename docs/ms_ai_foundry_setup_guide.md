@@ -1,13 +1,13 @@
 # Microsoft AI Foundry Hub Project Setup Guide
 
-This guide provides step-by-step instructions for setting up a [Microsoft Azure AI Foundry](https://ai.azure.com) Hub Project, deploying a GPT-4o model, and configuring an A100 compute node. The guide is organized into logical sections to facilitate the setup process.
+This guide provides step-by-step instructions for setting up a [Microsoft Azure AI Foundry](https://ai.azure.com) Hub Project, deploying Llama-4-Scout-17B-16E as a teacher model and Phi-4 as a student model, and configuring an A100 compute node. The guide is organized into logical sections to facilitate the setup process.
 
 ## Table of Contents
 1. [Introduction to Microsoft AI Foundry](#introduction-to-microsoft-ai-foundry)
 2. [Prerequisites](#prerequisites)
 3. [Creating an AI Foundry Hub Project](#creating-an-ai-foundry-hub-project)
 4. [Setting Up Azure Resources](#setting-up-azure-resources)
-5. [Deploying GPT-4o Model](#deploying-gpt-4o-model)
+5. [Deploying Llama-4-Scout and Phi-4 Models](#deploying-llama-4-scout-and-phi-4-models)
 6. [Configuring A100 Compute Node](#configuring-a100-compute-node)
 7. [Testing the Deployment](#testing-the-deployment)
 8. [Monitoring and Management](#monitoring-and-management)
@@ -100,19 +100,31 @@ az acr create \
   --sku Premium
 ```
 
-## Deploying GPT-4o Model
+## Deploying Llama-4-Scout and Phi-4 Models
 
-### Step 1: Access Model Catalog
+### Step 1: Access Model Catalog for Teacher Model
 
 1. In your [Azure AI Foundry Hub Project](https://ai.azure.com), navigate to "Model Catalog"
-2. Search for "GPT-4o" in the catalog
-3. Select the GPT-4o model from the results
+2. Search for "Llama-4-Scout-17B-16E" in the catalog
+3. Select the Llama-4-Scout-17B-16E model from the results
 
-### Step 2: Configure Model Deployment
+### Step 2: Configure Teacher Model Deployment
 
 1. Click "Deploy model"
 2. Configure deployment settings:
-   - Deployment name: A unique name for your deployment
+   - Deployment name: A unique name for your teacher model deployment (e.g., "llama-scout-teacher")
+
+### Step 3: Access Model Catalog for Student Model
+
+1. Return to the "Model Catalog" section
+2. Search for "Phi-4" in the catalog
+3. Select the Phi-4 model from the results
+
+### Step 4: Configure Student Model Deployment
+
+1. Click "Deploy model"
+2. Configure deployment settings:
+   - Deployment name: A unique name for your student model deployment (e.g., "phi4-student")
 
 ## Configuring A100 Compute Node
 
@@ -139,12 +151,17 @@ az acr create \
 3. Configure memory allocation for large model operations
 4. Set up monitoring and alerts for GPU utilization
 
-### Step 3: Attach Compute to Model Deployment
+### Step 3: Attach Compute to Model Deployments
 
-1. Navigate to your GPT-4o deployment settings
+1. Navigate to your Llama-4-Scout-17B-16E deployment settings
 2. Under "Compute configuration," select your A100 compute cluster
 3. Save the configuration
 4. Restart the deployment to apply changes
+
+5. Navigate to your Phi-4 deployment settings
+6. Under "Compute configuration," select your A100 compute cluster (or an appropriate compute for the smaller model)
+7. Save the configuration
+8. Restart the deployment to apply changes
 
 ## Testing the Deployment
 

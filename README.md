@@ -9,16 +9,16 @@ The solution consists of the following components:
 
 1. Utility Modules:
 
-    1. openai_utils.py: Handles interactions with the Azure OpenAI API to generate responses from the GPT-4o teacher model.
+    1. openai_utils.py: Handles interactions with the Azure OpenAI API to generate responses from the teacher model.
     1. azure_ml_utils.py: Provides functionality to interact with Azure ML and AI Foundry services.
     1. data_utils.py: Contains utilities for data processing, dataset creation, and data loading.
     1. Training Script (src/distillation_train.py): The core training script that runs in Azure ML to perform the actual distillation process.
-    1. Main Orchestration Script (src/distill_gpt4o.py): Orchestrates the entire distillation workflow.
+    1. Main Orchestration Script (src/distill_llama_to_phi.py): Orchestrates the entire distillation workflow.
 
 ### How the Solution Works
 The solution implements knowledge distillation, where a smaller, more efficient model (student) learns to mimic the behavior of a larger, more powerful model (GPT-4o as the teacher). Here's the workflow:
 
-1. Generate Training Data: The solution uses GPT-4o to generate responses for a set of prompts, creating teacher-student training pairs.
+1. Generate Training Data: The solution uses to generate responses for a set of prompts, creating teacher-student training pairs.
 
 1. Prepare and Register Dataset: The generated training examples are saved and registered as a dataset in Azure ML.
 
@@ -36,7 +36,7 @@ pip install -r requirements.txt
 ```
 3. Run the main distillation script:
 ```
-python src/distill_gpt4o.py --num_examples 200 --student_model distilgpt2 --compute_target your-compute-target
+python src/distill_llama_to_phi.py --num_examples 200 --student_model Phi-4 --compute_target your-compute-target
 ```
 4. Monitor the job in the Azure AI Foundry portal.
 
@@ -50,7 +50,7 @@ You can customize this solution by:
 - Adjusting the training hyperparameters in config.py
 - Extending the distillation process with advanced techniques like temperature scaling or additional loss functions
 
-This solution provides a complete framework for distilling knowledge from GPT-4o into smaller, more efficient models using Azure AI Foundry's infrastructure.
+This solution provides a complete framework for distilling knowledge from LLM into SLM, more efficient models using Azure AI Foundry's infrastructure.
 
 ## Contributing
 

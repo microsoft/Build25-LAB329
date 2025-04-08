@@ -57,7 +57,8 @@ var aiFoundryProjectName = 'aifoundry-${projectName}-${environmentType}'
 var logAnalyticsWorkspaceName = 'aifoundry-law-${uniqueSuffix}'
 var keyVaultName = 'aifoundry-kv-${uniqueSuffix}'
 var computeClusterName = 'a100-cluster'
-var deploymentName = 'gpt4o-deployment'
+var teacherDeploymentName = 'llama4-scout-teacher'
+var studentDeploymentName = 'phi4-student'
 
 // Log Analytics Workspace
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -223,38 +224,49 @@ resource computeCluster 'Microsoft.MachineLearningServices/workspaces/computes@2
   ]
 }
 
-// Model Deployment
-resource modelDeployment 'Microsoft.MachineLearningServices/workspaces/models@2023-06-01-preview' = {
-  name: '${deploymentName}-model'
+// Teacher Model Deployment (Llama-4-Scout-17B-16E)
+resource teacherModelDeployment 'Microsoft.MachineLearningServices/workspaces/models@2023-06-01-preview' = {
+  name: '${teacherDeploymentName}-model'
   parent: aiFoundryProject
   properties: {
     modelType: 'MLflow'
-    modelUri: 'azureml://registries/azureml/models/gpt-4o/versions/1'
-    description: 'GPT-4o model deployment'
+    modelUri: 'azureml://registries/azureml/models/Llama-4-Scout-17B-16E/versions/1'
+    description: 'Llama-4-Scout-17B-16E teacher model deployment'
   }
 }
 
-// Deployment Endpoint 
-resource endpoint 'Microsoft.MachineLearningServices/workspaces/onlineEndpoints@2023-06-01-preview' = {
-  name: '${deploymentName}-endpoint'
+// Student Model Deployment (Phi-4)
+resource studentModelDeployment 'Microsoft.MachineLearningServices/workspaces/models@2023-06-01-preview' = {
+  name: '${studentDeploymentName}-model'
+  parent: aiFoundryProject
+  properties: {
+    modelType: 'MLflow'
+    modelUri: 'azureml://registries/azureml/models/Phi-4/versions/1'
+    description: 'Phi-4 student model deployment'
+  }
+}
+
+// Teacher Deployment Endpoint 
+resource teacherEndpoint 'Microsoft.MachineLearningServices/workspaces/onlineEndpoints@2023-06-01-preview' = {
+  name: '${teacherDeploymentName}-endpoint'
   parent: aiFoundryProject
   location: location
   properties: {
     authMode: 'Key'
     traffic: {
-      '${deploymentName}': 100
+      '${teacherDeploymentName}': 100
     }
   }
 }
 
-// Deployment
-resource deployment 'Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments@2023-06-01-preview' = {
-  name: deploymentName
-  parent: endpoint
+// Teacher Deployment
+resource teacherDeployment 'Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments@2023-06-01-preview' = {
+  name: teacherDeploymentName
+  parent: teacherEndpoint
   location: location
   properties: {
     model: {
-      id: modelDeployment.id
+      id: teacherModelDeployment.id
     }
     endpointComputeType: 'Managed'
     scaleSettings: {
@@ -270,7 +282,56 @@ resource deployment 'Microsoft.MachineLearningServices/workspaces/onlineEndpoint
       successThreshold: 1
       timeoutSeconds: 10
     }
-    environmentId: 'azureml://registries/azureml/environments/gpt-4o-runtime/versions/1'
+    environmentId: 'azureml://registries/azureml/environments/llama-4-runtime/versions/1'
+    compute: computeClusterName
+    requestSettings: {
+      maxQueueWait: 'PT60S'
+      maxConcurrentRequestsPerInstance: 5
+    }
+    environmentVariables: {
+      MODEL_MOUNT_PATH: '/mnt/models'
+      INFERENCE_SERVER_PORT: '8080'
+    }
+  }
+}
+
+// Student Deployment Endpoint 
+resource studentEndpoint 'Microsoft.MachineLearningServices/workspaces/onlineEndpoints@2023-06-01-preview' = {
+  name: '${studentDeploymentName}-endpoint'
+  parent: aiFoundryProject
+  location: location
+  properties: {
+    authMode: 'Key'
+    traffic: {
+      '${studentDeploymentName}': 100
+    }
+  }
+}
+
+// Student Deployment
+resource studentDeployment 'Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments@2023-06-01-preview' = {
+  name: studentDeploymentName
+  parent: studentEndpoint
+  location: location
+  properties: {
+    model: {
+      id: studentModelDeployment.id
+    }
+    endpointComputeType: 'Managed'
+    scaleSettings: {
+      scaleType: 'Default'
+      instanceCount: 1
+      minInstances: 1
+      maxInstances: nodeCount
+    }
+    livenessProbe: {
+      failureThreshold: 30
+      initialDelaySeconds: 300
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    }
+    environmentId: 'azureml://registries/azureml/environments/phi-4-runtime/versions/1'
     compute: computeClusterName
     requestSettings: {
       maxQueueWait: 'PT60S'

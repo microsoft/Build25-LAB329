@@ -22,7 +22,7 @@ The solution implements knowledge distillation, where a smaller, more efficient 
 
 1. Prepare and Register Dataset: The generated training examples are saved and registered as a dataset in Azure ML.
 
-1. Submit Training Job: A distillation job is created and submitted to Azure AI Foundry, which trains the student model to mimic GPT-4o's responses.
+1. Submit Training Job: A distillation job is created and submitted to Azure AI Foundry, which trains the student model to mimic the LLMs responses.
 
 1. Monitor and Register Model: The training job is monitored, and upon completion, the distilled model is registered in Azure ML.
 

@@ -1,3 +1,3 @@
 """
-Test package for DistillationGPT4o.
+Test package for Distillation.
 """

@@ -58,8 +58,7 @@ def main():
     
     # Parse arguments
     args = parse_args()
-    
-    print("Starting knowledge distillation process from Llama-4-Scout-17B-16E to Phi-4 in Azure AI Foundry...")
+      print("Starting knowledge distillation process from Llama-4-Scout-17B-16E to Phi-4 in Azure AI Foundry...")
     
     # Step 1: Generate training examples using Llama-4-Scout-17B-16E
     print(f"Generating {args.num_examples} training examples using {TEACHER_MODEL_NAME}...")

@@ -1,5 +1,6 @@
 """
-Unit tests for distill_llama_to_phi.py main script.
+Unit tests for distill_llama_to_phi.py main script that handles distillation from
+Llama-4-Scout-17B-16E (teacher model) to Phi-4 (student model).
 """
 import unittest
 from unittest.mock import patch, MagicMock
@@ -9,8 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.distill_llama_to_phi import parse_args, main
 
-class TestDistillLlamaToPhi(unittest.TestCase):
-    def test_parse_args_default(self):
+class TestDistillLlamaToPhi(unittest.TestCase):    def test_parse_args_default(self):
         """Test argument parsing with default values."""
         # Test with no arguments
         with patch('sys.argv', ['distill_llama_to_phi.py']):
@@ -18,19 +18,18 @@ class TestDistillLlamaToPhi(unittest.TestCase):
             self.assertEqual(args.num_examples, 100)
             self.assertEqual(args.student_model, "Phi-4")
             self.assertEqual(args.compute_target, "gpu-cluster")
-    
-    def test_parse_args_custom(self):
+      def test_parse_args_custom(self):
         """Test argument parsing with custom values."""
         # Test with custom arguments
         with patch('sys.argv', [
             'distill_llama_to_phi.py',
             '--num_examples', '50',
-            '--student_model', 'custom-phi',
+            '--student_model', 'Phi-4-experimental',
             '--compute_target', 'cpu-cluster'
         ]):
             args = parse_args()
             self.assertEqual(args.num_examples, 50)
-            self.assertEqual(args.student_model, "custom-phi")
+            self.assertEqual(args.student_model, "Phi-4-experimental")
             self.assertEqual(args.compute_target, "cpu-cluster")
     
     @patch('src.distill_llama_to_phi.initialize_openai_client')

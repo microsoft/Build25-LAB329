@@ -10,28 +10,26 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.distillation_train import parse_args, train
 
-class TestDistillationTrain(unittest.TestCase):
-    def test_parse_args_default(self):
+class TestDistillationTrain(unittest.TestCase):    def test_parse_args_default(self):
         """Test argument parsing with default values."""
         # Test with only required argument
         with patch('sys.argv', ['distillation_train.py', '--dataset', 'test-dataset']):
             args = parse_args()
             self.assertEqual(args.dataset, 'test-dataset')
-            self.assertEqual(args.student_model, "distilgpt2")
+            self.assertEqual(args.student_model, "Phi-4")
             self.assertEqual(args.output_dir, "./outputs")
-    
-    def test_parse_args_custom(self):
+      def test_parse_args_custom(self):
         """Test argument parsing with custom values."""
         # Test with custom arguments
         with patch('sys.argv', [
             'distillation_train.py',
             '--dataset', 'test-dataset',
-            '--student_model', 'gpt2',
+            '--student_model', 'Phi-4-mini',
             '--output_dir', './custom-outputs'
         ]):
             args = parse_args()
             self.assertEqual(args.dataset, 'test-dataset')
-            self.assertEqual(args.student_model, "gpt2")
+            self.assertEqual(args.student_model, "Phi-4-mini")
             self.assertEqual(args.output_dir, "./custom-outputs")
     
     @patch('src.distillation_train.Run')
@@ -91,11 +89,10 @@ class TestDistillationTrain(unittest.TestCase):
             with patch('sys.argv', ['distillation_train.py', '--dataset', 'test-dataset']):
                 # Call the function
                 train()
-                
-                # Verify the training flow
+                  # Verify the training flow
                 mock_run.get_context.assert_called_once()
-                mock_tokenizer_class.from_pretrained.assert_called_once_with("distilgpt2")
-                mock_model_class.from_pretrained.assert_called_once_with("distilgpt2")
+                mock_tokenizer_class.from_pretrained.assert_called_once_with("Phi-4")
+                mock_model_class.from_pretrained.assert_called_once_with("Phi-4")
                 
                 # Verify pad token assignment
                 self.assertEqual(mock_tokenizer.pad_token, mock_tokenizer.eos_token)

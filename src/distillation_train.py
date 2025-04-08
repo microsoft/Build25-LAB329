@@ -1,6 +1,6 @@
 """
-Training script for model distillation in Azure AI Foundry using GPT-4o as the teacher model.
-This script trains a smaller student model to mimic the outputs of GPT-4o.
+Training script for model distillation in Azure AI Foundry.
+This script trains a smaller student model to mimic the outputs of LLM.
 """
 
 import os
@@ -174,7 +174,7 @@ def train():
     run.register_model(
         model_name=STUDENT_MODEL_NAME,
         model_path="model",
-        description="Distilled language model from GPT-4o"
+        description="Distilled language model from LLM Teacher model"
     )
     print(f"Registered model as {STUDENT_MODEL_NAME}")
 

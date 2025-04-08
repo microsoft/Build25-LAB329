@@ -1,5 +1,5 @@
-## Build 2025
-## Lab329 Fine-Tune End-to-End Distillation Models with Azure OpenAI Service and Azure AI Foundry Project Structure
+# Build 2025 Lab329 
+## Fine-Tune End-to-End Distillation Models with Azure OpenAI Service and Azure AI Foundry Project Structure
 
 The solution consists of the following components:
 

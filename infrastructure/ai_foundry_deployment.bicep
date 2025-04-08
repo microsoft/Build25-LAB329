@@ -14,10 +14,9 @@ param environmentType string = 'dev'
 
 @description('GPU SKU for compute nodes')
 @allowed([
-  'Standard_ND96asr_v4' // A100 GPU
-  'Standard_ND96amsr_v4' // A100 GPU with more memory
+  'Standard_ND96isr_H100_v5' // H100 GPU
 ])
-param gpuSku string = 'Standard_ND96asr_v4'
+param gpuSku string = 'Standard_ND96isr_H100_v5'
 
 @description('Number of GPU nodes to deploy')
 @minValue(1)
@@ -56,7 +55,7 @@ var acrName = 'aifoundryacr${uniqueSuffix}'
 var aiFoundryProjectName = 'aifoundry-${projectName}-${environmentType}'
 var logAnalyticsWorkspaceName = 'aifoundry-law-${uniqueSuffix}'
 var keyVaultName = 'aifoundry-kv-${uniqueSuffix}'
-var computeClusterName = 'a100-cluster'
+var computeClusterName = 'h100-cluster'
 var teacherDeploymentName = 'llama4-scout-teacher'
 var studentDeploymentName = 'phi4-student'
 
@@ -194,7 +193,7 @@ resource aiFoundryProject 'Microsoft.MachineLearningServices/workspaces@2023-06-
   }
 }
 
-// Compute Cluster for A100 GPUs
+// Compute Cluster for H100 GPUs
 resource computeCluster 'Microsoft.MachineLearningServices/workspaces/computes@2023-06-01-preview' = {
   name: computeClusterName
   parent: aiFoundryProject

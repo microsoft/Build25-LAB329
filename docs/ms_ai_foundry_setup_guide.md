@@ -1,6 +1,6 @@
 # Microsoft AI Foundry Hub Project Setup Guide
 
-This guide provides step-by-step instructions for setting up a [Microsoft Azure AI Foundry](https://ai.azure.com) Hub Project, deploying Llama-4-Scout-17B-16E as a teacher model and Phi-4 as a student model, and configuring an A100 compute node. The guide is organized into logical sections to facilitate the setup process.
+This guide provides step-by-step instructions for setting up a [Microsoft Azure AI Foundry](https://ai.azure.com) Hub Project, deploying Llama-4-Scout-17B-16E as a teacher model and Phi-4 as a student model, and configuring a Standard_ND96isr_H100_v5 compute node. The guide is organized into logical sections to facilitate the setup process.
 
 ## Table of Contents
 1. [Introduction to Microsoft AI Foundry](#introduction-to-microsoft-ai-foundry)
@@ -8,7 +8,7 @@ This guide provides step-by-step instructions for setting up a [Microsoft Azure 
 3. [Creating an AI Foundry Hub Project](#creating-an-ai-foundry-hub-project)
 4. [Setting Up Azure Resources](#setting-up-azure-resources)
 5. [Deploying Llama-4-Scout and Phi-4 Models](#deploying-llama-4-scout-and-phi-4-models)
-6. [Configuring A100 Compute Node](#configuring-a100-compute-node)
+6. [Configuring Standard_ND96isr_H100_v5 Compute Node](#configuring-standard_nd96isr_h100_v5-compute-node)
 7. [Testing the Deployment](#testing-the-deployment)
 8. [Monitoring and Management](#monitoring-and-management)
 9. [Automation with Bicep Templates](#automation-with-bicep-templates)
@@ -33,7 +33,7 @@ Before you begin, ensure you have the following:
 - Azure CLI installed and configured (version 2.40.0 or later)
 - Bicep CLI installed (version 0.9.1 or later)
 - Access to Microsoft AI Foundry service
-- Quota for A100 GPUs in your target region
+- Quota for Standard_ND96isr_H100_v5 GPUs in your target region
 - Service principal with contributor access to your subscription
 - Knowledge of your organization's networking requirements
 
@@ -126,16 +126,15 @@ az acr create \
 2. Configure deployment settings:
    - Deployment name: A unique name for your student model deployment (e.g., "phi4-student")
 
-## Configuring A100 Compute Node
+## Configuring Standard_ND96isr_H100_v5 Compute Node
 
-### Step 1: Set Up A100 Compute Cluster
+### Step 1: Set Up Standard_ND96isr_H100_v5 Compute Cluster
 
 1. In your [Azure AI Foundry Hub Project](https://ai.azure.com), navigate to "Compute"
 2. Click "Create"
-3. Select "A100" from the GPU options
+3. Select "Standard_ND96isr_H100_v5" from the GPU options
 4. Configure the cluster:
-   - Cluster name: A unique name for your compute cluster
-   - VM size: Select the appropriate size (ND A100 v4-series recommended)
+   - Cluster name: A unique name for your compute cluster   - VM size: Select the appropriate size (Standard_ND96isr_H100_v5 recommended)
    - Minimum nodes: Set to 0 for cost efficiency
    - Maximum nodes: Based on your workload and quota
    - Idle seconds before scale down: 300 (5 minutes) or adjust as needed
@@ -144,7 +143,7 @@ az acr create \
      - Public IP settings
      - Security group rules
 
-### Step 2: Optimize A100 Configuration
+### Step 2: Optimize Standard_ND96isr_H100_v5 Configuration
 
 1. Configure CUDA settings for optimal performance
 2. Set up node pool autoscaling based on workload
@@ -154,12 +153,12 @@ az acr create \
 ### Step 3: Attach Compute to Model Deployments
 
 1. Navigate to your Llama-4-Scout-17B-16E deployment settings
-2. Under "Compute configuration," select your A100 compute cluster
+2. Under "Compute configuration," select your Standard_ND96isr_H100_v5 compute cluster
 3. Save the configuration
 4. Restart the deployment to apply changes
 
 5. Navigate to your Phi-4 deployment settings
-6. Under "Compute configuration," select your A100 compute cluster (or an appropriate compute for the smaller model)
+6. Under "Compute configuration," select your Standard_ND96isr_H100_v5 compute cluster (or an appropriate compute for the smaller model)
 7. Save the configuration
 8. Restart the deployment to apply changes
 
@@ -181,7 +180,7 @@ curl -X POST https://{your-deployment-endpoint}/completions \
 
 ### Step 2: Performance Testing
 
-Run performance tests to ensure your A100 compute node is properly configured:
+Run performance tests to ensure your Standard_ND96isr_H100_v5 compute node is properly configured:
 
 1. Test response times under various loads
 2. Monitor GPU utilization during inference
@@ -238,7 +237,7 @@ az deployment group create \
 
 ### Common Issues
 
-1. **Quota Limits**: Ensure you have sufficient quota for A100 GPUs in your target region.
+1. **Quota Limits**: Ensure you have sufficient quota for Standard_ND96isr_H100_v5 GPUs in your target region.
    - Solution: Request a quota increase through the Azure portal.
 
 2. **Networking Issues**: VNet integration problems.

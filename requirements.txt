@@ -12,7 +12,7 @@ azureml-core>=1.53.0
 azureml-dataset-runtime>=1.53.0
 python-dotenv>=1.0.0
 
-# Additional dependencies for local A100 GPU training upcomment libraries
+# Additional dependencies for local Standard_ND96isr_H100_v5 GPU training upcomment libraries
 # nvidia-cuda-runtime-cu12
 # nvidia-cudnn-cu12
 # deepspeed>=0.10.0

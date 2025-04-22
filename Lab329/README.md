@@ -17,7 +17,7 @@ This is a practical workshop on model distillation using Azure AI Foundry. Throu
 The workshop flow is divided into the following key steps:
 
 ### 1. Knowledge Distillation (Implemented via DeepSeek)
-In `01.AzureML_DistrillationByDeepSeek.ipynb`, we demonstrate how to:
+In `01.AzureML_DistillationByMAI.ipynb`, we demonstrate how to:
 - Load a dataset from Hugging Face datasets(in this case, a commonsense QA dataset)
 - Prepare data for knowledge distillation
 - Use a "teacher" model (a larger pre-trained model) to generate high-quality answers
@@ -63,15 +63,15 @@ The project uses multiple advanced AI and cloud technologies:
 
 1. Execute the notebook files in sequence (01 through 05)
     - AzureML
-        - Please run `01.AzureML_DistrillationByDeepSeek.ipynb` and `04.AzureML_RegisterToAzureML.ipynb` in 'Python 3.10 AzureML' env
+        - Please run `01.AzureML_DistillationByMAI.ipynb` and `04.AzureML_RegisterToAzureML.ipynb` in 'Python 3.10 AzureML' env
         - Please run `02.AzureML_FineTuningAndConvertByMSOlive.ipynb` and `03.AzureML_RuningByORTGenAI.ipynb` in 'Python 3.10 PyTorch and Tensorflow' env 
     - Local
         - Please run `05.Local_Download.ipynb` in your local env( Please install Python 3.10+ in your edge device)
 2. Ensure required environment variables are set before execution , add .env in Notebook folder
 ```
-TEACHER_MODEL_NAME = "DeepSeek-V3"
-TEACHER_MODEL_ENDPOINT = "Your Azure AI Foundry DeepSeek-V3 Endpoint"
-TEACHER_MODEL_KEY = "Your Azure AI Foundry DeepSeek-V3 Key"
+TEACHER_MODEL_NAME = "MAI-DS-R1"
+TEACHER_MODEL_ENDPOINT = "Your Azure AI Foundry MAI Endpoint"
+TEACHER_MODEL_KEY = "Your Azure AI Foundry MAI Key"
 
 AZUREML_WS_NAME = "Your Azure ML Workspace Name"
 AZUREML_RESOURCE_GROUP = "Your Azure ML Resource Group Name"

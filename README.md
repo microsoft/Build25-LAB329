@@ -12,8 +12,6 @@ Through a series of notebooks, this workshop demonstrates the complete workflow 
 - **Lab329/**: Main workshop content
   - **Notebooks/**: Jupyter notebooks implementing the entire distillation process
   - **LocalFoundryEnv/**: Configuration files for local ONNX inference on edge devices
-- **config/**: Configuration files for the distillation project
-- **infrastructure/**: Azure infrastructure deployment templates
 - **lab_manual/**: Detailed lab manual with step-by-step instructions
 
 ### Workshop Flow

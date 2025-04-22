@@ -113,181 +113,240 @@ To clone a repository, you can follow these steps:
 
 Now you’re ready to work with the repository on your local machine!
 
+## Workshop Notebook Structure
+
+This lab uses a series of Jupyter notebooks that guide you through the complete model distillation workflow. Each notebook focuses on a specific phase of the process:
+
+1. **01.AzureML_DistillationByMAI.ipynb**: Initial knowledge distillation using a teacher model
+2. **02.AzureML_FineTuningAndConvertByMSOlive.ipynb**: Fine-tuning and model optimization
+3. **03.AzureML_RuningByORTGenAI.ipynb**: Model inference using ONNX Runtime
+4. **04.AzureML_RegisterToAzureML.ipynb**: Model registration to Azure ML
+5. **05.Local_Download.ipynb**: Downloading models for local deployment
+
+Each notebook includes a corresponding overview document (XX.Overview.md) that explains the concepts and techniques used.
+
 ## Option 1: Cloud-Based Distillation Using Microsoft Azure AI Foundry
 
 Microsoft Azure AI Foundry provides a managed environment for large-scale machine learning tasks. This approach is ideal for distilling larger models or when you need substantial compute resources.
 
 ### Step 1: Configure Your Environment (5 minutes)
 
-1. Open the `config/config.py` file in your project
+1. Create a `.env` file based on the `sample.env` template in the Notebook folder
 2. Update the Azure configuration settings with your credentials:
 
 ```python
-# Microsoft Azure AI Foundry Configuration
-AZURE_ML_SUBSCRIPTION_ID = "your-subscription-id"
-AZURE_ML_RESOURCE_GROUP = "your-resource-group"
-AZURE_ML_WORKSPACE_NAME = "your-workspace-name"
+# Azure ML Environment Variables
+AZUREML_SUBSCRIPTION_ID=your-subscription-id
+AZUREML_RESOURCE_GROUP=your-resource-group
+AZUREML_WS_NAME=your-workspace-name
 
-# Azure OpenAI Configuration
-AZURE_OPENAI_ENDPOINT = "https://your-endpoint.openai.azure.com/"
-AZURE_OPENAI_API_KEY = "your-api-key"
-AZURE_OPENAI_API_VERSION = "2023-12-01-preview"
-AZURE_OPENAI_DEPLOYMENT_NAME = "llama-scout-teacher"  # Your Llama-4-Scout-17B-16E deployment name
+# Teacher Model Environment Variables
+TEACHER_MODEL_NAME=your-model-deployment-name
+TEACHER_MODEL_ENDPOINT=https://your-endpoint.openai.azure.com/
+TEACHER_MODEL_KEY=your-api-key
 ```
 
-3. Install the required dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 2: Generate Training Data (10 minutes)
-
-The first step in distillation is generating training examples using the teacher model (GPT-4o):
-
-```bash
-python src/distill_llama_to_phi.py --num_examples 50 --student_model Phi-4
-```
-
-This script:
-- Creates 50 sample prompts
-- Sends each prompt to the GPT-4o model
-- Captures the responses
-- Saves the prompt-response pairs as training data
-- Registers the dataset in your Azure ML workspace
-
-You can adjust the number of examples based on your time constraints. For this lab, we recommend 50-100 examples.
-
-### Step 3: Launch the Distillation Job (5 minutes)
-
-The script from Step 2 automatically launches a distillation training job in Microsoft Azure AI Foundry after generating the data. You'll see output like:
-
-```
-Distillation job created with ID: job-123456-789
-You can monitor the job in the Microsoft Azure AI Foundry portal.
-```
-
-### Step 4: Monitor Training Progress (20 minutes)
-
-1. Navigate to the Microsoft Azure AI Foundry portal
-2. Go to your workspace
-3. Select "Jobs" in the left navigation
-4. Find and click on your distillation job
-5. Monitor the training progress, including:
-   - Loss metrics
-   - Resource utilization
-   - Job status
-
-While the job runs, take some time to review the `distillation_train.py` script to understand the training process.
-
-### Step 5: Access Your Distilled Model (10 minutes)
-
-Once training completes:
-
-1. In the Microsoft Azure AI Foundry portal, navigate to "Models"
-2. Find your newly registered model (default name: "DistilledModel")
-3. You can now:
-   - Download the model for local use
-   - Deploy it as an endpoint
-   - Use it in other Azure ML pipelines
-
-Congratulations! You've successfully distilled knowledge from GPT-4o into a smaller model using Microsoft Azure AI Foundry.
-
-## Option 2: Local-Based Distillation
-
-Don't have Azure access? No problem! This approach allows you to perform distillation on your local machine.
-
-### Step 1: Configure Your Environment (5 minutes)
-
-1. Install the required dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-2. Ensure you have an OpenAI API key for accessing GPT-4o
-3. Set your API key as an environment variable:
-
-For Windows:
-```bash
-set OPENAI_API_KEY=your-api-key-here
-```
-
-For macOS/Linux:
-```bash
-export OPENAI_API_KEY=your-api-key-here
-```
-
-### Step 2: Generate Training Data (10 minutes)
-
-Generate training examples using the OpenAI API:
-
-```bash
-python src/generate_local_data.py --num_examples 50 --output_path ./data/distillation_data.jsonl --model gpt-4o
-```
-
-This script creates a JSONL file containing prompt-response pairs that will be used for training.
-
-### Step 3: Train the Student Model Locally (25 minutes)
-
-Start the local training process:
-
-```bash
-python src/local_gpu_train.py --dataset_path ./data/distillation_data.jsonl --student_model distilgpt2 --output_dir ./outputs
-```
-
-If you have a GPU, add the `--fp16` flag for faster training:
-
-```bash
-python src/local_gpu_train.py --dataset_path ./data/distillation_data.jsonl --student_model distilgpt2 --output_dir ./outputs --fp16
-```
-
-This script:
-- Loads your generated training data
-- Initializes a small student model (DistilGPT-2 by default)
-- Trains the model to mimic GPT-4o's responses
-- Saves checkpoints during training
-- Outputs the final model to `./outputs/final_model/`
-
-You'll see progress updates including loss values as training proceeds.
-
-### Step 4: Verify Your Distilled Model (10 minutes)
-
-Test your newly trained model with this simple script:
+3. Install the required dependencies by running these commands at the top of your notebook:
 
 ```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-# Load your distilled model
-model_path = "./outputs/final_model/"
-tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = AutoModelForCausalLM.from_pretrained(model_path)
-
-# Try a test prompt
-test_prompt = "Explain the concept of machine learning to a 10-year old."
-inputs = tokenizer(test_prompt, return_tensors="pt")
-output = model.generate(**inputs, max_length=100)
-response = tokenizer.decode(output[0], skip_special_tokens=True)
-
-print(f"Prompt: {test_prompt}")
-print(f"Response: {response}")
+pip install python-dotenv
+pip install datasets -U
+pip install azure-ai-inference
 ```
 
-Save this as `test_model.py` and run it to see how your distilled model performs.
+### Step 2: Generate Training Data (15 minutes)
 
-## Evaluating Your Distilled Model
+Work through the `01.AzureML_DistillationByMAI.ipynb` notebook to generate training examples:
 
-To evaluate how well your distilled model has learned from GPT-4o, consider these metrics:
+1. **Load and prepare the dataset**:
+   ```python
+   from datasets import load_dataset
+   
+   # We can define train and test sample sizes here
+   train_sample_size = 100
+   val_sample_size = 100
+   
+   # Use the commonsense QA dataset
+   dataset_name = "tau/commonsense_qa"
+   input_dataset = CQnAHuggingFaceInputDataset()
+   
+   train, val, _ = input_dataset.load_hf_dataset(
+       dataset_name=dataset_name,
+       train_sample_size=train_sample_size,
+       val_sample_size=val_sample_size,
+       train_split_name="train",
+       val_split_name="validation",
+   )
+   ```
 
-1. **Response quality**: How coherent and accurate are the responses?
-2. **Size comparison**: How much smaller is your distilled model compared to GPT-4o?
-3. **Speed**: How much faster is inference with your distilled model?
-4. **Resource usage**: What are the memory requirements for your model?
+2. **Format the questions** with appropriate system prompts:
+   ```python
+   system_prompt = "You are a helpful assistant. Your output should only be one of the five choices: 'A', 'B', 'C', 'D', or 'E'."
+   user_prompt_template = "Answer the following multiple-choice question by selecting the correct option.\n\nQuestion: {question}\nAnswer Choices:\n{answer_choices}"
+   ```
 
-For a quantitative evaluation, you could:
-- Calculate BLEU or ROUGE scores between your model's outputs and GPT-4o's outputs
-- Measure response times for both models on identical inputs
-- Compare the number of parameters and disk space requirements
+3. **Process questions with the teacher model**:
+   ```python
+   from azure.ai.inference import ChatCompletionsClient
+   from azure.ai.inference.models import SystemMessage, UserMessage
+   from azure.core.credentials import AzureKeyCredential
+   
+   # Connect to the Azure AI service
+   client = ChatCompletionsClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+   
+   # Process each question and collect responses
+   results = []
+   with open(train_data_path, 'r', encoding='utf-8') as file:
+       for i, line in enumerate(file):
+           question_data = json.loads(line)
+           result = process_question(question_data)
+           results.append(result)
+   ```
+
+This process:
+- Loads 100 sample questions from the commonsense QA dataset
+- Formats each question as a multiple-choice problem
+- Sends questions to your teacher model via Azure AI Inference SDK
+- Collects the responses for training the student model
+- Saves the question-answer pairs in JSONL format
+
+### Step 3: Fine-tune and Optimize the Model (15 minutes)
+
+Work through the `02.AzureML_FineTuningAndConvertByMSOlive.ipynb` notebook to fine-tune and optimize the student model:
+
+1. **Install required packages**:
+   ```python
+   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124 -U
+   pip install olive-ai[auto-opt] -U
+   pip install onnxruntime-genai==0.7.0 --pre
+   pip install peft
+   ```
+
+2. **Fine-tune with LoRA using Microsoft Olive**:
+   ```python
+   ! olive finetune \
+       --method lora \
+       --model_name_or_path azureml://registries/azureml/models/Phi-4-mini-instruct/versions/1 \
+       --trust_remote_code \
+       --data_name json \
+       --data_files ./data/train_data.jsonl \
+       --text_template "<|user|>{Question}<|end|><|assistant|>{Answer}<|end|>" \
+       --max_steps 100 \
+       --output_path models/phi-4-mini/ft \
+       --target_modules "q_proj","k_proj","v_proj","o_proj","gate_proj","up_proj","down_proj" \
+       --log_level 1
+   ```
+
+3. **Optimize the model with quantization**:
+   ```python
+   ! olive auto-opt \
+       --model_name_or_path azureml://registries/azureml/models/Phi-4-mini-instruct/versions/1 \
+       --adapter_path models/phi-4-mini/ft/adapter \
+       --device cpu \
+       --provider CPUExecutionProvider \
+       --use_model_builder \
+       --precision int4 \
+       --output_path models/phi-4-mini/onnx \
+       --log_level 1
+   ```
+
+This process:
+- Uses Microsoft Olive's fine-tuning capability with LoRA (Low-Rank Adaptation)
+- Fine-tunes the Phi-4-mini-instruct model using your generated training data
+- Converts the model to ONNX format for optimized inference
+- Applies int4 quantization to dramatically reduce model size
+
+### Step 4: Test Your Optimized Model (10 minutes)
+
+Work through the `03.AzureML_RuningByORTGenAI.ipynb` notebook to run inference with your optimized model:
+
+1. **Load the ONNX model and adapter**:
+   ```python
+   import onnxruntime_genai as og
+   import numpy as np
+   
+   model_folder = "./models/phi-4-mini/onnx/model"
+   model = og.Model(model_folder)
+   
+   adapters = og.Adapters(model)
+   adapters.load('./models/phi-4-mini/onnx/model/adapter_weights.onnx_adapter', "qa_choice")
+   ```
+
+2. **Set up the tokenizer and parameters**:
+   ```python
+   tokenizer = og.Tokenizer(model)
+   tokenizer_stream = tokenizer.create_stream()
+   
+   search_options = {}
+   search_options['max_length'] = 102
+   search_options['past_present_share_buffer'] = False
+   ```
+
+3. **Run inference on sample questions**:
+   ```python
+   chat_template = "</s>You are a helpful assistant. Your output should only be one of the five choices: 'A', 'B', 'C', 'D', or 'E'.<|end|><|user|>{input}<|end|><|assistant|>"
+   prompt = f'{chat_template.format(input=input)}'
+   
+   input_tokens = tokenizer.encode(prompt)
+   params = og.GeneratorParams(model)
+   params.set_search_options(**search_options)
+   generator = og.Generator(model, params)
+   generator.set_active_adapter(adapters, "qa_choice")
+   generator.append_tokens(input_tokens)
+   ```
+
+### Step 5: Register Your Model to Azure ML (5 minutes)
+
+Work through the `04.AzureML_RegisterToAzureML.ipynb` notebook to register your optimized model to Azure Machine Learning:
+
+1. **Set up Azure ML client**:
+   ```python
+   from azure.ai.ml import MLClient
+   from azure.ai.ml.entities import Model
+   from azure.ai.ml.constants import AssetTypes
+   from azure.identity import DefaultAzureCredential
+   
+   subscription_id = os.getenv('AZUREML_SUBSCRIPTION_ID')
+   resource_group = os.getenv('AZUREML_RESOURCE_GROUP')
+   workspace = os.getenv('AZUREML_WS_NAME')
+   
+   ml_client = MLClient(DefaultAzureCredential(), subscription_id, resource_group, workspace)
+   ```
+
+2. **Create model entity and register it**:
+   ```python
+   file_model = Model(
+       path="models/phi-4-mini/onnx",
+       type=AssetTypes.CUSTOM_MODEL,
+       name="fine-tuning-phi-4-mini-onnx-int4-cpu",
+       description="Fine tuning by MSOlive",
+   )
+   
+   ml_client.models.create_or_update(file_model)
+   ```
+
+### Step 6: Download Your Model for Local Deployment (5 minutes)
+
+Work through the `05.Local_Download.ipynb` notebook to download your model for local deployment:
+
+1. **List available models in the registry**:
+   ```python
+   ml_client.models.list()
+   ```
+
+2. **Download your specific model**:
+   ```python
+   ml_client.models.download("fine-tuning-phi-4-mini-onnx-int4-cpu", 1)
+   ```
+
+Congratulations! You've successfully:
+1. Generated training data using a teacher model
+2. Fine-tuned a smaller student model with Microsoft Olive and LoRA
+3. Optimized the model with int4 quantization for efficient deployment
+4. Tested the model using ONNX Runtime GenAI
+5. Registered and downloaded your model for deployment
+
+This end-to-end workflow demonstrates the power of model distillation and optimization using Microsoft Azure AI Foundry and related tools.
 
 ## Conclusion
 

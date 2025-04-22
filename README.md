@@ -1,56 +1,46 @@
 # Build 2025 Lab329 
 ## Fine-Tune End-to-End Distillation Models with Azure OpenAI Service and Microsoft Azure AI Foundry Project Structure
 
-The solution consists of the following components:
+This workshop provides hands-on experience with model distillation using Microsoft Azure AI Foundry. Learn how to extract knowledge from Large Language Models (LLMs) and transfer it to Smaller Language Models (SLMs) while maintaining good performance.
 
-1. Requirements File (requirements.txt): Contains all necessary dependencies for the project.
+## Workshop Overview
 
-1. Configuration Module (config/config.py): Stores all configuration parameters including Azure ML workspace details, Azure OpenAI API credentials, and training hyperparameters.
+Through a series of notebooks, this workshop demonstrates the complete workflow of model distillation, fine-tuning, and deployment using Azure Machine Learning (AzureML) platform, with a particular focus on optimizing models and deploying them to production environments.
 
-1. Utility Modules:
+### Folder Structure
 
-    1. openai_utils.py: Handles interactions with the Azure OpenAI API to generate responses from the teacher model.
-    1. azure_ml_utils.py: Provides functionality to interact with Azure ML and Microsoft Azure AI Foundry services.
-    1. data_utils.py: Contains utilities for data processing, dataset creation, and data loading.
-    1. Training Script (src/distillation_train.py): The core training script that runs in Azure ML to perform the actual distillation process.
-    1. Main Orchestration Script (src/distill_llama_to_phi.py): Orchestrates the entire distillation workflow.
+- **Lab329/**: Main workshop content
+  - **Notebooks/**: Jupyter notebooks implementing the entire distillation process
+  - **LocalFoundryEnv/**: Configuration files for local ONNX inference on edge devices
+- **config/**: Configuration files for the distillation project
+- **infrastructure/**: Azure infrastructure deployment templates
+- **lab_manual/**: Detailed lab manual with step-by-step instructions
 
-### How the Solution Works
-The solution implements knowledge distillation, where a smaller, more efficient model (student) learns to mimic the behavior of a larger, more powerful model (GPT-4o as the teacher). Here's the workflow:
+### Workshop Flow
 
-1. Generate Training Data: The solution uses to generate responses for a set of prompts, creating teacher-student training pairs.
+The workshop follows these key steps:
 
-1. Prepare and Register Dataset: The generated training examples are saved and registered as a dataset in Azure ML.
+1. **Knowledge Distillation** (`01.AzureML_DistillationByMAI.ipynb`):
+   - Load a commonsense QA dataset from Hugging Face
+   - Prepare data for knowledge distillation
+   - Use a "teacher" model to generate high-quality answers for training the "student" model
 
-1. Submit Training Job: A distillation job is created and submitted to Microsoft Azure AI Foundry, which trains the student model to mimic the LLMs responses.
+2. **Model Fine-tuning and Conversion** (`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`):
+   - Fine-tune the Phi-4-mini model using the LoRA (Low-Rank Adaptation) method
+   - Use Microsoft Olive tools to optimize and convert the model to ONNX format
+   - Apply quantization techniques (int4 precision) to decrease model size
 
-1. Monitor and Register Model: The training job is monitored, and upon completion, the distilled model is registered in Azure ML.
+3. **Model Inference Using ONNX Runtime GenAI** (`03.AzureML_RuningByORTGenAI.ipynb`):
+   - Load the optimized model in ONNX format
+   - Configure adapters and tokenizers
+   - Perform inference and generate responses
 
-### Using the Solution
-To use this solution:
+4. **Model Registration to AzureML** (`04.AzureML_RegisterToAzureML.ipynb`):
+   - Register the optimized model to the Azure Machine Learning workspace
+   - Set appropriate model metadata for deployment
 
-1. First, update the config.py file with your actual Azure credentials and settings.
-1. Install the required dependencies:
-```
-pip install -r requirements.txt
-```
-3. Run the main distillation script:
-```
-python src/distill_llama_to_phi.py --num_examples 200 --student_model Phi-4 --compute_target your-compute-target
-```
-4. Monitor the job in the Microsoft Azure AI Foundry portal.
-
-5. Once completed, you can access and use your distilled model in your applications.
-
-### Customization Options
-You can customize this solution by:
-
-- Changing the student model architecture (default is distilgpt2)
-- Modifying the sample prompts in data_utils.py to better fit your specific domain
-- Adjusting the training hyperparameters in config.py
-- Extending the distillation process with advanced techniques like temperature scaling or additional loss functions
-
-This solution provides a complete framework for distilling knowledge from LLM into SLM, more efficient models using Microsoft Azure AI Foundry's infrastructure.
+5. **Local Model Download** (`05.Local_Download.ipynb`):
+   - Download registered models for local development or deployment
 
 ## Contributing
 

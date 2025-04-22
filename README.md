@@ -18,13 +18,13 @@ Through a series of notebooks, this workshop demonstrates the complete workflow 
 
 The workshop follows these key steps:
 
-1. **Knowledge Distillation** (['01.AzureML_DistillationByMAI.ipynb'](./Lab329/Notebook/01.AzureML_DistillationByMAI.ipynb)):
+1. **Knowledge Distillation** ([`01.AzureML_DistillationByMAI.ipynb`](./Lab329/Notebook/01.AzureML_DistillationByMAI.ipynb)):
    - Load a commonsense QA dataset from Hugging Face
    - Prepare data for knowledge distillation
    - Use a "teacher" model to generate high-quality answers for training the "student" model
    - [Overview](./Lab329/Notebook/01.Overview.md)
 
-2. **Model Fine-tuning and Conversion** (['02.AzureML_FineTuningAndConvertByMSOlive.ipynb'](./Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb)):
+2. **Model Fine-tuning and Conversion** ([`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`](./Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb)):
    - Fine-tune the Phi-4-mini model using the LoRA (Low-Rank Adaptation) method
    - Use Microsoft Olive tools to optimize and convert the model to ONNX format
    - Apply quantization techniques (int4 precision) to decrease model size

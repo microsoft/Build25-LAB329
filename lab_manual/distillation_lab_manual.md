@@ -11,9 +11,15 @@
 - [Lab Objectives](#lab-objectives)
 - [What is Knowledge Distillation?](#what-is-knowledge-distillation)
 - [Knowledge Distillation Flow Chart](#knowledge-distillation-flow-chart)
-- [Option 1: Cloud-Based Distillation Using Microsoft Azure AI Foundry](#option-1-cloud-based-distillation-using-microsoft-azure-ai-foundry)
-- [Option 2: Local-Based Distillation](#option-2-local-based-distillation)
-- [Evaluating Your Distilled Model](#evaluating-your-distilled-model)
+- [Clone the GitHub Repo and resources to your Local Machine](#clone-the-github-repo-and-resources-to-your-local-machine)
+- [Workshop Notebook Structure](#workshop-notebook-structure)
+- [Cloud-Based Distillation Using Microsoft Azure AI Foundry](#cloud-based-distillation-using-microsoft-azure-ai-foundry)
+  - [Configure Your Environment (5 minutes)](#configure-your-environment-5-minutes)
+  - [Step 1: Generate Training Data from a Teacher Model (15 minutes)](#step-1-generate-training-data-from-a-teacher-model-15-minutes)
+  - [Step 2: Fine-tune and Optimize the Model (15 minutes)](#step-2-fine-tune-and-optimize-the-model-15-minutes)
+  - [Step 3: Test Your Optimized Model (10 minutes)](#step-3-test-your-optimized-model-10-minutes)
+  - [Step 4: Register Your Model to Azure ML (5 minutes)](#step-4-register-your-model-to-azure-ml-5-minutes)
+  - [Step 5: Download Your Model for Local Deployment (5 minutes)](#step-5-download-your-model-for-local-deployment-5-minutes)
 - [Conclusion](#conclusion)
 - [Additional Resources](#additional-resources)
 
@@ -117,59 +123,95 @@ Now you’re ready to work with the repository on your local machine!
 
 This lab uses a series of Jupyter notebooks that guide you through the complete model distillation workflow. Each notebook focuses on a specific phase of the process:
 
-1. **01.AzureML_DistillationByMAI.ipynb**: Initial knowledge distillation using a teacher model
-2. **02.AzureML_FineTuningAndConvertByMSOlive.ipynb**: Fine-tuning and model optimization
-3. **03.AzureML_RuningByORTGenAI.ipynb**: Model inference using ONNX Runtime
-4. **04.AzureML_RegisterToAzureML.ipynb**: Model registration to Azure ML
-5. **05.Local_Download.ipynb**: Downloading models for local deployment
+1. [**`01.AzureML_DistillationByMAI.ipynb`**](../Lab329/Notebook/01.AzureML_DistillationByMAI.ipynb): Initial knowledge distillation using a teacher model
+2. [**`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`**](../Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb): Fine-tuning and model optimization
+3. [**`03.AzureML_RuningByORTGenAI.ipynb`**](../Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb): Model inference using ONNX Runtime
+4. [**`04.AzureML_RegisterToAzureML.ipynb`**](../Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb): Model registration to Azure ML
+5. [**`05.Local_Download.ipynb`**](../Lab329/Notebook/05.Local_Download.ipynb): Downloading models for local deployment
 
 Each notebook includes a corresponding overview document (XX.Overview.md) that explains the concepts and techniques used.
 
-## Option 1: Cloud-Based Distillation Using Microsoft Azure AI Foundry
+
+## Cloud-Based Distillation Using Microsoft Azure AI Foundry
 
 Microsoft Azure AI Foundry provides a managed environment for large-scale machine learning tasks. This approach is ideal for distilling larger models or when you need substantial compute resources.
 
-### Step 1: Configure Your Environment (5 minutes)
+### Configure Your Environment (5 minutes)
 
 1. Create a `.env` file based on the `sample.env` template in the Notebook folder
 2. Update the Azure configuration settings with your credentials:
 
-```python
-# Azure ML Environment Variables
-AZUREML_SUBSCRIPTION_ID=your-subscription-id
-AZUREML_RESOURCE_GROUP=your-resource-group
-AZUREML_WS_NAME=your-workspace-name
+```
+TEACHER_MODEL_NAME = "MAI-DS-R1"
+TEACHER_MODEL_ENDPOINT = "Your Azure AI Foundry MAI Endpoint"
+TEACHER_MODEL_KEY = "Your Azure AI Foundry MAI Key"
 
-# Teacher Model Environment Variables
-TEACHER_MODEL_NAME=your-model-deployment-name
-TEACHER_MODEL_ENDPOINT=https://your-endpoint.openai.azure.com/
-TEACHER_MODEL_KEY=your-api-key
+AZUREML_WS_NAME = "Your Azure ML Workspace Name"
+AZUREML_RESOURCE_GROUP = "Your Azure ML Resource Group Name"
+AZUREML_SUBSCRIPTION_ID = "Your Azure Subscription ID"
 ```
 
-3. Install the required dependencies by running these commands at the top of your notebook:
 
-```python
-pip install python-dotenv
-pip install datasets -U
-pip install azure-ai-inference
-```
+### Step 1: Generate Training Data from a Teacher Model (15 minutes)
 
-### Step 2: Generate Training Data (15 minutes)
+Work through the `01.AzureML_DistillationByMAI.ipynb` notebook to generate training data for your student model:
 
-Work through the `01.AzureML_DistillationByMAI.ipynb` notebook to generate training examples:
+1. **Install required packages**:
+   ```python
+   pip install python-dotenv
+   pip install datasets -U
+   pip install azure-ai-inference
+   ```
 
-1. **Load and prepare the dataset**:
+2. **Load and prepare a dataset**:
    ```python
    from datasets import load_dataset
+   from abc import ABC
    
-   # We can define train and test sample sizes here
+   # Define a class to handle the input dataset
+   class InputDataset(ABC):
+       def __init__(self):
+           super().__init__()
+           (
+               self.train_data_file_name,
+               self.test_data_file_name,
+               self.eval_data_file_name,
+           ) = (None, None, None)
+   
+   # Specific implementation for the QA dataset
+   class CQnAHuggingFaceInputDataset(InputDataset):
+       def __init__(self):
+           super().__init__()
+   
+       def load_hf_dataset(
+           self,
+           dataset_name,
+           train_sample_size=10,
+           val_sample_size=10,
+           test_sample_size=10,
+           train_split_name="train",
+           val_split_name="validation",
+           test_split_name="test",
+       ):
+           # Load dataset and create splits
+           full_dataset = load_dataset(dataset_name)
+           train_data = full_dataset[train_split_name].select(range(train_sample_size))
+           val_data = full_dataset[val_split_name].select(range(val_sample_size))
+           test_data = full_dataset[test_split_name].select(range(test_sample_size))
+           return train_data, val_data, test_data
+   ```
+
+3. **Sample data from a Hugging Face dataset**:
+   ```python
+   # Define sample sizes
    train_sample_size = 100
    val_sample_size = 100
    
-   # Use the commonsense QA dataset
+   # We'll use the commonsense QA dataset
    dataset_name = "tau/commonsense_qa"
    input_dataset = CQnAHuggingFaceInputDataset()
    
+   # Load the dataset
    train, val, _ = input_dataset.load_hf_dataset(
        dataset_name=dataset_name,
        train_sample_size=train_sample_size,
@@ -179,38 +221,138 @@ Work through the `01.AzureML_DistillationByMAI.ipynb` notebook to generate train
    )
    ```
 
-2. **Format the questions** with appropriate system prompts:
+4. **Format the questions for the teacher model**:
    ```python
+   import json
+   
+   # Create directory for data
+   ! mkdir -p data
+   train_data_path = "data/train_original_data.jsonl"
+   
+   # Define prompts
    system_prompt = "You are a helpful assistant. Your output should only be one of the five choices: 'A', 'B', 'C', 'D', or 'E'."
    user_prompt_template = "Answer the following multiple-choice question by selecting the correct option.\n\nQuestion: {question}\nAnswer Choices:\n{answer_choices}"
+   
+   # Format each question
+   for row in train:
+       data = {"messages": []}
+       data["messages"].append(
+           {
+               "role": "system",
+               "content": system_prompt,
+           }
+       )
+       question, choices = row["question"], row["choices"]
+       labels, choice_list = choices["label"], choices["text"]
+       answer_choices = [
+           "({}) {}".format(labels[i], choice_list[i]) for i in range(len(labels))
+       ]
+       answer_choices = "\n".join(answer_choices)
+       data["messages"].append(
+           {
+               "role": "user",
+               "content": user_prompt_template.format(
+                   question=question, answer_choices=answer_choices
+               ),
+           }
+       )
+       with open(train_data_path, "a") as f:
+           f.write(json.dumps(data) + "\n")
    ```
 
-3. **Process questions with the teacher model**:
+5. **Load credentials and connect to the teacher model**:
    ```python
+   from dotenv import load_dotenv
+   import os
    from azure.ai.inference import ChatCompletionsClient
    from azure.ai.inference.models import SystemMessage, UserMessage
    from azure.core.credentials import AzureKeyCredential
    
-   # Connect to the Azure AI service
-   client = ChatCompletionsClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+   # Load environment variables
+   load_dotenv()
    
-   # Process each question and collect responses
+   teacher_model_name = os.getenv('TEACHER_MODEL_NAME')
+   teacher_model_endpoint_url = os.getenv('TEACHER_MODEL_ENDPOINT')
+   teacher_model_api_key = os.getenv('TEACHER_MODEL_KEY')
+   
+   # Set up client
+   endpoint = teacher_model_endpoint_url
+   model_name = teacher_model_name
+   key = teacher_model_api_key
+   client = ChatCompletionsClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+   ```
+
+6. **Generate responses using the teacher model**:
+   ```python
+   def process_question(question_data):
+       try:
+           messages = []
+           for msg in question_data["messages"]:
+               if msg["role"] == "system":
+                   messages.append(SystemMessage(content=msg["content"]))
+               elif msg["role"] == "user":
+                   messages.append(UserMessage(content=msg["content"]))
+   
+           response = client.complete(
+               messages=messages,
+               model=model_name,
+               max_tokens=100  # Short answers (A, B, C, D, or E)
+           )
+   
+           return {
+               "question": question_data["messages"][1]["content"],
+               "response": response.choices[0].message.content,
+               "full_response": response
+           }
+       except Exception as e:
+           return {
+               "question": question_data["messages"][1]["content"] if len(question_data["messages"]) > 1 else "Error",
+               "response": f"Error: {str(e)}",
+               "full_response": None
+           }
+   
+   # Process all questions
    results = []
    with open(train_data_path, 'r', encoding='utf-8') as file:
+       print(f"Processing questions from {train_data_path}")
        for i, line in enumerate(file):
-           question_data = json.loads(line)
-           result = process_question(question_data)
-           results.append(result)
+           if line.strip():  # Skip empty lines
+               try:
+                   question_data = json.loads(line)
+                   print(f"Processing question {i+1}...")
+                   result = process_question(question_data)
+                   results.append(result)
+                   print(f"Question {i+1} response: {result['response']}")
+               except Exception as e:
+                   print(f"Error processing line {i+1}: {str(e)}")
+   ```
+
+7. **Save the teacher's responses for student model training**:
+   ```python
+   output_file_path = "./data/train_data.jsonl"
+   with open(output_file_path, 'w', encoding='utf-8') as f:
+       for result in results:
+           # Create the simplified output format
+           output_line = {
+               "Question": result["question"],
+               "Answer": result["response"]
+           }
+   
+           # Write as JSONL (one JSON object per line)
+           f.write(json.dumps(output_line, ensure_ascii=False) + '\n')
    ```
 
 This process:
-- Loads 100 sample questions from the commonsense QA dataset
-- Formats each question as a multiple-choice problem
-- Sends questions to your teacher model via Azure AI Inference SDK
-- Collects the responses for training the student model
-- Saves the question-answer pairs in JSONL format
+- Loads a multiple-choice question dataset from Hugging Face
+- Formats each question with a clear system prompt and instruction
+- Sends the questions to your teacher model (using Azure AI Foundry MAI endpoint)
+- Collects the high-quality responses from the larger model
+- Creates a training dataset that pairs questions with expert answers
+- Formats the output for use in the next step of model distillation
 
-### Step 3: Fine-tune and Optimize the Model (15 minutes)
+The resulting `train_data.jsonl` file will be used in Step 2 to fine-tune your smaller student model.
+
+### Step 2: Fine-tune and Optimize the Model (15 minutes)
 
 Work through the `02.AzureML_FineTuningAndConvertByMSOlive.ipynb` notebook to fine-tune and optimize the student model:
 
@@ -256,7 +398,7 @@ This process:
 - Converts the model to ONNX format for optimized inference
 - Applies int4 quantization to dramatically reduce model size
 
-### Step 4: Test Your Optimized Model (10 minutes)
+### Step 3: Test Your Optimized Model (10 minutes)
 
 Work through the `03.AzureML_RuningByORTGenAI.ipynb` notebook to run inference with your optimized model:
 
@@ -295,7 +437,7 @@ Work through the `03.AzureML_RuningByORTGenAI.ipynb` notebook to run inference w
    generator.append_tokens(input_tokens)
    ```
 
-### Step 5: Register Your Model to Azure ML (5 minutes)
+### Step 4: Register Your Model to Azure ML (5 minutes)
 
 Work through the `04.AzureML_RegisterToAzureML.ipynb` notebook to register your optimized model to Azure Machine Learning:
 
@@ -325,7 +467,7 @@ Work through the `04.AzureML_RegisterToAzureML.ipynb` notebook to register your 
    ml_client.models.create_or_update(file_model)
    ```
 
-### Step 6: Download Your Model for Local Deployment (5 minutes)
+### Step 5: Download Your Model for Local Deployment (5 minutes)
 
 Work through the `05.Local_Download.ipynb` notebook to download your model for local deployment:
 

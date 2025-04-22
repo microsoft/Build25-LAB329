@@ -21,14 +21,12 @@ This lab is organized into five key sections following a practical workflow:
 
 - **Interactive Notebooks**: Five Jupyter notebooks with detailed comments guide you through each step
 - **Overview Documents**: Each notebook has a companion overview document explaining key concepts
-- **Configuration Files**: Sample environment configurations for both cloud and local execution
-- **Infrastructure Templates**: Azure resource templates for setting up the required environment
 
 ### Technology Stack
 
 This workshop leverages several cutting-edge technologies:
 
-- **Azure Machine Learning**: For managing the end-to-end ML lifecycle
+- **Azure Machine Learning**: For managing the end-to-end ML lifecycle requring a A100 Compute Instance
 - **Microsoft Olive**: For model optimization and ONNX conversion
 - **ONNX Runtime GenAI**: For efficient model inference
 - **Phi-4-mini**: Microsoft's small but powerful language model

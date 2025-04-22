@@ -1,0 +1,7 @@
+{
+    "Name": "phi-4-mini-reasoning-onnx",
+    "PromptTemplate": {
+      "assistant": "{Content}",
+      "prompt": "<|user|>Explain the Pythagorean Theorem<|end|><|assistant|>"
+    }
+  }

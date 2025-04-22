@@ -43,7 +43,7 @@ The workshop follows these key steps:
 
 5. **Local Model Download** ([`05.Local_Download.ipynb`](./Lab329/Notebook/05.Local_Download.ipynb)):
    - Download registered models for local development or deployment
-   -[Overview](./Lab329/Notebook/05.Overview.md)
+   - [Overview](./Lab329/Notebook/05.Overview.md)
 
 ## Contributing
 

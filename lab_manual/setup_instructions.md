@@ -2,7 +2,7 @@
 
 This guide provides step-by-step instructions for:
 1. Setting up an NVIDIA A100 GPU compute node through Azure AI Foundry
-2. Deploying the MAI-DS-R1 model using Models as a Service (MaaS) in supported regions
+2. Deploying the model using Models as a Service (MaaS) in supported regions
 
 ## Prerequisites
 
@@ -74,7 +74,7 @@ This lab requires specific Azure regions that support both A100 GPUs and MAI-DS-
 2. The status should change to **Creating** and then to **Running**
 3. You can verify the A100 GPU specification by clicking on the compute resource name
 
-## Step 5: Use Your A100 Compute with Azure AI Foundry
+## Step 5: Use Your A100 Compute with Azure ML Studio
 
 ### Option 1: Through Notebooks
 
@@ -93,34 +93,6 @@ if torch.cuda.is_available():
     print(f"GPU Device Name: {torch.cuda.get_device_name(0)}")
     # Should show "NVIDIA A100 80GB PCIe" or similar
 ```
-
-### Option 2: For Model Training Jobs
-
-1. Navigate to the **Jobs** section in your Azure AI Foundry project
-2. Click **+ New job** to create a new training job
-3. Configure your job parameters
-4. In the compute selection, choose your A100 compute resource
-5. Submit the job and monitor its progress
-
-### Option 3: For Model Fine-tuning
-
-1. Navigate to the **Models** section in your Azure AI Foundry project
-2. Select a model you want to fine-tune
-3. Click on **Fine-tune**
-4. In the fine-tuning configuration, select your A100 compute cluster
-5. Configure other fine-tuning parameters as needed
-6. Start the fine-tuning process
-
-## Step 6: Connect Your A100 Compute to the Distillation Notebooks
-
-For the lab notebooks in your workspace (under Lab329/Notebook/):
-
-1. Open the notebook `01.AzureML_DistillationByMAI.ipynb`
-2. Look for the cell where compute is configured/specified
-3. Replace the compute name with your A100 compute cluster name
-4. Do the same for other notebooks that require GPU compute:
-   - `02.AzureML_FineTuningAndConvertByMSOlive.ipynb`
-   - `03.AzureML_RuningByORTGenAI.ipynb`
 
 ## Important Considerations for A100 GPU Usage
 
@@ -190,7 +162,7 @@ Azure AI Foundry provides a serverless deployment option called Models as a Serv
 2. Navigate to your Azure AI Foundry project
 3. Select **Models** from the left navigation menu
 4. Find your model in the list or search for it
-   - For Azure AI catalog models like MAI-DS-R1, you can use the model ID: `azureml://registries/azureml/models/MAI-DS-R1/versions/1`
+   - For Azure AI catalog models Deepseek-v3, you can use the model ID: `azureml://registries/azureml/models/deepseek-v3/versions/1`
 
 ### Step 2: Deploy the Model as a Service
 
@@ -267,11 +239,11 @@ Not all models can be deployed using MaaS. Currently, supported models include:
    - Check that your API keys haven't expired
    - Ensure proper CORS settings if calling from web applications
 
-### Connecting MAI-DS-R1 Model via MaaS
+### Connecting Deepseek-v3 Model via MaaS
 
-For the specific MAI-DS-R1 model mentioned in the lab materials:
+For the specific Deepseek model mentioned in the lab materials:
 
-1. Use the model ID: `azureml://registries/azureml/models/MAI-DS-R1/versions/1`
+1. Use the model ID: `azureml://registries/azureml/models/deepseek-v3/versions/1`
 2. Deploy to one of the supported regions: westus, southcentralus, eastus, westus3, northcentralus, or eastus2
 3. Use the following Python code to connect to your deployed endpoint:
 

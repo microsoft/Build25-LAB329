@@ -92,32 +92,35 @@ flowchart TD
 
 Now let's get started with the practical implementation!
 
-## Clone the GitHub Repo and resources to your Local Machine 
+## Clone the GitHub Repo and resources to your Azure ML Studio 
+
+Open your [Azure ML Studio](https://ml.azure.com)
+
+![MLStudio](./images/)
+
+Select Notebooks
+
+![MLStudioNotebooks](./images/)
+
+Select Terminal
+
+![SelectTerminal](./images/)
+
 
 To clone a repository, you can follow these steps:
-
-1. **Install Git**: If Git is not already installed on your machine, download and install it from [git-scm.com](https://git-scm.com/).
-
-2. **Get the Repository URL**: Clone the repository `https://github.com/microsoft/Build25-LAB329`.
-
-3. **Open a Terminal or Command Prompt**: On Windows, use Command Prompt, PowerShell, or a Git Bash terminal. On macOS or Linux, use a terminal.
-
-4. **Navigate to Your Desired Folder**: Use the `cd` command to move into the directory where you want the repository to be cloned:
    ```
-   cd path/to/your/folder
-   ```
-
-5. **Clone the Repository**: Use the `git clone` command followed by the repository URL:
+1. **Clone the Repository**: Use the `git clone` command followed by the repository URL:
    ```
    git clone https://github.com/microsoft/Build25-LAB329 
    ```
 
-6. **Access the Cloned Repository**: After cloning, navigate to the directory of the cloned repository:
+2. **Access the Cloned Repository**: After cloning, navigate to the directory of the cloned repository:
    ```
    cd repository
    ```
 
-Now you’re ready to work with the repository on your local machine!
+Now you’re ready to work with the repository on your Azure ML Studio!
+
 
 ## Workshop Notebook Structure
 
@@ -142,13 +145,17 @@ Microsoft Azure AI Foundry provides a managed environment for large-scale machin
 2. Update the Azure configuration settings with your credentials:
 
 ```
-TEACHER_MODEL_NAME = "MAI-DS-R1"
+TEACHER_MODEL_NAME = "Model Card Name"
 TEACHER_MODEL_ENDPOINT = "Your Azure AI Foundry MAI Endpoint"
 TEACHER_MODEL_KEY = "Your Azure AI Foundry MAI Key"
 
 AZUREML_WS_NAME = "Your Azure ML Workspace Name"
 AZUREML_RESOURCE_GROUP = "Your Azure ML Resource Group Name"
 AZUREML_SUBSCRIPTION_ID = "Your Azure Subscription ID"
+
+AZUREML_SUBSCRIPTION_ID="Your Azure Subscription ID"
+AZUREML_RESOURCE_GROUP="Your Azure Resource Group"
+AZUREML_WS_NAME="Your Azure ML Workspace Name"
 ```
 
 

@@ -311,3 +311,94 @@ if response.status_code == 200:
 else:
     print(f"Error: {response.status_code}, {response.text}")
 ```
+
+## Setting Up IAM Permissions for Azure ML Compute
+
+Proper permissions are essential for users to work with Azure ML compute resources. This section guides you through setting up Identity and Access Management (IAM) permissions for your Azure ML resources.
+
+### Step 1: Configure Resource Group-Level Permissions
+
+1. Sign in to the [Azure Portal](https://portal.azure.com/)
+2. Navigate to the Resource Group containing your Azure AI Foundry project
+3. Select **Access control (IAM)** from the left sidebar
+4. Click on **+ Add** and then **Add role assignment**
+5. Configure the following settings:
+   - **Role**: Select one of the following based on user needs:
+     - **Contributor**: Grants full access to manage all resources (recommended for lab admins)
+     - **AzureML Data Scientist**: Can perform most Azure ML operations, but can't create compute resources
+     - **AzureML Compute Operator**: Can only use existing compute resources
+   - **Assign access to**: Select "User, group, or service principal"
+   - **Select**: Search for and select the user account(s) that need access
+6. Click **Review + assign** to save the role assignment
+
+### Step 2: Configure Azure ML Workspace-Level Permissions
+
+For more granular control, you can assign roles at the workspace level:
+
+1. Navigate to your Azure ML workspace resource in the Azure Portal
+2. Select **Access control (IAM)** from the left sidebar
+3. Click on **+ Add** and then **Add role assignment**
+4. Assign one of the following roles based on user needs:
+   - **Owner**: Full control of the workspace, including user management
+   - **Contributor**: Can create and manage all resources in the workspace
+   - **AzureML Data Scientist**: Can submit runs and create experiments, but can't create compute
+   - **AzureML Compute Operator**: Can only use existing compute resources
+5. Select the user(s) and click **Review + assign**
+
+### Step 3: Configure Compute-Specific Permissions
+
+To provide access to specific compute resources only:
+
+1. Navigate to your Azure AI Foundry project
+2. Select **Compute** from the left sidebar
+3. Click on the specific compute cluster you want to share
+4. Select the **Access control (IAM)** tab
+5. Click **+ Add** and then **Add role assignment**
+6. Assign the **AzureML Compute Operator** role to specific users
+7. Click **Review + assign**
+
+### Step 4: Verify Permissions
+
+To verify that permissions have been correctly assigned:
+
+1. Ask users to sign into the [Azure AI Studio](https://ai.azure.com/)
+2. Navigate to the project and try to access compute resources
+3. Verify they can perform actions appropriate to their assigned role:
+   - Viewing compute resources
+   - Submitting jobs to compute clusters
+   - Creating notebooks and connecting to compute instances
+
+### Common Permission Issues and Troubleshooting
+
+1. **"No permission to create compute" error**:
+   - Ensure the user has at least Contributor role on the resource group
+   - Check if there are Azure Policy restrictions in place
+
+2. **"Cannot access storage account" error**:
+   - Ensure the user has the Storage Blob Data Contributor role on the associated storage account
+
+3. **"Failed to start notebook" error**:
+   - Check if the user has permissions to the underlying compute resource
+   - Verify the user has AzureML Data Scientist role at minimum
+
+4. **Permission changes not taking effect immediately**:
+   - Role assignments can take a few minutes to propagate
+   - Ask users to sign out and sign back in to refresh their token
+
+### Best Practices for IAM in Azure ML
+
+1. **Use Azure AD groups**: Assign permissions to Azure AD groups rather than individual users for easier management
+2. **Follow least privilege principle**: Assign the minimum permissions required for users to perform their tasks
+3. **Regular access review**: Periodically review and update access permissions to maintain security
+4. **Use custom roles**: For advanced scenarios, create custom IAM roles with precisely defined permissions
+
+### Required Permissions for Common Tasks
+
+| Task | Required Role |
+|------|--------------|
+| Create compute resources | Contributor or Owner at resource group level |
+| Use existing compute | AzureML Compute Operator |
+| Submit training jobs | AzureML Data Scientist |
+| Deploy models | AzureML Data Scientist + additional deployment permissions |
+| View experiment results | Reader |
+| Manage security settings | Owner |

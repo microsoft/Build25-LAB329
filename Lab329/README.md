@@ -79,17 +79,14 @@ The project uses multiple advanced AI and cloud technologies:
         - Please run `05.Local_Download.ipynb` in your local env( Please install Python 3.10+ in your edge device)
 2. Ensure required environment variables are set before execution , add local.env in Notebook folder
 ```
-TEACHER_MODEL_NAME = "Model Card Name"
-TEACHER_MODEL_ENDPOINT = "Your Azure AI Foundry MAI Endpoint"
-TEACHER_MODEL_KEY = "Your Azure AI Foundry MAI Key"
+TEACHER_MODEL_NAME=your-model-name
+TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
+TEACHER_MODEL_KEY=your-api-key-here
 
-AZUREML_WS_NAME = "Your Azure ML Workspace Name"
-AZUREML_RESOURCE_GROUP = "Your Azure ML Resource Group Name"
-AZUREML_SUBSCRIPTION_ID = "Your Azure Subscription ID"
-
-AZUREML_SUBSCRIPTION_ID="Your Azure Subscription ID"
-AZUREML_RESOURCE_GROUP="Your Azure Resource Group"
-AZUREML_WS_NAME="Your Azure ML Workspace Name"
+# Azure ML workspace information
+AZUREML_SUBSCRIPTION_ID=your-subscription-id
+AZUREML_RESOURCE_GROUP=your-resource-group
+AZUREML_WS_NAME=your-workspace-name
 ```
 3. Azure subscription and appropriate permissions are needed to use AzureML services see [Setup Instructions](../lab_manual/setup_instructions.md)
 4. Local execution requires sufficient computing resources (especially for model fine-tuning steps) - A100 as your GPU 

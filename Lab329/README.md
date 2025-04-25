@@ -77,7 +77,7 @@ The project uses multiple advanced AI and cloud technologies:
         - Please run `02.AzureML_FineTuningAndConvertByMSOlive.ipynb` and `03.AzureML_RuningByORTGenAI.ipynb` in 'Python 3.10 PyTorch and Tensorflow' env 
     - Local
         - Please run `05.Local_Download.ipynb` in your local env( Please install Python 3.10+ in your edge device)
-2. Ensure required environment variables are set before execution , add .env in Notebook folder
+2. Ensure required environment variables are set before execution , add local.env in Notebook folder
 ```
 TEACHER_MODEL_NAME = "Model Card Name"
 TEACHER_MODEL_ENDPOINT = "Your Azure AI Foundry MAI Endpoint"

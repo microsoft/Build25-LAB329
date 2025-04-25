@@ -54,6 +54,7 @@ module aiModelsDeploy 'ai-project.bicep' = {
     tags: tags
     location: location
     envName: environmentName
+    userPrincipalId: principalId
   }
 }
 output AZURE_AI_PROJECT_CONNECTION_STRING string = aiModelsDeploy.outputs.aiFoundryProjectConnectionString

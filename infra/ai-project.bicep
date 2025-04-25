@@ -6,6 +6,9 @@ param tags object = {}
 @description('Main location for the resources')
 param location string
 
+@description('The principal ID of the user running the deployment')
+param userPrincipalId string = ''
+
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = uniqueString(subscription().id, resourceGroup().id, location)
 
@@ -168,7 +171,7 @@ resource project 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
         personalComputeInstanceSettings: {
           assignedUser: {
             tenantId: tenant().tenantId
-            objectId: ''
+            objectId: !empty(userPrincipalId) ? userPrincipalId : ''
           }
         }
       }

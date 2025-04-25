@@ -17,11 +17,13 @@ This is a practical workshop on model distillation using Azure AI Foundry. Throu
 The workshop flow is divided into the following key steps:
 
 ### 1. Knowledge Distillation (Implemented via DeepSeek)
-In `01.AzureML_DistillationByMAI.ipynb`, we demonstrate how to:
+In `01.AzureML_Distillation.ipynb`, we demonstrate how to:
 - Load a dataset from Hugging Face datasets(in this case, a commonsense QA dataset)
 - Prepare data for knowledge distillation
 - Use a "teacher" model (a larger pre-trained model) to generate high-quality answers
 - These answers will be used to train a "student" model (phi-4-mini-instruct)
+
+Please read the Notebook 1 [Overview](./Notebook/01.Overview.md)
 
 ### 2. Model Fine-tuning and Conversion (Via Microsoft Olive)
 In `02.AzureML_FineTuningAndConvertByMSOlive.ipynb`, we:
@@ -30,6 +32,8 @@ In `02.AzureML_FineTuningAndConvertByMSOlive.ipynb`, we:
 - Use Microsoft Olive tools to optimize and convert the model to ONNX format
 - Apply quantization techniques (reduced to int4 precision) to decrease model size and improve inference efficiency
 
+Please read the Notebook 2 [Overview](./Notebook/02.Overview.md)
+
 ### 3. Model Inference Using ONNX Runtime GenAI
 In `03.AzureML_RuningByORTGenAI.ipynb`, we show:
 - How to load the optimized model in ONNX format
@@ -37,16 +41,22 @@ In `03.AzureML_RuningByORTGenAI.ipynb`, we show:
 - Set up inference parameters
 - Perform actual inference and generate responses using the fine-tuned model
 
+Please read the Notebook 3 [Overview](./Notebook/03.Overview.md)
+
 ### 4. Model Registration to AzureML
 In `04.AzureML_RegisterToAzureML.ipynb`, we:
 - Register the optimized model to the Azure Machine Learning workspace
 - Set appropriate model metadata and descriptions
 - Prepare the model for subsequent deployment or sharing
 
+Please read the Notebook 4 [Overview](./Notebook/04.Overview.md)
+
 ### 5. Local Model Download
 In `05.Local_Download.ipynb`, we:
 - Query and download registered models from the AzureML workspace
 - Prepare model files for local development or deployment
+
+Please read the Notebook 5 [Overview](./Notebook/05.Overview.md)
 
 ## Technology Stack
 

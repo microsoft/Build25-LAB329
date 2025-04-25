@@ -9,6 +9,9 @@ param location string
 @description('The principal ID of the user running the deployment')
 param userPrincipalId string = ''
 
+@description('VM size for the compute instance')
+param computeVmSize string
+
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = uniqueString(subscription().id, resourceGroup().id, location)
 
@@ -157,13 +160,13 @@ resource project 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
     hubResourceId: hub.id
   }
   
-  resource cpuCompute 'computes' = {
+  resource compute 'computes' = {
     name: '${envName}-cpu-instance'
     location: location
     properties: {
       computeType: 'ComputeInstance'
       properties: {
-        vmSize: 'Standard_DS3_v2'
+        vmSize: computeVmSize
         applicationSharingPolicy: 'Personal'
         sshSettings: {
           sshPublicAccess: 'Disabled'

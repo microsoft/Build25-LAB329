@@ -35,17 +35,6 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   tags: tags
 }
 
-module resources 'resources.bicep' = {
-  scope: rg
-  name: 'resources'
-  params: {
-    location: location
-    tags: tags
-    principalId: principalId
-    aiFoundryProjectConnectionString: aiModelsDeploy.outputs.aiFoundryProjectConnectionString
-  }
-}
-
 module aiModelsDeploy 'ai-project.bicep' = {
   scope: rg
   name: 'ai-project'
@@ -57,5 +46,17 @@ module aiModelsDeploy 'ai-project.bicep' = {
     userPrincipalId: principalId
   }
 }
+
+// Core connection outputs
 output AZURE_AI_PROJECT_CONNECTION_STRING string = aiModelsDeploy.outputs.aiFoundryProjectConnectionString
 output AZURE_RESOURCE_AI_PROJECT_ID string = aiModelsDeploy.outputs.projectId
+
+// Environment variables required by notebooks
+output TEACHER_MODEL_NAME string = aiModelsDeploy.outputs.teacherModelName
+output TEACHER_MODEL_ENDPOINT string = aiModelsDeploy.outputs.teacherModelEndpoint
+output TEACHER_MODEL_KEY string = aiModelsDeploy.outputs.teacherModelKey
+
+// Azure ML workspace outputs
+output AZUREML_SUBSCRIPTION_ID string = subscription().subscriptionId
+output AZUREML_RESOURCE_GROUP string = rg.name
+output AZUREML_WS_NAME string = aiModelsDeploy.outputs.projectName

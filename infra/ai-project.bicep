@@ -205,3 +205,8 @@ output projectId string = project.id
 output projectName string = project.name
 output aiFoundryProjectConnectionString string = '${split(project.properties.discoveryUrl, '/')[2]};${subscription().subscriptionId};${resourceGroup().name};${project.name}'
 
+// Teacher model outputs for environment variables
+output teacherModelName string = 'DeepSeek-V3'
+output teacherModelEndpoint string = deepSeekV31Deploy.properties.endpoint
+output teacherModelKey string = deepSeekV31Deploy.listKeys().key1
+

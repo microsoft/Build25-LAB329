@@ -1,4 +1,3 @@
-
 param deepSeekV31Location string
 
 @description('Tags that will be applied to all resources')
@@ -153,6 +152,27 @@ resource project 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
     v1LegacyMode: false
     publicNetworkAccess: 'Enabled'
     hubResourceId: hub.id
+  }
+  
+  resource cpuCompute 'computes' = {
+    name: '${envName}-cpu-instance'
+    location: location
+    properties: {
+      computeType: 'ComputeInstance'
+      properties: {
+        vmSize: 'Standard_DS3_v2'
+        applicationSharingPolicy: 'Personal'
+        sshSettings: {
+          sshPublicAccess: 'Disabled'
+        }
+        personalComputeInstanceSettings: {
+          assignedUser: {
+            tenantId: tenant().tenantId
+            objectId: ''
+          }
+        }
+      }
+    }
   }
 }
 

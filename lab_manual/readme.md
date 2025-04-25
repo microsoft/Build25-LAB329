@@ -43,3 +43,17 @@ By the end of this workshop, participants will be able to:
 3. Run inference efficiently using ONNX Runtime GenAI
 4. Deploy optimized models to both cloud and edge environments
 5. Understand the trade-offs between model size, speed, and accuracy
+
+### Setup instructions 
+
+Please follow the [setup instructions](./setup_instructions.md) to configure you Azure AI Foundry Workspace and Azure ML Compute and Notebook environment.
+
+### Lab Manual 
+# Model Distillation Lab Manual: Teaching Small Models to Be Smart
+
+## Duration
+- Total Time: 70 minutes
+- Reading Time: 20 minutes
+- Hands-On Activities: 50 minutes
+
+[Lab Manual Getting Started](./distillation_lab_manual.md)

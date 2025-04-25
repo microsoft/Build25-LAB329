@@ -59,25 +59,29 @@ The project uses multiple advanced AI and cloud technologies:
 - **LoRA**: An efficient model fine-tuning technique(https://learn.microsoft.com/en-us/azure/aks/concepts-fine-tune-language-models)
 - **Foundry Local**: AI Foundry Local brings the power of Azure AI Foundry to your local devic(https://github.com/kinfey/Foundry-Local/blob/main/docs/how-to/compile-models-for-foundry-local.md)
 
-## Usage Guide
+## Usage Guide **Please ensure you run this in the Azure ML Notebook Workspace and select the correct Kernel**
 
-1. Execute the notebook files in sequence (01 through 05)
+1. Execute the notebook files in sequence (01 through 05) using [Azure ML Workspace](https://ml.azure.com)
     - AzureML
-        - Please run `01.AzureML_DistillationByMAI.ipynb` and `04.AzureML_RegisterToAzureML.ipynb` in 'Python 3.10 AzureML' env
+        - Please run `01.AzureML_Distillation.ipynb` and `04.AzureML_RegisterToAzureML.ipynb` in 'Python 3.10 AzureML' env
         - Please run `02.AzureML_FineTuningAndConvertByMSOlive.ipynb` and `03.AzureML_RuningByORTGenAI.ipynb` in 'Python 3.10 PyTorch and Tensorflow' env 
     - Local
         - Please run `05.Local_Download.ipynb` in your local env( Please install Python 3.10+ in your edge device)
 2. Ensure required environment variables are set before execution , add .env in Notebook folder
 ```
-TEACHER_MODEL_NAME = "MAI-DS-R1"
+TEACHER_MODEL_NAME = "Model Card Name"
 TEACHER_MODEL_ENDPOINT = "Your Azure AI Foundry MAI Endpoint"
 TEACHER_MODEL_KEY = "Your Azure AI Foundry MAI Key"
 
 AZUREML_WS_NAME = "Your Azure ML Workspace Name"
 AZUREML_RESOURCE_GROUP = "Your Azure ML Resource Group Name"
 AZUREML_SUBSCRIPTION_ID = "Your Azure Subscription ID"
+
+AZUREML_SUBSCRIPTION_ID="Your Azure Subscription ID"
+AZUREML_RESOURCE_GROUP="Your Azure Resource Group"
+AZUREML_WS_NAME="Your Azure ML Workspace Name"
 ```
-3. Azure subscription and appropriate permissions are needed to use AzureML services
+3. Azure subscription and appropriate permissions are needed to use AzureML services see [Setup Instructions](../lab_manual/setup_instructions.md)
 4. Local execution requires sufficient computing resources (especially for model fine-tuning steps) - A100 as your GPU 
 5. Confirm you have installed Foundry Local sdk in your edge device
 6. After finish `05.Local_Download.ipynb`, please copy `LocalFoundryEnv/inference_model.json` to your download folder , such as 'ft-phi-4-onnx-int4-cpu/onnx'

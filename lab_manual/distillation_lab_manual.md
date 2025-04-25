@@ -126,7 +126,7 @@ Now you’re ready to work with the repository on your Azure ML Studio!
 
 This lab uses a series of Jupyter notebooks that guide you through the complete model distillation workflow. Each notebook focuses on a specific phase of the process:
 
-1. [**`01.AzureML_DistillationByMAI.ipynb`**](../Lab329/Notebook/01.AzureML_DistillationByMAI.ipynb): Initial knowledge distillation using a teacher model
+1. [**`01.AzureML_Distillation.ipynb`**](../Lab329/Notebook/01.AzureML_Distillation.ipynb): Initial knowledge distillation using a teacher model
 2. [**`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`**](../Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb): Fine-tuning and model optimization
 3. [**`03.AzureML_RuningByORTGenAI.ipynb`**](../Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb): Model inference using ONNX Runtime
 4. [**`04.AzureML_RegisterToAzureML.ipynb`**](../Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb): Model registration to Azure ML
@@ -161,7 +161,7 @@ AZUREML_WS_NAME="Your Azure ML Workspace Name"
 
 ### Step 1: Generate Training Data from a Teacher Model (15 minutes)
 
-Work through the `01.AzureML_DistillationByMAI.ipynb` notebook to generate training data for your student model:
+Work through the [`01.AzureML_Distillation.ipynb`](../Lab329/Notebook/01.AzureML_Distillation.ipynb) notebook to generate training data for your student model:
 
 1. **Install required packages**:
    ```python
@@ -361,7 +361,7 @@ The resulting `train_data.jsonl` file will be used in Step 2 to fine-tune your s
 
 ### Step 2: Fine-tune and Optimize the Model (15 minutes)
 
-Work through the `02.AzureML_FineTuningAndConvertByMSOlive.ipynb` notebook to fine-tune and optimize the student model:
+Work through the [`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`](/Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb) notebook to fine-tune and optimize the student model:
 
 1. **Install required packages**:
    ```python
@@ -407,7 +407,7 @@ This process:
 
 ### Step 3: Test Your Optimized Model (10 minutes)
 
-Work through the `03.AzureML_RuningByORTGenAI.ipynb` notebook to run inference with your optimized model:
+Work through the [`03.AzureML_RuningByORTGenAI.ipynb`](/Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb) notebook to run inference with your optimized model:
 
 1. **Load the ONNX model and adapter**:
    ```python
@@ -446,7 +446,7 @@ Work through the `03.AzureML_RuningByORTGenAI.ipynb` notebook to run inference w
 
 ### Step 4: Register Your Model to Azure ML (5 minutes)
 
-Work through the `04.AzureML_RegisterToAzureML.ipynb` notebook to register your optimized model to Azure Machine Learning:
+Work through the [`04.AzureML_RegisterToAzureML.ipynb`](/Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb) notebook to register your optimized model to Azure Machine Learning:
 
 1. **Set up Azure ML client**:
    ```python
@@ -476,7 +476,7 @@ Work through the `04.AzureML_RegisterToAzureML.ipynb` notebook to register your 
 
 ### Step 5: Download Your Model for Local Deployment (5 minutes)
 
-Work through the `05.Local_Download.ipynb` notebook to download your model for local deployment:
+Work through the [`05.Local_Download.ipynb`](/Lab329/Notebook/05.Local_Download.ipynb) notebook to download your model for local deployment:
 
 1. **List available models in the registry**:
    ```python

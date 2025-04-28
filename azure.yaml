@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: build25-lab329-distill
+resources:
+  ai-project:
+    type: ai.project
+    models:
+      - name: DeepSeek-V3
+        version: "1"
+        format: DeepSeek
+        sku:
+          name: GlobalStandard
+          usageName: AIServices.GlobalStandard.MaaS
+          capacity: 1

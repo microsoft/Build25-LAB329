@@ -104,7 +104,7 @@ Select Notebooks
 
 Select Terminal
 
-![SelectTerminal](./images/ML_Studio.png)
+![SelectTerminal](./images/Notebook_Terminal.png)
 
 
 To clone a repository, you can follow these steps:

@@ -139,6 +139,118 @@ A100 GPUs are premium resources with significant hourly costs:
    - Check if the necessary CUDA libraries are installed in your environment
    - Try using a curated environment with GPU support
 
+## Azure Developer CLI (azd) Infrastructure Deployment
+
+This lab includes Azure Bicep templates and Azure Developer CLI (azd) configuration files to automate the deployment of all required infrastructure components. This approach provides a consistent, repeatable deployment experience.
+
+### Prerequisites for Infrastructure Deployment
+
+1. **Azure CLI** - Install the latest version
+   ```powershell
+   winget install -e --id Microsoft.AzureCLI
+   ```
+
+2. **Azure Developer CLI (azd)** - Install the latest version
+   ```powershell
+   winget install -e --id Microsoft.Azd
+   ```
+
+3. **Azure Subscription** - An active Azure subscription with permissions to create resources
+
+4. **Logged in to Azure** - Ensure you're logged in
+   ```powershell
+   az login
+   ```
+
+### Step-by-Step Deployment Using Azure Developer CLI
+
+1. **Clone the Repository** (if not already done)
+   ```powershell
+   git clone https://github.com/yourusername/Build25-LAB329.git
+   cd Build25-LAB329
+   ```
+
+2. **Initialize the Azure Developer CLI Environment**
+   ```powershell
+   azd init
+   ```
+   This will prompt you for an environment name, which will be used as a prefix for all Azure resources created.
+
+3. **Deploy the Infrastructure**
+   ```powershell
+   azd up
+   ```
+   During deployment, you'll be prompted to provide:   - Azure subscription to use
+   - Azure region for deployment (choose from supported regions)
+   - DeepSeek-V3 model location (must support Azure AI services)
+   - Compute VM size (defaults to Standard_ND96amsr_A100_v4 for GPU acceleration)
+
+4. **Generate Environment Variables for Notebooks**
+   ```powershell
+   azd env get-values > Lab329\Notebook\local.env
+   ```
+   This command captures all output variables from the deployment and stores them in a file that the notebooks can use.
+
+### What Gets Deployed
+
+The azd deployment creates the following Azure resources:
+
+1. **Resource Group** - Named `rg-<environmentName>`
+
+2. **Azure Key Vault** - For secure storage of credentials and secrets
+
+3. **Azure Storage Account** - Used by Azure ML for datasets, models, and outputs
+
+4. **Azure AI Services** - DeepSeek-V3 model deployment (teacher model)
+
+5. **Azure ML Hub Workspace** - For centralized machine learning operations
+
+6. **Azure ML Project Workspace** - For running the knowledge distillation pipeline
+
+7. **Compute Instance** - For executing the notebooks and training processes
+
+### Verification and Troubleshooting
+
+1. **Verify Resource Deployment**:
+   ```powershell
+   azd env get-resources
+   ```
+   This shows all resources that have been deployed in your environment.
+
+2. **Check Deployment Logs**:
+   ```powershell
+   azd env get-logs
+   ```
+   If deployment fails, this command helps identify the cause.
+
+3. **Common Deployment Issues**:
+   - **Quota limits**: Ensure your subscription has quota for the requested resources
+   - **Region availability**: Verify the selected region supports all required services
+   - **Permission issues**: Ensure your account has Contributor access to the subscription
+   - **Name conflicts**: If resource names conflict, try a different environment name
+
+### Accessing Deployed Resources
+
+1. **Azure Portal**:
+   - Navigate to the [Azure Portal](https://portal.azure.com/)
+   - Search for and select the resource group named `rg-<environmentName>`
+   - Explore the deployed resources within this group
+
+2. **Azure ML Studio**:
+   - In the Azure Portal, find your Azure ML workspace
+   - Click "Launch Studio" to open Azure ML Studio
+   - Access notebooks, compute, and other ML resources
+
+### Clean Up
+
+When you've completed the lab and want to remove all deployed resources:
+
+```powershell
+azd down
+```
+
+This command will delete all Azure resources created during deployment, preventing further charges.
+
 ## Resources
 
 - [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)

@@ -1,97 +1,123 @@
 # Model Distillation Lab Manual: Teaching Small Models to Be Smart
 
-## Duration
-- Total Time: 70 minutes
-- Reading Time: 20 minutes
-- Hands-On Activities: 50 minutes
+## Workshop Duration and Timing
+- **Total Workshop Time**: 70 minutes
+- **Setup Time**: 5 minutes
+- **Hands-On Activities**: 60 minutes
+- **Discussion Time**: 5 minutes
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [Lab Objectives](#lab-objectives)
-- [What is Knowledge Distillation?](#what-is-knowledge-distillation)
-- [Knowledge Distillation Flow Chart](#knowledge-distillation-flow-chart)
-- [Clone the GitHub Repo and resources to your Azure ML Studio](#clone-the-github-repo-and-resources-to-your-azure-ml-studio)
-- [Workshop Notebook Structure](#workshop-notebook-structure)
-- [Cloud-Based Distillation Using Microsoft Azure AI Foundry](#cloud-based-distillation-using-microsoft-azure-ai-foundry)
-  - [Configure Your Environment (5 minutes)](#configure-your-environment-5-minutes)
-  - [Step 1: Generate Training Data from a Teacher Model (15 minutes)](#step-1-generate-training-data-from-a-teacher-model-15-minutes)
-  - [Step 2: Fine-tune and Optimize the Model (15 minutes)](#step-2-fine-tune-and-optimize-the-model-15-minutes)
-  - [Step 3: Test Your Optimized Model (10 minutes)](#step-3-test-your-optimized-model-10-minutes)
-  - [Step 4: Register Your Model to Azure ML (5 minutes)](#step-4-register-your-model-to-azure-ml-5-minutes)
-  - [Step 5: Download Your Model for Local Deployment (5 minutes)](#step-5-download-your-model-for-local-deployment-5-minutes)
-- [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
-- [Conclusion](#conclusion)
-- [Additional Resources](#additional-resources)
+- [Workshop Overview](#workshop-overview)
+- [Prerequisites Check](#prerequisites-check)
+- [Environment Setup](#environment-setup)
+- [Notebook-by-Notebook Guide](#notebook-by-notebook-guide)
+  - [Step 1: Generate Training Data (15 min)](#step-1-generate-training-data-15-min)
+  - [Step 2: Fine-tune and Optimize (15 min)](#step-2-fine-tune-and-optimize-15-min)
+  - [Step 3: Test Your ONNX Model (10 min)](#step-3-test-your-onnx-model-10-min)
+  - [Step 4: Register to Azure ML (5 min)](#step-4-register-to-azure-ml-5-min)
+  - [Step 5: Download the Model (5 min)](#step-5-download-the-model-5-min)
+  - [Step 6: Local Inference (10 min)](#step-6-local-inference-10-min)
+- [Troubleshooting Guide](#troubleshooting-guide)
+- [What You've Learned](#what-youve-learned)
+- [Next Steps](#next-steps)
 
-## Introduction
+## Workshop Overview
 
-Welcome to the Model Distillation Lab! In this hands-on session, you will learn how to distill knowledge from large language models like GPT-4o into smaller, more efficient models. This technique allows you to create compact models that can run faster and with fewer resources while still maintaining much of the capability of their larger counterparts.
+Welcome to the Model Distillation Workshop! In this hands-on session, you'll learn how to transform a large language model (DeepSeek-V3) into a smaller, equally capable model (Phi-4-mini) using knowledge distillation.
 
-This lab manual provides step-by-step instructions for two distillation approaches:
-1. **Cloud-based distillation** using Microsoft Azure AI Foundry (for those with Azure access)
-2. **Local-based distillation** on your own machine (for everyone)
+### What You'll Build
 
-By the end of this lab, you'll understand the principles of knowledge distillation and have practical experience implementing it using Python and popular machine learning frameworks.
+By the end of this workshop, you'll create a compact language model that:
+- Is **75% smaller** than the original teacher model
+- Runs on **standard hardware** without specialized GPUs
+- Can be deployed on **edge devices** or embedded systems
+- Maintains most of the **capabilities** of the larger model
 
-## Prerequisites
+### Workshop Flow
 
-- Basic Python programming knowledge
-- Familiarity with machine learning concepts
-- A computer with internet access
-- For cloud-based approach: Azure account with access to Microsoft Azure AI Foundry
-- For local-based approach: Python 3.7+ installed on your machine
+This is a **practical, code-first workshop**. You'll work through six Jupyter notebooks that guide you step-by-step through:
 
-## Lab Objectives
+1. **Data Generation**: Create training examples using a large "teacher" model
+2. **Fine-Tuning**: Train a smaller "student" model on this data
+3. **Optimization**: Convert and compress the model for efficiency
+4. **Testing**: Verify the model works correctly
+5. **Registration**: Register your model with Azure ML
+6. **Deployment**: Download and run the model locally
 
-- Understand the concept and benefits of model distillation
-- Generate training data using a larger "teacher" model
-- Train a smaller "student" model to mimic the teacher's outputs
-- Evaluate the effectiveness of the distilled model
-- Compare cloud-based and local distillation approaches
+Each notebook is designed to be completed in 5-15 minutes, with clear instructions at each step.
 
-## What is Knowledge Distillation?
+## Prerequisites Check
 
-Knowledge distillation is a technique for transferring knowledge from a large, complex model (the "teacher") to a smaller, more efficient model (the "student"). Instead of training the student model directly on raw data, we train it to mimic the outputs of the teacher model.
+Before you start, ensure you have:
 
-The process works as follows:
-1. A large, powerful model (like GPT-4o) generates responses to various prompts
-2. These prompt-response pairs become the training data
-3. A smaller model (like DistilGPT-2) is trained to produce similar outputs given the same prompts
-4. The resulting student model is more efficient while preserving much of the teacher's capabilities
+- [x] **Azure ML Studio access** with compute resources allocated
+- [x] **Python 3.10+** installed (already in Azure ML Studio)
+- [x] **Basic Python knowledge** (understanding of functions, loops, and imports)
+- [x] **Terminal/command line familiarity** (basic git commands)
+- [x] **Internet connectivity** (to access datasets and models)
 
-Distillation offers several benefits:
-- Faster inference times
-- Lower computational resource requirements
-- Reduced deployment costs
-- Possibility of on-device AI applications
+> **Important:** This workshop uses Azure ML Studio and requires access to a deployed Azure AI model endpoint. You should have already been provided with the necessary credentials.
 
-## Knowledge Distillation Flow Chart
+## Environment Setup
 
-```mermaid
-flowchart TD
-    A[Teacher Model Preparation] --> A1[Choose large pre-trained teacher model]
-    A1 --> A2[Fine-tune teacher on task-specific data if needed]
-    A2 --> B[Dataset Selection]
-    B --> B1[Curate and preprocess training dataset]
-    B1 --> B2[Include labeled data or generate pseudo-labels with teacher]
-    B2 --> C[Knowledge Distillation]
-    C --> C1[Pass training data through teacher model]
-    C1 --> C2[Extract probabilities/representations as soft labels]
-    C2 --> D[Student Model Training]
-    D --> D1[Initialize smaller student model]
-    D1 --> D2[Train student using hard and soft labels]
-    D2 --> E[Optimization]
-    E --> E1[Apply loss functions to minimize teacher-student difference]
-    E1 --> E2[Regularize student model for better generalization]
-    E2 --> F[Evaluation]
-    F --> F1[Assess student performance with validation metrics]
-    F1 --> F2[Compare student performance with teacher]
-    F2 --> G[Deployment]
-    G --> G1[Deploy smaller, optimized student model to production]
+Let's start by setting up your environment and cloning the code repository.
+
+### 1. Access Azure ML Studio
+
+Open Azure ML Studio by:
+1. Go to [Azure ML Studio](https://ml.azure.com/)
+2. Sign in with your Azure credentials
+3. Select your workspace (provided by your instructor)
+4. Navigate to the "Notebooks" section
+
+### 2. Clone the Repository
+
+1. In Azure ML Studio, click on the terminal icon at the top right
+2. Run these commands to clone and navigate to the repo:
+
+```bash
+git clone https://github.com/microsoft/Build25-LAB329
+cd Build25-LAB329/Lab329/Notebook
 ```
 
-Now let's get started with the practical implementation!
+### 3. Create Your Environment File
+
+Create a local environment file to store your Azure credentials:
+
+```bash
+cp sample.env local.env
+code local.env
+```
+
+Add your credentials to the file (these will be provided by your instructor):
+
+```
+TEACHER_MODEL_NAME=DeepSeek-V3
+TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
+TEACHER_MODEL_KEY=your-api-key-here
+AZUREML_SUBSCRIPTION_ID=your-subscription-id
+AZUREML_RESOURCE_GROUP=your-resource-group
+AZUREML_WS_NAME=your-workspace-name
+```
+
+Save the file and close the editor.
+
+## Notebook-by-Notebook Guide
+
+This workshop uses 6 Jupyter notebooks that you'll run in sequence. Each notebook builds on the previous one, so it's important to complete them in order.
+
+Let's look at each notebook and what you'll do:
+
+| Notebook | Purpose | Duration |
+|----------|---------|----------|
+| 01_AzureML_Distillation | Generate training data using DeepSeek-V3 | 15 min |
+| 02_AzureML_FineTuningAndConvertByMSOlive | Fine-tune Phi-4-mini with LoRA and optimize | 15 min |
+| 03_AzureML_RuningByORTGenAI | Test model inference with ONNX Runtime | 10 min |
+| 04_AzureML_RegisterToAzureML | Register model to Azure ML | 5 min |
+| 05_Local_Download | Download model for local deployment | 5 min |
+| 06_Local_Inference | Run inference locally | 10 min |
+
+Let's start with the first notebook!
 
 ## Clone the GitHub Repo and resources to your Azure ML Studio 
 
@@ -143,60 +169,76 @@ az login --identity
 Now you’re ready to work with the repository on your Azure ML Studio!
 
 
-## Workshop Notebook Structure
+## Step 1: Generate Training Data (15 min)
 
-This lab uses a series of Jupyter notebooks that guide you through the complete model distillation workflow. Each notebook focuses on a specific phase of the process:
+**Notebook:** `01.AzureML_Distillation.ipynb`
 
-1. [**`01.AzureML_Distillation.ipynb`**](../Lab329/Notebook/01.AzureML_Distillation.ipynb): Initial knowledge distillation using a teacher model
-2. [**`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`**](../Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb): Fine-tuning and model optimization
-3. [**`03.AzureML_RuningByORTGenAI.ipynb`**](../Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb): Model inference using ONNX Runtime
-4. [**`04.AzureML_RegisterToAzureML.ipynb`**](../Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb): Model registration to Azure ML
-5. [**`05.Local_Download.ipynb`**](../Lab329/Notebook/05.Local_Download.ipynb): Downloading models for local deployment
-6. [**`06.Local_Inference.ipynb`**](../Lab329/Notebook/06.Local_Inference.ipynb): Using the downloaded model for local inference
+**Purpose:** Create a training dataset by asking a large teacher model (DeepSeek-V3) to answer multiple-choice questions.
 
-Each notebook includes a corresponding overview document (XX.Overview.md) that explains the concepts and techniques used.
+#### Instructions:
+
+1. **Open the notebook** from the left file explorer panel in Azure ML Studio
+
+2. **Read the purpose and overview** at the top of the notebook 
+
+3. **Install required packages**
+   - Run the first cell to install dependencies
+   - Look for successful installation messages before continuing
+
+4. **Load environment variables**
+   - Run the environment variables cell
+   - Verify your teacher model endpoint is correctly loaded
+
+5. **Load the dataset**
+   - Run the cell to load the CommonSenseQA dataset
+   - You should see output showing the dataset was successfully loaded
+
+6. **Process questions and get teacher responses**
+   - Run the cells that process questions for the teacher model
+   - Watch the progress as the teacher model generates answers
+   - Note: This may take 5-10 minutes depending on the number of questions
+
+7. **Save the teacher's responses**
+   - Run the final cells to save responses to `data/train_data.jsonl`
+   - Verify the file was created successfully
+
+#### Key Outputs:
+- A JSONL file with questions and expert answers from the teacher model
+- This file will be used to train your student model in the next notebook
 
 
-## Cloud-Based Distillation Using Microsoft Azure AI Foundry
+## Troubleshooting Guide
 
-Microsoft Azure AI Foundry provides a managed environment for large-scale machine learning tasks. This approach is ideal for distilling larger models or when you need substantial compute resources.
+If you encounter issues during the workshop, use this guide to resolve common problems:
 
-### Configure Your Environment (5 minutes)
+### Environment and Setup Issues
 
-1. Ensure you're in the Notebook directory of the cloned repository:
-   ```bash
-   cd Build25-LAB329/Lab329/Notebook
-   ```
+1. **Authentication errors**:
+   - Error: "Failed to authenticate to Azure"
+   - Solution: Verify your local.env file has the correct values
+   - Fix: Run `az login` in the terminal to refresh your login
 
-2. Create a `local.env` file based on the `sample.env` template:
-   ```bash
-   cp sample.env local.env
-   ```
+2. **Missing environment variables**:
+   - Error: "NameError: name 'xyz' is not defined"
+   - Solution: Make sure you've run all initialization cells
+   - Fix: Create or update your local.env file with the required values
 
-3. Edit the `local.env` file to add your Azure credentials:
-   ```bash
-   code local.env
-   ```
+3. **Package installation failures**:
+   - Error: "ERROR: Could not install packages..."
+   - Solution: Ensure you have internet connectivity and proper permissions
+   - Fix: Try installing one package at a time or specify --user flag
 
-4. Update the following values in your local.env file:
-   ```bash
-   # Teacher model information (from Azure AI Services)
-   TEACHER_MODEL_NAME=DeepSeek-V3
-   TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
-   TEACHER_MODEL_KEY=your-api-key-here
-   
-   # Azure ML workspace information (from Azure ML Studio)
-   AZUREML_SUBSCRIPTION_ID=your-subscription-id
-   AZUREML_RESOURCE_GROUP=your-resource-group
-   AZUREML_WS_NAME=your-workspace-name
-   ```
+### Teacher Model Issues
 
-5. Save the file and verify it exists:
-   ```bash
-   ls -la local.env
-   ```
+1. **Connection to teacher model fails**:
+   - Error: "Unable to connect to endpoint"
+   - Solution: Check your API key and endpoint URL
+   - Fix: Update the TEACHER_MODEL_* values in local.env
 
-> **Note**: If you deployed the infrastructure using the Azure Developer CLI (azd), you can run `azd env get-values > local.env` to automatically populate these values.
+2. **Dataset loading errors**:
+   - Error: "Failed to download/load dataset"
+   - Solution: Check internet connectivity and reduce batch size
+   - Fix: Try `dataset = load_dataset("tau/commonsense_qa", split="train[:10]")` for a smaller sample
 
 
 ### Step 1: Generate Training Data from a Teacher Model (15 minutes)
@@ -399,23 +441,30 @@ This process:
 
 The resulting `train_data.jsonl` file will be used in Step 2 to fine-tune your smaller student model.
 
-### Step 2: Fine-tune and Optimize the Model (15 minutes)
+### Step 2: Fine-tune and Optimize (15 min)
 
-Open the [`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`](../Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb) notebook and follow these steps to fine-tune and optimize your student model:
+**Notebook:** `02.AzureML_FineTuningAndConvertByMSOlive.ipynb`
 
-1. **Read the notebook introduction** to understand the fine-tuning and optimization process
+**Purpose:** Transform the small student model by fine-tuning it on the training data generated from the teacher model, and optimize it for deployment.
 
-2. **Execute the package installation cell**:
+#### Instructions:
+
+1. **Open the notebook** from the file explorer in Azure ML Studio
+
+2. **Install required packages**
+   - Run the package installation cell:
    ```python
    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124 -U
    pip install olive-ai[auto-opt] -U
    pip install onnxruntime-genai==0.7.0 --pre
    pip install peft
    ```
+   - Wait for all packages to install successfully
 
-2. **Fine-tune with LoRA using Microsoft Olive**:
+3. **Fine-tune with LoRA**
+   - Run the cell containing the olive finetune command:
    ```python
-   ! olive finetune \
+   !olive finetune \
        --method lora \
        --model_name_or_path azureml://registries/azureml/models/Phi-4-mini-instruct/versions/1 \
        --trust_remote_code \
@@ -427,10 +476,13 @@ Open the [`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`](../Lab329/Notebook/0
        --target_modules "q_proj","k_proj","v_proj","o_proj","gate_proj","up_proj","down_proj" \
        --log_level 1
    ```
+   - This will take approximately 5-10 minutes to complete
+   - Watch the output for "Fine-tuning complete" message
 
-3. **Optimize the model with quantization**:
+4. **Convert to ONNX and quantize**
+   - Run the model optimization cell:
    ```python
-   ! olive auto-opt \
+   !olive auto-opt \
        --model_name_or_path azureml://registries/azureml/models/Phi-4-mini-instruct/versions/1 \
        --adapter_path models/phi-4-mini/ft/adapter \
        --device cpu \
@@ -440,32 +492,50 @@ Open the [`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`](../Lab329/Notebook/0
        --output_path models/phi-4-mini/onnx \
        --log_level 1
    ```
+   - This will take approximately 5-10 minutes
+   - The optimization reduces model size by ~75%
 
-This process:
-- Uses Microsoft Olive's fine-tuning capability with LoRA (Low-Rank Adaptation)
-- Fine-tunes the Phi-4-mini-instruct model using your generated training data
-- Converts the model to ONNX format for optimized inference
-- Applies int4 quantization to dramatically reduce model size
+5. **Verify the output directory**
+   - Run the cell to list the files in the output directory
+   - Ensure both model files and adapter files are present
 
-### Step 3: Test Your Optimized Model (10 minutes)
+#### Key Outputs:
+- A LoRA adapter in `models/phi-4-mini/ft/adapter`
+- A quantized ONNX model in `models/phi-4-mini/onnx/model`
+- These files will be used for inference in the next notebook
 
-Open the [`03.AzureML_RuningByORTGenAI.ipynb`](../Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb) notebook to test your optimized model with inference:
 
-1. **Review the notebook's overview section** to understand how inference works with ONNX Runtime GenAI
+### Step 3: Test Your ONNX Model (10 min)
 
-2. **Execute the cells in order** to load the ONNX model and adapter:
+**Notebook:** `03.AzureML_RuningByORTGenAI.ipynb`
+
+**Purpose:** Test the optimized model using ONNX Runtime GenAI to verify its performance on multiple-choice questions.
+
+#### Instructions:
+
+1. **Open the notebook** from the file explorer
+
+2. **Import libraries and load the model**
+   - Run the import and model loading cells:
    ```python
    import onnxruntime_genai as og
    import numpy as np
    
    model_folder = "./models/phi-4-mini/onnx/model"
    model = og.Model(model_folder)
-   
+   ```
+   - Verify the model loads without errors
+
+3. **Load the adapter**
+   - Run the adapter loading cell:
+   ```python
    adapters = og.Adapters(model)
    adapters.load('./models/phi-4-mini/onnx/model/adapter_weights.onnx_adapter', "qa_choice")
    ```
+   - Check for confirmation that the adapter loaded successfully
 
-2. **Set up the tokenizer and parameters**:
+4. **Set up the tokenizer**
+   - Run the tokenizer setup cells:
    ```python
    tokenizer = og.Tokenizer(model)
    tokenizer_stream = tokenizer.create_stream()
@@ -473,42 +543,77 @@ Open the [`03.AzureML_RuningByORTGenAI.ipynb`](../Lab329/Notebook/03.AzureML_Run
    search_options = {}
    search_options['max_length'] = 102
    search_options['past_present_share_buffer'] = False
+   search_options['repeat_penalty'] = 1.1
+   search_options['temperature'] = 0.7
    ```
 
-3. **Run inference on sample questions**:
+5. **Test the model on example questions**
+   - Run the inference cells with example multiple-choice questions
+   - The model should generate answers (A, B, C, D, or E)
+   - Compare the model's answers to the expected answers
+
+6. **Try your own questions** (optional)
+   - Modify the example question in the last cell
+   - Run the cell to see how the model performs on your question
+
+#### Key Points:
+- ONNX Runtime GenAI provides optimized inference for your model
+- The model should run efficiently on CPU, without requiring a GPU
+- The adapter contains the knowledge learned from the teacher model
+- The model should respond with the correct multiple-choice answer most of the time
+
+
+### Step 4: Register to Azure ML (5 min)
+
+**Notebook:** `04.AzureML_RegisterToAzureML.ipynb`
+
+**Purpose:** Register your optimized model to Azure ML for version tracking, sharing, and future deployment.
+
+#### Instructions:
+
+1. **Open the notebook** from the file explorer
+
+2. **Install required packages**
+   - Run the package installation cell if needed:
    ```python
-   chat_template = "</s>You are a helpful assistant. Your output should only be one of the five choices: 'A', 'B', 'C', 'D', or 'E'.<|end|><|user|>{input}<|end|><|assistant|>"
-   prompt = f'{chat_template.format(input=input)}'
-   
-   input_tokens = tokenizer.encode(prompt)
-   params = og.GeneratorParams(model)
-   params.set_search_options(**search_options)
-   generator = og.Generator(model, params)
-   generator.set_active_adapter(adapters, "qa_choice")
-   generator.append_tokens(input_tokens)
+   pip install azure-ai-ml
+   pip install azure-identity
+   pip install python-dotenv
    ```
 
-### Step 4: Register Your Model to Azure ML (5 minutes)
-
-Open the [`04.AzureML_RegisterToAzureML.ipynb`](../Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb) notebook to register your optimized model to Azure Machine Learning:
-
-1. **Check your environment variables** to ensure Azure ML credentials are set correctly
-
-2. **Run the ML client setup cells**:
+3. **Import libraries and load environment**
+   - Run the import cells:
    ```python
+   import os
+   from dotenv import load_dotenv
    from azure.ai.ml import MLClient
    from azure.ai.ml.entities import Model
    from azure.ai.ml.constants import AssetTypes
    from azure.identity import DefaultAzureCredential
+   ```
+   - Run the environment loading cell:
+   ```python
+   load_dotenv()
    
    subscription_id = os.getenv('AZUREML_SUBSCRIPTION_ID')
    resource_group = os.getenv('AZUREML_RESOURCE_GROUP')
    workspace = os.getenv('AZUREML_WS_NAME')
    
+   print(f"Subscription ID: {subscription_id}")
+   print(f"Resource Group: {resource_group}")
+   print(f"Workspace Name: {workspace}")
+   ```
+   - Verify your Azure ML workspace information is displayed correctly
+
+4. **Create ML client and connect to Azure ML**
+   - Run the ML client creation cell:
+   ```python
    ml_client = MLClient(DefaultAzureCredential(), subscription_id, resource_group, workspace)
+   print("Successfully connected to Azure ML workspace")
    ```
 
-2. **Create model entity and register it**:
+5. **Register your model**
+   - Run the model registration cell:
    ```python
    file_model = Model(
        path="models/phi-4-mini/onnx",
@@ -517,154 +622,262 @@ Open the [`04.AzureML_RegisterToAzureML.ipynb`](../Lab329/Notebook/04.AzureML_Re
        description="Fine tuning by MSOlive",
    )
    
-   ml_client.models.create_or_update(file_model)
+   registered_model = ml_client.models.create_or_update(file_model)
+   print(f"Model registered with name: {registered_model.name}, version: {registered_model.version}")
+   ```
+   - Wait for confirmation that the model was registered successfully
+
+6. **Verify registration**
+   - Run the cell to list registered models:
+   ```python
+   models = list(ml_client.models.list())
+   for model in models:
+       print(f"Model: {model.name}, Version: {model.version}")
+   ```
+   - Verify your model appears in the list
+
+#### Key Outputs:
+- Your model registered in Azure ML with a unique name and version
+- This registration makes your model discoverable and shareable with others
+- You'll use this registered model for download in the next notebook
+
+
+### Step 5: Download the Model (5 min)
+
+**Notebook:** `05.Local_Download.ipynb`
+
+**Purpose:** Download the registered model from Azure ML to your local machine for local deployment and inference.
+
+#### Instructions:
+
+1. **Important:** This notebook should be run on your local machine, not in Azure ML Studio
+   - Download the notebook from the file explorer in Azure ML to your local computer
+   - Open it in a local Jupyter environment (VS Code, JupyterLab, etc.)
+
+2. **Install required packages**
+   - Run the package installation cell:
+   ```python
+   import sys
+   import subprocess
+   
+   def install_package(package_name):
+       try:
+           __import__(package_name)
+           print(f"✓ {package_name} is already installed")
+       except ImportError:
+           print(f"Installing {package_name}...")
+           subprocess.check_call([sys.executable, '-m', 'pip', 'install', package_name])
+           print(f"✓ {package_name} installed successfully")
+   
+   install_package('python-dotenv')
+   install_package('azure-identity')
+   install_package('azure-ai-ml')
    ```
 
-### Step 5: Download Your Model for Local Deployment (5 minutes)
-
-Open the [`05.Local_Download.ipynb`](../Lab329/Notebook/05.Local_Download.ipynb) notebook to download your model for local deployment:
-
-1. **This notebook must run locally**, not in Azure ML Studio. Download it to your local machine first.
-
-2. **Install required packages and import libraries** by running the setup cells
-
-3. **List available models in the registry** to confirm your model is available:
-   ```python
-   ml_client.models.list()
+3. **Create local.env file**
+   - Create a `local.env` file in the same directory as the notebook
+   - Add your Azure ML credentials to the file:
+   ```
+   AZUREML_SUBSCRIPTION_ID=your-subscription-id
+   AZUREML_RESOURCE_GROUP=your-resource-group
+   AZUREML_WS_NAME=your-workspace-name
    ```
 
-4. **Download your specific model** with the progress bar feature:
+4. **Load environment and create ML client**
+   - Run the environment loading cells
+   - Run the ML client creation cell:
    ```python
-   # Define model name and version
+   ml_client = MLClient(DefaultAzureCredential(), subscription_id, resource_group, workspace)
+   print("Successfully connected to Azure ML workspace")
+   ```
+   - Verify successful connection to Azure ML
+
+5. **List available models**
+   - Run the model listing cell:
+   ```python
+   models = list(ml_client.models.list())
+   for model in models:
+       print(f" - {model.name} (version: {model.version})")
+   ```
+   - Confirm your registered model is in the list
+
+6. **Download your model**
+   - Run the model download cell:
+   ```python
    model_name = "fine-tuning-phi-4-mini-onnx-int4-cpu"
    model_version = 1
-
-   # Download with progress tracking
+   
+   print(f"Starting download of model: {model_name} (version {model_version})")
+   
    download_path = ml_client.models.download(name=model_name, version=model_version)
+   print(f"Model downloaded to: {download_path}")
+   ```
+   - Wait for the download to complete (may take a few minutes)
+
+7. **Calculate model statistics**
+   - Run the cells to calculate and display model size and file count
+   - Note the total size, which should be much smaller than the original model
+
+#### Key Outputs:
+- A downloaded model on your local machine
+- Information about the model size and files
+- The model location for use in local inference
+
+
+### Step 6: Local Inference (10 min)
+
+**Notebook:** `06.Local_Inference.ipynb`
+
+**Purpose:** Run the optimized model on your local machine to demonstrate its ability to answer questions without cloud resources.
+
+#### Instructions:
+
+1. **Run the notebook locally**
+   - Open the notebook on your local machine in a Jupyter environment
+   - This notebook should be run on the same machine where you downloaded the model
+
+2. **Install ONNX Runtime GenAI**
+   - Run the package installation cell:
+   ```python
+   def install_package(package_name):
+       try:
+           __import__(package_name)
+           print(f"✓ {package_name} is already installed")
+       except ImportError:
+           print(f"Installing {package_name}...")
+           subprocess.check_call([sys.executable, '-m', 'pip', 'install', package_name])
+           print(f"✓ {package_name} installed successfully")
+
+   install_package('onnxruntime-genai')
    ```
 
-5. **Review the model statistics** displayed after download completes
+3. **Set the model path**
+   - Update the model path to where your model was downloaded:
+   ```python
+   model_path = "./fine-tuning-phi-4-mini-onnx-int4-cpu/1/model"
+   
+   # Verify the model files exist
+   if os.path.exists(model_path):
+       print(f"Model found at path: {model_path}")
+       print("Model files:")
+       for file in os.listdir(model_path):
+           print(f" - {file}")
+   ```
+   - Verify the model files are found
 
-Congratulations! You've successfully:
-1. **Generated training data** using a larger "teacher" model (DeepSeek-V3)
-2. **Fine-tuned a smaller "student" model** (Phi-4-mini) with Microsoft Olive and LoRA
-3. **Optimized the model** with int4 quantization to reduce size by up to 75%
-4. **Tested the model's inference capabilities** using ONNX Runtime GenAI
-5. **Registered the model** to Azure ML for versioning and tracking
-6. **Downloaded the optimized model** for local deployment
+4. **Load the model and adapter**
+   - Run the model loading cells:
+   ```python
+   model = og.Model(model_path)
+   print("✓ Model loaded successfully!")
+   
+   adapters = og.Adapters(model)
+   adapter_path = os.path.join(model_path, "adapter_weights.onnx_adapter")
+   adapters.load(adapter_path, "qa_choice")
+   ```
+   - Confirm the model and adapter loaded successfully
 
-This end-to-end workflow demonstrates how model distillation can create smaller, efficient models that maintain much of the capability of larger models while requiring significantly fewer resources.
+5. **Set up the tokenizer**
+   - Run the tokenizer setup cell:
+   ```python
+   tokenizer = og.Tokenizer(model)
+   tokenizer_stream = tokenizer.create_stream()
+   
+   search_options = {}
+   search_options['max_length'] = 102
+   search_options['past_present_share_buffer'] = False
+   search_options['repeat_penalty'] = 1.1
+   search_options['temperature'] = 0.7
+   ```
 
-### Performance Comparison
+6. **Run inference on test questions**
+   - Run the test question cells:
+   ```python
+   # Define some test questions
+   test_questions = [
+       {
+           "question": "What is the capital of France?",
+           "choices": {
+               "A": "Berlin",
+               "B": "London",
+               "C": "Paris",
+               "D": "Madrid",
+               "E": "Rome"
+           }
+       },
+       # ... other questions ...
+   ]
 
-| Metric | Teacher Model (DeepSeek-V3) | Student Model (Phi-4-mini) |
-|--------|----------------------------|--------------------------|
-| Parameter Count | 3.8B parameters | 1.3B parameters |
-| Size | ~8 GB (full precision) | ~500 MB (int4 quantized) |
-| Required RAM | >16 GB | ~2 GB |
-| Response Time | Varies (cloud-based) | Fast (local inference) |
-| Deployment | Cloud only | Edge device capable |
+   # Generate responses for each question
+   for i, test_q in enumerate(test_questions):
+       print(f"\n--- Question {i+1} ---")
+       response = generate_response(test_q["question"], test_q["choices"])
+       print(f"Final answer: {response}")
+   ```
+   - Review the model's answers to see if they're correct
 
-## Common Issues and Troubleshooting
+7. **Try your own questions**
+   - Run the custom question cell:
+   ```python
+   ask_question(
+       "What is the main purpose of knowledge distillation in machine learning?",
+       {
+           "A": "To make models physically smaller in file size",
+           "B": "To transfer knowledge from larger models to smaller ones",
+           "C": "To increase the number of parameters in a model",
+           "D": "To make training data more compact",
+           "E": "To replace human knowledge with AI"
+       }
+   )
+   ```
+   - Or modify it to ask your own question
 
-As you work through this lab, you might encounter some common issues. Here's how to resolve them:
+#### Key Achievements:
+- Running an ML model entirely on your local machine
+- Achieving fast inference without cloud resources
+- Using significantly less memory than the original model
+- Getting accurate answers to multiple-choice questions
 
-### Environment Setup Issues
+## What You've Learned
 
-1. **Missing Azure Credentials**
-   - **Problem**: You see errors about missing AZUREML_* environment variables
-   - **Solution**: Verify your local.env file has been created and contains all required values
-   - **Fix**: Run `cat local.env` to check if values are properly set
+Congratulations! You've successfully completed the Model Distillation Workshop. Here's what you've accomplished:
 
-2. **Authentication Errors**
-   - **Problem**: "Failed to authenticate to Azure" or similar errors
-   - **Solution**: Re-authenticate with Azure using the Azure CLI
-   - **Fix**: Run `az login --use-device-code` and follow the prompts
+1. **Generated training data** using a large teacher model (DeepSeek-V3)
+2. **Fine-tuned a smaller student model** (Phi-4-mini) using LoRA
+3. **Optimized the model** with ONNX conversion and int4 quantization 
+4. **Tested the model** using ONNX Runtime GenAI
+5. **Registered the model** to Azure ML
+6. **Downloaded and run the model locally**
 
-3. **Notebook Import Errors**
-   - **Problem**: ModuleNotFoundError when importing libraries
-   - **Solution**: Install the missing package in the current kernel
-   - **Fix**: Run `pip install [missing-package-name]` in a notebook cell
+You've learned:
+- How knowledge distillation transfers intelligence from large to small models
+- How to use Microsoft Olive for fine-tuning and optimization
+- How to use ONNX Runtime GenAI for efficient inference
+- How to deploy models locally for edge computing scenarios
 
-### Teacher Model Issues
+## Next Steps
 
-1. **Teacher Model API Errors**
-   - **Problem**: "Error accessing teacher model" when generating training data
-   - **Solution**: Verify your model endpoint and API key are correct
-   - **Fix**: Double-check TEACHER_MODEL_* variables in your local.env file
+Here are some ways to build on what you've learned:
 
-2. **Dataset Loading Issues**
-   - **Problem**: HuggingFace dataset fails to load
-   - **Solution**: Check your internet connection and try a smaller dataset first
-   - **Fix**: Reduce the sample size in the dataset loading code
+1. **Try different datasets**
+   - Use different types of questions or tasks
+   - Create your own custom dataset
 
-### Fine-tuning Issues
+2. **Explore different models**
+   - Try different teacher models (GPT-4, Claude, etc.)
+   - Try different student models (Phi-3, Llama, etc.)
 
-1. **Microsoft Olive Installation Errors**
-   - **Problem**: Installation of olive-ai fails or has dependency conflicts
-   - **Solution**: Install in a clean environment with compatible versions
-   - **Fix**: Run `pip install olive-ai[auto-opt]==0.5.0` for a stable version
+3. **Optimize for different targets**
+   - Try different quantization levels (int8, fp16)
+   - Target different hardware (ARM, NVIDIA Jetson, etc.)
 
-2. **CUDA Errors During Fine-tuning**
-   - **Problem**: CUDA out of memory or GPU-related errors
-   - **Solution**: Reduce batch size or use CPU instead
-   - **Fix**: Add `--batch_size 1` to the Olive finetune command
+4. **Build applications**
+   - Create a simple web UI for your model
+   - Integrate it with other applications
 
-3. **Model Loading Failures**
-   - **Problem**: Cannot load model from Azure ML registry
-   - **Solution**: Check permissions and model name/version
-   - **Fix**: Run `ml_client.models.list()` to verify the model exists
+5. **Learn more about:**
+   - [Microsoft Olive](https://github.com/microsoft/Olive)
+   - [ONNX Runtime](https://onnxruntime.ai/)
+   - [Azure ML](https://learn.microsoft.com/en-us/azure/machine-learning/)
 
-### ONNX Model Issues
-
-1. **Quantization Errors**
-   - **Problem**: Int4 quantization fails with errors
-   - **Solution**: Try Int8 quantization first as it's more stable
-   - **Fix**: Change `--precision int4` to `--precision int8` in the Olive command
-
-2. **ORT GenAI Runtime Errors**
-   - **Problem**: "No adapter found" or errors loading the ONNX model
-   - **Solution**: Verify file paths and adapter names
-   - **Fix**: Check that the adapter_weights.onnx_adapter file exists in the expected location
-
-### Azure ML Registration Issues
-
-1. **Model Registration Fails**
-   - **Problem**: Error when trying to register the model to Azure ML
-   - **Solution**: Verify workspace permissions and model path
-   - **Fix**: Check that the model path is correct and you have contributor access to the workspace
-
-### Model Download Issues
-
-1. **Download Path Issues**
-   - **Problem**: "Path should be string, bytes, os.PathLike or integer, not NoneType"
-   - **Solution**: The API doesn't return a path, but the model is still downloaded
-   - **Fix**: Check your current directory for a folder with the model name
-
-2. **Progress Bar Errors**
-   - **Problem**: tqdm or ipywidgets related errors
-   - **Solution**: Use the simpler progress tracking approach
-   - **Fix**: Execute the notebook cells that have the text-based progress tracking
-
-If you encounter any issues not covered here, please refer to the README.md file in the repository or ask an instructor for assistance.
-
-## Conclusion
-
-In this lab, you've learned:
-- The fundamentals of knowledge distillation
-- How to generate training data using a teacher model
-- How to train a student model to mimic the teacher
-- How to evaluate your distilled model
-- The trade-offs between model size and performance
-
-Knowledge distillation is a powerful technique for creating more efficient models while preserving much of the capability of larger models. This approach enables broader deployment of advanced AI capabilities across devices and environments with limited resources.
-
-## Additional Resources
-
-- [Knowledge Distillation in NLP (Blog Post)](https://towardsdatascience.com/knowledge-distillation-in-natural-language-processing-9f758493cfff)
-- [Hugging Face Transformers Documentation](https://huggingface.co/docs/transformers/index)
-- [Microsoft Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)
-- [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)
-- [DistilBERT Paper: Smaller, faster, cheaper, lighter Transformer models](https://arxiv.org/abs/1910.01108)
-
-If you encounter any issues during the lab, please consult the project README or ask your instructor for assistance.
+Thank you for participating in this workshop! Your feedback is valuable for improving future sessions.

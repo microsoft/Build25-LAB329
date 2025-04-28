@@ -11,7 +11,7 @@
 - [Lab Objectives](#lab-objectives)
 - [What is Knowledge Distillation?](#what-is-knowledge-distillation)
 - [Knowledge Distillation Flow Chart](#knowledge-distillation-flow-chart)
-- [Clone the GitHub Repo and resources to your Local Machine](#clone-the-github-repo-and-resources-to-your-local-machine)
+- [Clone the GitHub Repo and resources to your Azure ML Studio](#clone-the-github-repo-and-resources-to-your-azure-ml-studio)
 - [Workshop Notebook Structure](#workshop-notebook-structure)
 - [Cloud-Based Distillation Using Microsoft Azure AI Foundry](#cloud-based-distillation-using-microsoft-azure-ai-foundry)
   - [Configure Your Environment (5 minutes)](#configure-your-environment-5-minutes)
@@ -20,6 +20,7 @@
   - [Step 3: Test Your Optimized Model (10 minutes)](#step-3-test-your-optimized-model-10-minutes)
   - [Step 4: Register Your Model to Azure ML (5 minutes)](#step-4-register-your-model-to-azure-ml-5-minutes)
   - [Step 5: Download Your Model for Local Deployment (5 minutes)](#step-5-download-your-model-for-local-deployment-5-minutes)
+- [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
 - [Conclusion](#conclusion)
 - [Additional Resources](#additional-resources)
 
@@ -106,17 +107,31 @@ Select Terminal
 
 ![SelectTerminal](./images/ML_Terminal.png)
 
+To clone the repository and set up your environment for the lab, follow these steps:
 
-To clone a repository, you can follow these steps:
-   ```
 1. **Clone the Repository**: Use the `git clone` command followed by the repository URL:
-   ```
+   ```bash
    git clone https://github.com/microsoft/Build25-LAB329 
    ```
 
-2. **Access the Cloned Repository**: After cloning, navigate to the directory of the cloned repository:
+2. **Access the Cloned Repository**: Navigate to the directory of the cloned repository:
+   ```bash
+   cd Build25-LAB329
    ```
-   cd repository
+
+3. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
+   ```bash
+   cd Lab329/Notebook
+   ```
+
+4. **Create Your Environment File**: Copy the sample environment file and rename it to local.env:
+   ```bash
+   cp sample.env local.env
+   ```
+
+5. **Edit Your Environment File**: Update the local.env file with your Azure credentials using a text editor:
+   ```bash
+   code local.env
    ```
 
 Login with your azure creditional 
@@ -137,6 +152,7 @@ This lab uses a series of Jupyter notebooks that guide you through the complete 
 3. [**`03.AzureML_RuningByORTGenAI.ipynb`**](../Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb): Model inference using ONNX Runtime
 4. [**`04.AzureML_RegisterToAzureML.ipynb`**](../Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb): Model registration to Azure ML
 5. [**`05.Local_Download.ipynb`**](../Lab329/Notebook/05.Local_Download.ipynb): Downloading models for local deployment
+6. [**`06.Local_Inference.ipynb`**](../Lab329/Notebook/06.Local_Inference.ipynb): Using the downloaded model for local inference
 
 Each notebook includes a corresponding overview document (XX.Overview.md) that explains the concepts and techniques used.
 
@@ -147,26 +163,47 @@ Microsoft Azure AI Foundry provides a managed environment for large-scale machin
 
 ### Configure Your Environment (5 minutes)
 
-1. Create a `Local.env` file based on the `sample.env` template in the Notebook folder
-2. Update the Azure configuration settings with your credentials:
+1. Ensure you're in the Notebook directory of the cloned repository:
+   ```bash
+   cd Build25-LAB329/Lab329/Notebook
+   ```
 
-```
-TEACHER_MODEL_NAME=your-model-name
-TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
-TEACHER_MODEL_KEY=your-api-key-here
+2. Create a `local.env` file based on the `sample.env` template:
+   ```bash
+   cp sample.env local.env
+   ```
 
-# Azure ML workspace information
-AZUREML_SUBSCRIPTION_ID=your-subscription-id
-AZUREML_RESOURCE_GROUP=your-resource-group
-AZUREML_WS_NAME=your-workspace-name
-```
+3. Edit the `local.env` file to add your Azure credentials:
+   ```bash
+   code local.env
+   ```
+
+4. Update the following values in your local.env file:
+   ```bash
+   # Teacher model information (from Azure AI Services)
+   TEACHER_MODEL_NAME=DeepSeek-V3
+   TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
+   TEACHER_MODEL_KEY=your-api-key-here
+   
+   # Azure ML workspace information (from Azure ML Studio)
+   AZUREML_SUBSCRIPTION_ID=your-subscription-id
+   AZUREML_RESOURCE_GROUP=your-resource-group
+   AZUREML_WS_NAME=your-workspace-name
+   ```
+
+5. Save the file and verify it exists:
+   ```bash
+   ls -la local.env
+   ```
+
+> **Note**: If you deployed the infrastructure using the Azure Developer CLI (azd), you can run `azd env get-values > local.env` to automatically populate these values.
 
 
 ### Step 1: Generate Training Data from a Teacher Model (15 minutes)
 
-Work through the [`01.AzureML_Distillation.ipynb`](../Lab329/Notebook/01.AzureML_Distillation.ipynb) notebook to generate training data for your student model:
+Open the [`01.AzureML_Distillation.ipynb`](../Lab329/Notebook/01.AzureML_Distillation.ipynb) notebook and follow these steps to generate training data for your student model:
 
-1. **Install required packages**:
+1. **Run the notebook cell by cell**, starting with package installation:
    ```python
    pip install python-dotenv
    pip install datasets -U
@@ -364,9 +401,11 @@ The resulting `train_data.jsonl` file will be used in Step 2 to fine-tune your s
 
 ### Step 2: Fine-tune and Optimize the Model (15 minutes)
 
-Work through the [`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`](/Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb) notebook to fine-tune and optimize the student model:
+Open the [`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`](../Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb) notebook and follow these steps to fine-tune and optimize your student model:
 
-1. **Install required packages**:
+1. **Read the notebook introduction** to understand the fine-tuning and optimization process
+
+2. **Execute the package installation cell**:
    ```python
    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124 -U
    pip install olive-ai[auto-opt] -U
@@ -410,9 +449,11 @@ This process:
 
 ### Step 3: Test Your Optimized Model (10 minutes)
 
-Work through the [`03.AzureML_RuningByORTGenAI.ipynb`](/Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb) notebook to run inference with your optimized model:
+Open the [`03.AzureML_RuningByORTGenAI.ipynb`](../Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb) notebook to test your optimized model with inference:
 
-1. **Load the ONNX model and adapter**:
+1. **Review the notebook's overview section** to understand how inference works with ONNX Runtime GenAI
+
+2. **Execute the cells in order** to load the ONNX model and adapter:
    ```python
    import onnxruntime_genai as og
    import numpy as np
@@ -449,9 +490,11 @@ Work through the [`03.AzureML_RuningByORTGenAI.ipynb`](/Lab329/Notebook/03.Azure
 
 ### Step 4: Register Your Model to Azure ML (5 minutes)
 
-Work through the [`04.AzureML_RegisterToAzureML.ipynb`](/Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb) notebook to register your optimized model to Azure Machine Learning:
+Open the [`04.AzureML_RegisterToAzureML.ipynb`](../Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb) notebook to register your optimized model to Azure Machine Learning:
 
-1. **Set up Azure ML client**:
+1. **Check your environment variables** to ensure Azure ML credentials are set correctly
+
+2. **Run the ML client setup cells**:
    ```python
    from azure.ai.ml import MLClient
    from azure.ai.ml.entities import Model
@@ -479,26 +522,131 @@ Work through the [`04.AzureML_RegisterToAzureML.ipynb`](/Lab329/Notebook/04.Azur
 
 ### Step 5: Download Your Model for Local Deployment (5 minutes)
 
-Work through the [`05.Local_Download.ipynb`](/Lab329/Notebook/05.Local_Download.ipynb) notebook to download your model for local deployment:
+Open the [`05.Local_Download.ipynb`](../Lab329/Notebook/05.Local_Download.ipynb) notebook to download your model for local deployment:
 
-1. **List available models in the registry**:
+1. **This notebook must run locally**, not in Azure ML Studio. Download it to your local machine first.
+
+2. **Install required packages and import libraries** by running the setup cells
+
+3. **List available models in the registry** to confirm your model is available:
    ```python
    ml_client.models.list()
    ```
 
-2. **Download your specific model**:
+4. **Download your specific model** with the progress bar feature:
    ```python
-   ml_client.models.download("fine-tuning-phi-4-mini-onnx-int4-cpu", 1)
+   # Define model name and version
+   model_name = "fine-tuning-phi-4-mini-onnx-int4-cpu"
+   model_version = 1
+
+   # Download with progress tracking
+   download_path = ml_client.models.download(name=model_name, version=model_version)
    ```
 
-Congratulations! You've successfully:
-1. Generated training data using a teacher model
-2. Fine-tuned a smaller student model with Microsoft Olive and LoRA
-3. Optimized the model with int4 quantization for efficient deployment
-4. Tested the model using ONNX Runtime GenAI
-5. Registered and downloaded your model for deployment
+5. **Review the model statistics** displayed after download completes
 
-This end-to-end workflow demonstrates the power of model distillation and optimization using Microsoft Azure AI Foundry and related tools.
+Congratulations! You've successfully:
+1. **Generated training data** using a larger "teacher" model (DeepSeek-V3)
+2. **Fine-tuned a smaller "student" model** (Phi-4-mini) with Microsoft Olive and LoRA
+3. **Optimized the model** with int4 quantization to reduce size by up to 75%
+4. **Tested the model's inference capabilities** using ONNX Runtime GenAI
+5. **Registered the model** to Azure ML for versioning and tracking
+6. **Downloaded the optimized model** for local deployment
+
+This end-to-end workflow demonstrates how model distillation can create smaller, efficient models that maintain much of the capability of larger models while requiring significantly fewer resources.
+
+### Performance Comparison
+
+| Metric | Teacher Model (DeepSeek-V3) | Student Model (Phi-4-mini) |
+|--------|----------------------------|--------------------------|
+| Parameter Count | 3.8B parameters | 1.3B parameters |
+| Size | ~8 GB (full precision) | ~500 MB (int4 quantized) |
+| Required RAM | >16 GB | ~2 GB |
+| Response Time | Varies (cloud-based) | Fast (local inference) |
+| Deployment | Cloud only | Edge device capable |
+
+## Common Issues and Troubleshooting
+
+As you work through this lab, you might encounter some common issues. Here's how to resolve them:
+
+### Environment Setup Issues
+
+1. **Missing Azure Credentials**
+   - **Problem**: You see errors about missing AZUREML_* environment variables
+   - **Solution**: Verify your local.env file has been created and contains all required values
+   - **Fix**: Run `cat local.env` to check if values are properly set
+
+2. **Authentication Errors**
+   - **Problem**: "Failed to authenticate to Azure" or similar errors
+   - **Solution**: Re-authenticate with Azure using the Azure CLI
+   - **Fix**: Run `az login --use-device-code` and follow the prompts
+
+3. **Notebook Import Errors**
+   - **Problem**: ModuleNotFoundError when importing libraries
+   - **Solution**: Install the missing package in the current kernel
+   - **Fix**: Run `pip install [missing-package-name]` in a notebook cell
+
+### Teacher Model Issues
+
+1. **Teacher Model API Errors**
+   - **Problem**: "Error accessing teacher model" when generating training data
+   - **Solution**: Verify your model endpoint and API key are correct
+   - **Fix**: Double-check TEACHER_MODEL_* variables in your local.env file
+
+2. **Dataset Loading Issues**
+   - **Problem**: HuggingFace dataset fails to load
+   - **Solution**: Check your internet connection and try a smaller dataset first
+   - **Fix**: Reduce the sample size in the dataset loading code
+
+### Fine-tuning Issues
+
+1. **Microsoft Olive Installation Errors**
+   - **Problem**: Installation of olive-ai fails or has dependency conflicts
+   - **Solution**: Install in a clean environment with compatible versions
+   - **Fix**: Run `pip install olive-ai[auto-opt]==0.5.0` for a stable version
+
+2. **CUDA Errors During Fine-tuning**
+   - **Problem**: CUDA out of memory or GPU-related errors
+   - **Solution**: Reduce batch size or use CPU instead
+   - **Fix**: Add `--batch_size 1` to the Olive finetune command
+
+3. **Model Loading Failures**
+   - **Problem**: Cannot load model from Azure ML registry
+   - **Solution**: Check permissions and model name/version
+   - **Fix**: Run `ml_client.models.list()` to verify the model exists
+
+### ONNX Model Issues
+
+1. **Quantization Errors**
+   - **Problem**: Int4 quantization fails with errors
+   - **Solution**: Try Int8 quantization first as it's more stable
+   - **Fix**: Change `--precision int4` to `--precision int8` in the Olive command
+
+2. **ORT GenAI Runtime Errors**
+   - **Problem**: "No adapter found" or errors loading the ONNX model
+   - **Solution**: Verify file paths and adapter names
+   - **Fix**: Check that the adapter_weights.onnx_adapter file exists in the expected location
+
+### Azure ML Registration Issues
+
+1. **Model Registration Fails**
+   - **Problem**: Error when trying to register the model to Azure ML
+   - **Solution**: Verify workspace permissions and model path
+   - **Fix**: Check that the model path is correct and you have contributor access to the workspace
+
+### Model Download Issues
+
+1. **Download Path Issues**
+   - **Problem**: "Path should be string, bytes, os.PathLike or integer, not NoneType"
+   - **Solution**: The API doesn't return a path, but the model is still downloaded
+   - **Fix**: Check your current directory for a folder with the model name
+
+2. **Progress Bar Errors**
+   - **Problem**: tqdm or ipywidgets related errors
+   - **Solution**: Use the simpler progress tracking approach
+   - **Fix**: Execute the notebook cells that have the text-based progress tracking
+
+If you encounter any issues not covered here, please refer to the README.md file in the repository or ask an instructor for assistance.
 
 ## Conclusion
 

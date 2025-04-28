@@ -96,15 +96,15 @@ Now let's get started with the practical implementation!
 
 Open your [Azure ML Studio](https://ml.azure.com)
 
-![MLStudio](./images/)
+![MLStudio](./images/ML_Studio.png)
 
 Select Notebooks
 
-![MLStudioNotebooks](./images/)
+![MLStudioNotebooks](./images/Notebook_Terminal.png)
 
 Select Terminal
 
-![SelectTerminal](./images/)
+![SelectTerminal](./images/ML_Studio.png)
 
 
 To clone a repository, you can follow these steps:
@@ -118,6 +118,12 @@ To clone a repository, you can follow these steps:
    ```
    cd repository
    ```
+
+Login with your azure creditional 
+
+```
+az login --identity
+```
 
 Now you’re ready to work with the repository on your Azure ML Studio!
 
@@ -141,7 +147,7 @@ Microsoft Azure AI Foundry provides a managed environment for large-scale machin
 
 ### Configure Your Environment (5 minutes)
 
-1. Create a `.env` file based on the `sample.env` template in the Notebook folder
+1. Create a `Local.env` file based on the `sample.env` template in the Notebook folder
 2. Update the Azure configuration settings with your credentials:
 
 ```

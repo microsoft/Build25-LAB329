@@ -67,7 +67,7 @@ The project uses multiple advanced AI and cloud technologies:
 - **ONNX Runtime GenAI**: For efficient model inference(https://github.com/microsoft/onnxruntime-genai)
 - **Phi-4-mini**: Microsoft's SLM(https://huggingface.co/microsoft/Phi-4-mini-instruct)
 - **LoRA**: An efficient model fine-tuning technique(https://learn.microsoft.com/en-us/azure/aks/concepts-fine-tune-language-models)
-- **Foundry Local**: AI Foundry Local brings the power of Azure AI Foundry to your local devic(https://github.com/kinfey/Foundry-Local/blob/main/docs/how-to/compile-models-for-foundry-local.md)
+- **Foundry Local**: AI Foundry Local brings the power of Azure AI Foundry to your local device(https://github.com/microsoft/Foundry-Local/blob/main/docs/how-to/compile-models-for-foundry-local.md)
 
 ## Usage Guide **Please ensure you run this in the Azure ML Notebook Workspace and select the correct Kernel**
 

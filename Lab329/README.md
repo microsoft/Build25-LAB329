@@ -14,7 +14,24 @@ This is a practical workshop on model distillation using Azure AI Foundry. Throu
 
 ## Workflow Introduction
 
-The workshop flow is divided into the following key steps:
+
+## Scenario
+
+**Scenario: Edge AI for Education — Efficient Question Answering on Resource-Constrained Devices**
+
+Imagine you are an AI engineer at an EdTech company. Your goal is to deliver an intelligent question-answering assistant that can run on affordable, resource-constrained devices in schools, such as laptops or edge servers, without requiring constant cloud connectivity. However, the best-performing language models are large and expensive to run locally.
+
+In this workshop, you will:
+- Use a large, cloud-hosted language model (the "teacher") to generate high-quality answers for a multiple-choice question dataset (CommonsenseQA).
+- Distill this knowledge into a much smaller, efficient "student" model (Phi-4-mini) using knowledge distillation and fine-tuning techniques.
+- Optimize and quantize the student model (using Microsoft Olive and ONNX) so it can run efficiently on local hardware.
+- Register, download, and deploy the optimized model to an edge device using Azure AI Foundry Local.
+- Validate that your compact model can answer questions with high accuracy and low latency, even on limited hardware.
+
+This scenario reflects real-world needs for deploying AI in education, healthcare, manufacturing, and other sectors where cost, privacy, and offline capability are critical. By the end of the lab, you will have built an end-to-end workflow for distilling, optimizing, and deploying advanced AI models from the cloud to the edge.
+
+
+## The workshop flow is divided into the following key steps:
 
 ### 1. Knowledge Distillation (Implemented via DeepSeek)
 In `01.AzureML_Distillation.ipynb`, we demonstrate how to:

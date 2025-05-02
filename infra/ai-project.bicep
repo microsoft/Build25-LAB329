@@ -83,7 +83,7 @@ resource deepSeekV31Deploy 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'AIServices'
   properties: {
     apiProperties: {
-      statisticsEnabled: false
+//      statisticsEnabled: false
     }
   }
   
@@ -161,7 +161,7 @@ resource project 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
   }
   
   resource compute 'computes' = {
-    name: '${envName}-cpu-instance'
+    name: '${envName}-compute'
     location: location
     properties: {
       computeType: 'ComputeInstance'

@@ -16,7 +16,9 @@ param location string
 param deepSeekV31Location string
 
 @description('VM size for the compute instance')
-param computeVmSize string = 'Standard_ND96amsr_A100_v4' // High-performance GPU for model training
+param computeVmSize string = 'STANDARD_NC40ADS_H100_V5' // High-performance GPU for model training
+
+// other types: STANDARD_NC40ADS_H100_V5
 
 @description('Id of the user or app to assign application roles')
 param principalId string

@@ -17,8 +17,9 @@ you can update the machine sizes and specification by editing the following in t
 
 ```
 @description('VM size for the compute instance')
-param computeVmSize string = 'Standard_ND96amsr_A100_v4' // High-performance GPU for model training using A100
-param computeVmSize string = 'STANDARD_NC40ADS_H100_V5' // High-performance GPU for model training using H100 (Default used by the Bicep Deployment)
+# Simply uncomment appropiate machine size
+# param computeVmSize string = 'Standard_ND96amsr_A100_v4' // High-performance GPU for model training using A100 (fastest)
+# param computeVmSize string = 'STANDARD_NC40ADS_H100_V5' // High-performance GPU for model training using H100 (Default used by the Bicep Deployment)
 
 ```
 

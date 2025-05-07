@@ -268,10 +268,12 @@ This command will delete all Azure resources created during deployment, preventi
 
 ## Resources
 
-- [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/machine-learning/)
-- [NVIDIA A100 GPU Documentation](https://www.nvidia.com/en-us/data-center/a100/)
-- [Azure NC A100 v4-series](https://learn.microsoft.com/en-us/azure/virtual-machines/nc-a100-v4-series)
-- [Distributed Training Best Practices](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-train-distributed-gpu)
+- [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/machine-learning/)
+- [NVIDIA H100 GPU Documentation](https://www.nvidia.com/data-center/h100/)
+- [Azure NC H100 v5 Series](https://learn.microsoft.com/azure/virtual-machines/ncads-h100-v5)
+- [NVIDIA A100 GPU Documentation](https://www.nvidia.com/data-center/a100/)
+- [Azure NC A100 v4-series](https://learn.microsoft.com/azure/virtual-machines/nc-a100-v4-series)
+- [Distributed Training Best Practices](https://learn.microsoft.com/azure/machine-learning/how-to-train-distributed-gpu)
 
 ## Deploying Models Using Azure AI Foundry Models as a Service (MaaS)
 

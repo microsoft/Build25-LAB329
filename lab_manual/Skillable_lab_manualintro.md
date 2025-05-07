@@ -83,24 +83,6 @@ Open Azure ML Studio by:
 3. Select your workspace (provided by your instructor)
 4. Navigate to the "Notebooks" section
 
-
-## Notebook-by-Notebook Guide
-
-This workshop uses 7 Jupyter notebooks that you'll run in sequence. Each notebook builds on the previous one, so it's important to complete them in order. We will be your Azure ML workspace Notebook environment for notebooks 1 - 4 you will then be using the Skillable VM for notebooks 5,6,7.
-
-Let's look at each notebook and what you'll do:
-
-| Notebook | Purpose | Duration |
-|----------|---------|----------|
-| 01_AzureML_Distillation | Generate training data using DeepSeek-V3 | 15 min |
-| 02_AzureML_FineTuningAndConvertByMSOlive | Fine-tune Phi-4-mini with LoRA and optimize | 15 min |
-| 03_AzureML_RuningByORTGenAI | Test model inference with ONNX Runtime | 10 min |
-| 04_AzureML_RegisterToAzureML | Register model to Azure ML | 5 min |
-| 05_Local_Download | Download model for local deployment | 5 min |
-| 06_Local_Inference | Run inference locally | 10 min |
-| 07_Local_Inference | Run inference locally with Foundry Local | 10 min |
-
-
 Let's start with the first notebook!
 
 ## Clone the GitHub Repo and resources to your Azure ML Studio 
@@ -168,5 +150,21 @@ Login with your azure creditional
 ```
 az login --identity
 ```
+
+## Notebook-by-Notebook Guide
+
+This workshop uses 7 Jupyter notebooks that you'll run in sequence. Each notebook builds on the previous one, so it's important to complete them in order. We will be your Azure ML workspace Notebook environment for notebooks 1 - 4 you will then be using the Skillable VM for notebooks 5,6,7.
+
+Let's look at each notebook and what you'll do:
+
+| Notebook | Purpose | Duration |
+|----------|---------|----------|
+| 01_AzureML_Distillation | Generate training data using DeepSeek-V3 | 15 min |
+| 02_AzureML_FineTuningAndConvertByMSOlive | Fine-tune Phi-4-mini with LoRA and optimize | 15 min |
+| 03_AzureML_RuningByORTGenAI | Test model inference with ONNX Runtime | 10 min |
+| 04_AzureML_RegisterToAzureML | Register model to Azure ML | 5 min |
+| 05_Local_Download | Download model for local deployment | 5 min |
+| 06_Local_Inference | Run inference locally | 10 min |
+| 07_Local_Inference | Run inference locally with Foundry Local | 10 min |
 
 Now you’re ready to work with the repository on your [Azure ML Studio](+++https://ml.azure.com+++)

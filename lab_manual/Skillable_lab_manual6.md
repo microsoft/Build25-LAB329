@@ -2,7 +2,7 @@
 
 **Notebook:** `06.Local_Inference.ipynb`
 
-**Purpose:** Run the optimized model on your local machine to demonstrate its ability to answer questions without cloud resources.
+**Purpose:** Run the optimized model on your local machine to demonstrate its ability to answer questions without cloud resources. You will be running this notebook from the skillable VM. Please open the folder `notebooks` which is located on the desktop of your VM.
 
 # Local Model Inference
 

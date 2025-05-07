@@ -2,7 +2,7 @@
 
 **Notebook:** `05.Local_Download.ipynb`
 
-**Purpose:** Download the registered model from Azure ML to your local machine for local deployment and inference.
+**Purpose:** Download the registered model from Azure ML to your skillable VM for local deployment and inference. You will be running this notebook from the skillable VM. Please open the folder `notebooks` which is located on the desktop of your VM.
 
 # Local Model Download
 

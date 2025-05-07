@@ -2,7 +2,7 @@
 
 **Notebook:** `07.Local_inference_AIFoundry.ipynb`
 
-**Purpose:** Deploy and test your optimized, distilled model on your local machine using Azure Foundry Local. This step demonstrates how to serve and interact with your model in a production-like, resource-constrained environment.
+**Purpose:** Deploy and test your optimized, distilled model on your local machine using Azure Foundry Local. This step demonstrates how to serve and interact with your model in a production-like, resource-constrained environment. You will be running this notebook from the skillable VM. Please open the folder `notebooks` which is located on the desktop of your VM.
 
 #### Instructions:
 

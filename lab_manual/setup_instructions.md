@@ -1,4 +1,4 @@
-# Azure AI Foundry Setup for Lab329: A100 Compute & MAI-DS-R1 Model
+# Azure AI Foundry Setup for Lab329: H100 Compute & Deepseek Model
 
 This guide provides step-by-step instructions for:
 1. Setting up an NVIDIA A100 or H100 GPU compute node through Azure AI Foundry

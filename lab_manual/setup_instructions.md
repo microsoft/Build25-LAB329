@@ -1,7 +1,7 @@
 # Azure AI Foundry Setup for Lab329: A100 Compute & MAI-DS-R1 Model
 
 This guide provides step-by-step instructions for:
-1. Setting up an NVIDIA A100 GPU compute node through Azure AI Foundry
+1. Setting up an NVIDIA A100 or H100 GPU compute node through Azure AI Foundry
 2. Deploying the model using Models as a Service (MaaS) in supported regions
 
 ## Prerequisites
@@ -9,6 +9,20 @@ This guide provides step-by-step instructions for:
 - An active Azure subscription
 - Owner or Contributor access to your Azure subscription
 - An existing Azure AI Foundry project or permission to create one
+
+## Automated deployment using AZD/Bicep
+
+We have provided an automated setup process using azd/bicep the setup configuration is located the `infra` folder 
+you can update the machine sizes and specification by editing the following in the `main.bicep` file.
+
+```
+@description('VM size for the compute instance')
+param computeVmSize string = 'Standard_ND96amsr_A100_v4' // High-performance GPU for model training using A100
+param computeVmSize string = 'STANDARD_NC40ADS_H100_V5' // High-performance GPU for model training using H100 (Default used by the Bicep Deployment)
+
+```
+
+# Manual Setup Process 
 
 ## Project Setup and Supported Regions
 
@@ -53,10 +67,10 @@ This lab requires specific Azure regions that support both A100 GPUs and MAI-DS-
    - **Compute name**: Provide a unique name (e.g., "a100-compute")
    - **Location**: Should match your workspace region
    - **Virtual machine tier**: Select **GPU**
-   - **Virtual machine type**: Choose **NCA100 v4-series** (This is the A100 series)
+   - **Virtual machine type**: Choose **NCA100 v4-series** (This is the A100 series) or **NC40ADS_H100_V5** (This the H100 Series)
    - **Virtual machine size**: 
-     - For single A100 GPU: Select **Standard_NC24ads_A100_v4** (1 A100 GPU)
-     - For multiple A100 GPUs: Select **Standard_NC48ads_A100_v4** (2 A100 GPUs) or higher
+     - For single A100 GPU: Select **Standard_NC24ads_A100_v4** (1 A100 GPU) or **Standard_NC40ADS_H100_V5**(1 H100 GPU)
+     - For multiple A100 GPUs machines/cluster: Select **Standard_NC48ads_A100_v4** (2 A100 GPUs) or higher
    - **Compute mode**: Select **Dedicated** for production workloads
    - **Minimum number of nodes**: Set to 0 to avoid idle costs
    - **Maximum number of nodes**: Set according to your needs and quota limits
@@ -68,20 +82,20 @@ This lab requires specific Azure regions that support both A100 GPUs and MAI-DS-
 5. Click **Create** to provision your A100 compute resource
 6. Wait for the compute to be created and reach "Running" state
 
-## Step 4: Verify A100 Compute Availability
+## Step 4: Verify A100/H100 Compute Availability
 
 1. Once the compute resource is created, it will appear in your compute list
 2. The status should change to **Creating** and then to **Running**
 3. You can verify the A100 GPU specification by clicking on the compute resource name
 
-## Step 5: Use Your A100 Compute with Azure ML Studio
+## Step 5: Use Your A100/H100 Compute with Azure ML Studio
 
 ### Option 1: Through Notebooks
 
 1. Navigate to the **Notebooks** section in your Azure AI Foundry project
 2. Create a new notebook or open an existing one
 3. In the notebook, click on the compute selector in the top right
-4. Select your A100 compute from the dropdown menu
+4. Select your A100/H100 compute from the dropdown menu
 5. Run a simple test to verify GPU availability:
 
 ```python
@@ -113,7 +127,7 @@ A100 GPUs are premium resources with significant hourly costs:
 
 ### Quota Limitations
 
-1. **Check your quota**: Verify your subscription has sufficient quota for A100 GPUs
+1. **Check your quota**: Verify your subscription has sufficient quota for A100/H100 GPUs
 2. **Request increases**: If needed, request quota increases through the Azure Portal
 3. **Regional availability**: A100 GPUs may not be available in all regions
 
@@ -207,7 +221,7 @@ The azd deployment creates the following Azure resources:
 
 6. **Azure ML Project Workspace** - For running the knowledge distillation pipeline
 
-7. **Compute Instance** - For executing the notebooks and training processes
+7. **Compute Instance** - H100 compute For executing the notebooks and training processes
 
 ### Verification and Troubleshooting
 

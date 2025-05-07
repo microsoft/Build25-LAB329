@@ -7,20 +7,17 @@
 - **Discussion Time**: 5 minutes
 
 ## Table of Contents
-- [Workshop Overview](#workshop-overview)
-- [Prerequisites Check](#prerequisites-check)
-- [Environment Setup](#environment-setup)
-- [Notebook-by-Notebook Guide](#notebook-by-notebook-guide)
-  - [Step 1: Generate Training Data (15 min)](#step-1-generate-training-data-15-min)
-  - [Step 2: Fine-tune and Optimize (15 min)](#step-2-fine-tune-and-optimize-15-min)
-  - [Step 3: Test Your ONNX Model (10 min)](#step-3-test-your-onnx-model-10-min)
-  - [Step 4: Register to Azure ML (5 min)](#step-4-register-to-azure-ml-5-min)
-  - [Step 5: Download the Model (5 min)](#step-5-download-the-model-5-min)
-  - [Step 6: Local Inference (10 min)](#step-6-local-inference-10-min)
-  - [Step 7: Local Inference with Foundry Local](#step-7-local-inference-foundrylocal-10min)
-- [Troubleshooting Guide](#troubleshooting-guide)
-- [What You've Learned](#what-youve-learned)
-- [Next Steps](#next-steps)
+- Workshop Overview
+- Notebook-by-Notebook Guide
+  - Step 1: Generate Training Data
+  - Step 2: Fine-tune and Optimize
+  - Step 3: Test Your ONNX Model 
+  - Step 4: Register to Azure ML 
+  - Step 5: Download the Model 
+  - Step 6: Local Inference 
+  - Step 7: Local Inference with Foundry Local
+- What You've Learned
+- Next Steps
 
 ## Workshop Overview
 

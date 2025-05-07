@@ -31,7 +31,7 @@
 
 4. **Next Steps**
    - Explore prompt engineering, benchmark performance, or integrate the local server into your apps.
-   - See the [Foundry Local documentation](https://github.com/microsoft/Foundry-Local/tree/main/docs) for advanced usage.
+   - See the Foundry Local documentation +++https://github.com/microsoft/Foundry-Local/tree/main/docs+++ for advanced usage.
 
 # 07. Local Inference with Azure Foundry Local — Overview
 
@@ -70,7 +70,7 @@ This notebook guides you through running local inference with your optimized mod
 - Experiment with prompt engineering and system instructions
 - Benchmark your model's performance locally
 - Integrate the local Foundry server into your own applications
-- For more details, see the [Azure Foundry Local documentation](https://github.com/microsoft/Foundry-Local/tree/main/docs)
+- For more details, see the Azure Foundry Local documentation +++https://github.com/microsoft/Foundry-Local/tree/main/docs+++
 
 ---
 

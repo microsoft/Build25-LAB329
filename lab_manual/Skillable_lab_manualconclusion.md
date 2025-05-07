@@ -38,8 +38,8 @@ Here are some ways to build on what you've learned:
    - Integrate it with other applications
 
 5. **Learn more about:**
-   - [Microsoft Olive](https://github.com/microsoft/Olive)
-   - [ONNX Runtime](https://onnxruntime.ai/)
-   - [Azure ML](https://learn.microsoft.com/en-us/azure/machine-learning/)
+   - Microsoft Olive +++https://github.com/microsoft/Olive+++
+   - ONNX Runtime +++https://onnxruntime.ai/+++
+   - [Azure ML +++ https://learn.microsoft.com/azure/machine-learning+++
 
-Thank you for participating in this workshop! Your feedback is valuable for improving future sessions. If you would like to retry this lab or access the resources these are available at [Build Lab329](https://github.com/microsoft/Build25_Lab329)
+Thank you for participating in this workshop! Your feedback is valuable for improving future sessions. If you would like to retry this lab or access the resources these are available at Build Lab329 +++https://github.com/microsoft/Build25_Lab329+++

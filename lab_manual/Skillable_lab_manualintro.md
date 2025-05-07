@@ -78,7 +78,7 @@ Let's start by setting up your environment and cloning the code repository to yo
 ### 1. Access Azure ML Studio
 
 Open Azure ML Studio by:
-1. Go to [Azure ML Studio](https://ml.azure.com)
+1. Go to Azure ML Studio +++https://ml.azure.com+++
 2. Sign in with your Azure credentials
 3. Select your workspace (provided by your instructor)
 4. Navigate to the "Notebooks" section
@@ -87,7 +87,7 @@ Let's start with the first notebook!
 
 ## Clone the GitHub Repo and resources to your Azure ML Studio 
 
-Open your [Azure ML Studio](https://ml.azure.com)
+Open your Azure ML Studio +++https://ml.azure.com+++
 
 ![MLStudio](./images/ML_Studio.png)
 
@@ -167,4 +167,4 @@ Let's look at each notebook and what you'll do:
 | 06_Local_Inference | Run inference locally | 10 min |
 | 07_Local_Inference | Run inference locally with Foundry Local | 10 min |
 
-Now you’re ready to work with the repository on your [Azure ML Studio](https://ml.azure.com)
+Now you’re ready to work with the repository on your Azure ML Studio +++https://ml.azure.com+++

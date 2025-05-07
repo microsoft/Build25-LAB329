@@ -13,9 +13,11 @@ This lab is organized into five key sections following a practical workflow:
 5. **Local Model Download** - Preparing models for edge deployment
 
 ### Time Allocation
-- Total workshop time: 70 minutes
-  - 20 minutes for conceptual understanding
-  - 50 minutes for hands-on activities with notebooks
+## Workshop Duration and Timing
+- **Total Workshop Time**: 70 minutes
+- **Setup Time**: 5 minutes
+- **Hands-On Activities**: 60 minutes
+- **Discussion Time**: 5 minutes
 
 ### Workshop Materials
 

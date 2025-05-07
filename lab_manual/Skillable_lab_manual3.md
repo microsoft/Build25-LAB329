@@ -10,7 +10,7 @@
 
 # Model Inference with ONNX Runtime GenAI
 
-This notebook ([`03.AzureML_RuningByORTGenAI.ipynb`](03.AzureML_RuningByORTGenAI.ipynb)) implements the third phase of our model distillation pipeline: running inference with the optimized ONNX model using ONNX Runtime GenAI. This demonstrates how the fine-tuned and optimized model performs on our target task.
+This notebook `03.AzureML_RuningByORTGenAI.ipynb` implements the third phase of our model distillation pipeline: running inference with the optimized ONNX model using ONNX Runtime GenAI. This demonstrates how the fine-tuned and optimized model performs on our target task.
 
 ## Purpose
 

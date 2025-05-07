@@ -10,7 +10,7 @@
 
 # Model Registration to Azure Machine Learning
 
-This notebook ([`04.AzureML_RegisterToAzureML.ipynb`](./04.AzureML_RegisterToAzureML.ipynb)) implements the fourth phase of our model distillation pipeline: registering the optimized model to Azure Machine Learning. This step ensures the model is properly cataloged and available for deployment or sharing with other users.
+This notebook `04.AzureML_RegisterToAzureML.ipynb` implements the fourth phase of our model distillation pipeline: registering the optimized model to Azure Machine Learning. This step ensures the model is properly cataloged and available for deployment or sharing with other users.
 
 ## Purpose
 

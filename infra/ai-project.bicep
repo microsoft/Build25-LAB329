@@ -117,7 +117,7 @@ resource hub 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
     keyVault: keyVault.outputs.resourceId
     hbiWorkspace: false
     managedNetwork: {
-      isolationMode: 'Disabled'
+      isolationMode: 'AllowInternetOutBound'
     }
     v1LegacyMode: false
     publicNetworkAccess: 'Enabled'

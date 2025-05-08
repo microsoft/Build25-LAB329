@@ -101,38 +101,40 @@ Select Terminal
 
 To clone the repository and set up your environment for the lab, follow these steps:
 
-1. **Clone the Repository**: Use the `git clone` command followed by the repository URL:
+1. **Ensure you navigate to the user folder as we want to clone the workshop to our user home folder**
+      ```bash 
+      ls
+      ```
+
+   ### Move to user folder   
+   ```bash
+   cd users 
+   ```
+   ### Ensure you navigate to your specifc user folder
+   ```bash 
+   cd user*** 
+   ```
+2. **Clone the Repository**: Use the `git clone` command followed by the repository URL:
    ```bash
    git clone https://github.com/microsoft/Build25-LAB329 
    ```
 
-2. **Access the Cloned Repository**: Navigate to the directory of the cloned repository:
+3. **Access the Cloned Repository**: Navigate to the directory of the cloned repository:
    ```bash
    cd Build25-LAB329
    ```
 
-3. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
-   ```bash
-   cd Lab329/Notebook
-   ```
+4. **Create Your Environment File**: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution. The local environment file is used to store your Azure credentials:
 
-4. **Create Your Environment File**: Copy the sample environment file and rename it to local.env in the root of your solution:
    ```bash
    cp sample.env local.env
    ```
 
-5. **Edit Your Environment File**: Update the local.env file with your Azure credentials using a text editor (ensure the local.env file is saved in the root):
-   ```bash
-   code local.env
-   ```
-Create a local environment file to store your Azure credentials:
+We provide a `sample.env` file in the `notebooks` folder you will need to create a `local.env` file and save this to your user folder 
 
-```bash
-cp sample.env local.env
-code local.env
-```
+![Localenv](./images/localenv.png)
 
-Add your credentials to the file (these are provided in the resouce tab:
+Add your credentials to the file these are provided in the resouce tab:
 
 ```
 TEACHER_MODEL_NAME=DeepSeek-V3
@@ -143,11 +145,17 @@ AZUREML_RESOURCE_GROUP=your-resource-group
 AZUREML_WS_NAME=your-workspace-name
 ```
 
-Save the file and close the editor.
+Save the file in root of your your user folder as in the image above save and close the `local.env`.
+
+
+5. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
+   ```bash
+   cd Build-Lab329/Notebook
+   ```
 
 ## Notebook-by-Notebook Guide
 
-This workshop uses 7 Jupyter notebooks that you'll run in sequence. Each notebook builds on the previous one, so it's important to complete them in order. We will be your Azure ML workspace Notebook environment for notebooks 1 - 4 you will then be using the Skillable VM for notebooks 5,6,7.
+This workshop uses 7 Jupyter notebooks that you'll run in sequence. Each notebook builds on the previous one, so it's important to complete them in order. We will be your Azure ML workspace Notebook environment for notebooks 1 - 4 you will then be using the Skillable VM for notebooks 5 - 7.
 
 Let's look at each notebook and what you'll do:
 

@@ -160,8 +160,10 @@ resource project 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
     hubResourceId: hub.id
   }
   
+  // Compute Instance name must be 3-24 chars, start with a letter, only letters, numbers, and hyphens
+  var computeInstanceName = toLower(replace(replace(replace(substring('${envName}-compute', 0, 24), '_', '-'), '--', '-'), '[^a-zA-Z0-9-]', ''))
   resource compute 'computes' = {
-    name: '${envName}-compute'
+    name: computeInstanceName
     location: location
     properties: {
       computeType: 'ComputeInstance'

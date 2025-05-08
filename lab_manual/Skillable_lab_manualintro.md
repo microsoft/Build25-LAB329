@@ -116,12 +116,12 @@ To clone the repository and set up your environment for the lab, follow these st
    cd Lab329/Notebook
    ```
 
-4. **Create Your Environment File**: Copy the sample environment file and rename it to local.env:
+4. **Create Your Environment File**: Copy the sample environment file and rename it to local.env in the root of your solution:
    ```bash
    cp sample.env local.env
    ```
 
-5. **Edit Your Environment File**: Update the local.env file with your Azure credentials using a text editor:
+5. **Edit Your Environment File**: Update the local.env file with your Azure credentials using a text editor (ensure the local.env file is saved in the root):
    ```bash
    code local.env
    ```
@@ -135,7 +135,7 @@ code local.env
 Add your credentials to the file (these are provided in the resouce tab:
 
 ```
-TEACHER_MODEL_NAME=your-DeepSeek-V3-model-name
+TEACHER_MODEL_NAME=DeepSeek-V3
 TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
 TEACHER_MODEL_KEY=your-api-key-here
 AZUREML_SUBSCRIPTION_ID=your-subscription-id

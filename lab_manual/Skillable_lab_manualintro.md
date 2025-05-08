@@ -135,7 +135,7 @@ code local.env
 Add your credentials to the file (these are provided in the resouce tab:
 
 ```
-TEACHER_MODEL_NAME=DeepSeek-V3
+TEACHER_MODEL_NAME=your-DeepSeek-V3-model-name
 TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
 TEACHER_MODEL_KEY=your-api-key-here
 AZUREML_SUBSCRIPTION_ID=your-subscription-id
@@ -144,12 +144,6 @@ AZUREML_WS_NAME=your-workspace-name
 ```
 
 Save the file and close the editor.
-
-Login with your azure creditional 
-
-```
-az login --identity
-```
 
 ## Notebook-by-Notebook Guide
 

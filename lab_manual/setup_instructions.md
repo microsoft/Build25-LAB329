@@ -264,6 +264,34 @@ When you've completed the lab and want to remove all deployed resources:
 azd down
 ```
 
+To remove an **Azure Developer CLI (azd) environment** from **Azure CLI** or **Azure Cloud Shell**, follow these steps:
+
+### Manually Delete the Environment Folder
+Since `azd env delete` may not work properly in Cloud Shell, you can manually remove the environment folder:
+```bash
+rm -rf ~/.azd/env/<EnvironmentName>
+```
+Replace `<EnvironmentName>` with the actual name of your environment.
+
+### Check for Remaining Environment Variables
+Run the following command to list environment variables:
+```bash
+azd env get-values
+```
+If needed, unset specific variables:
+```bash
+azd env set <VariableName> ""
+```
+
+### Verify Cleanup
+Ensure the environment is removed by running:
+```bash
+azd env list
+```
+If the deleted environment still appears, restart Cloud Shell and check again.
+
+For more details, you can refer to [Microsoft's documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables) 
+
 This command will delete all Azure resources created during deployment, preventing further charges.
 
 ## Resources

@@ -1,4 +1,9 @@
+<p align="center">
+<img src="img/banner.jpg" alt="decorative banner" width="1200"/>
+</p>
+
 # Build 2025 Lab329 
+
 ## Fine-Tune End-to-End Distillation Models with Azure AI Foundry Models
 This workshop provides an in-depth journey into fine-tuning an end-to-end distillation process utilizing DeepSeek V3 as a teacher model and Phi4-mini as a student model. Participants will explore the theoretical underpinnings, practical applications, and engage in hands-on exercises to perfect the art of implementing and optimizing distillation techniques in AI projects.
 
@@ -48,6 +53,12 @@ The workshop follows these key steps:
 5. **Local Model Download** ([`05.Local_Download.ipynb`](./Lab329/Notebook/05.Local_Download.ipynb)):
    - Download registered models for local development or deployment
    - [Overview](./Lab329/Notebook/05.Overview.md)
+
+## Session Resources 
+
+| Resources          | Links                             | Description        |
+|:-------------------|:----------------------------------|:-------------------|
+| Build session page | https://build.microsoft.com/sessions/LAB329 | Event session page with downloadable recording, slides, resources, and speaker bio |
 
 ## Contributing
 

@@ -181,7 +181,7 @@ This lab includes Azure Bicep templates and Azure Developer CLI (azd) configurat
 
 1. **Clone the Repository** (if not already done)
    ```powershell
-   git clone https://github.com/yourusername/Build25-LAB329.git
+   git clone https://github.com/microsoft/Build25-LAB329.git
    cd Build25-LAB329
    ```
 

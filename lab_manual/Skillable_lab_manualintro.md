@@ -150,7 +150,7 @@ Save the file in root of your your user folder as in the image above save and cl
 
 5. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
    ```bash
-   cd Build-Lab329/Notebook
+   cd Build-Lab329/Lab329/Notebook
    ```
 
 ## Notebook-by-Notebook Guide

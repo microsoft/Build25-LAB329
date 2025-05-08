@@ -86,7 +86,7 @@ resource deepSeekV31Deploy 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 //      statisticsEnabled: false
     }
   }
-  
+
   resource deployment 'deployments' = {
     name: 'DeepSeek-V3'
     properties: {
@@ -159,11 +159,9 @@ resource project 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
     publicNetworkAccess: 'Enabled'
     hubResourceId: hub.id
   }
-  
-  // Compute Instance name must be 3-24 chars, start with a letter, only letters, numbers, and hyphens
-  var computeInstanceName = toLower(replace(replace(replace(substring('${envName}-compute', 0, 24), '_', '-'), '--', '-'), '[^a-zA-Z0-9-]', ''))
+
   resource compute 'computes' = {
-    name: computeInstanceName
+    name: '${envName}-compute'
     location: location
     properties: {
       computeType: 'ComputeInstance'

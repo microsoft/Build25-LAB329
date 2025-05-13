@@ -59,6 +59,7 @@ The workshop follows these key steps:
 | Resources          | Links                             | Description        |
 |:-------------------|:----------------------------------|:-------------------|
 | Build session page | https://build.microsoft.com/sessions/LAB329 | Event session page with downloadable recording, slides, resources, and speaker bio |
+|Microsoft Learn|https://aka.ms/build25/plan/CreateAgenticAISolutions|Official Collection or Plan with skilling resources to learn at your own pace|
 
 ## Contributing
 

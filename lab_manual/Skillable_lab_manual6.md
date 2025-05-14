@@ -2,7 +2,9 @@
 
 **Notebook:** `06.Local_Inference.ipynb`
 
-**Purpose:** Run the optimized model on your local machine to demonstrate its ability to answer questions without cloud resources. You will be running this notebook from the skillable VM. Please open the folder `notebooks` which is located on the desktop of your VM.
+**Purpose:** Run the optimized model on your local machine to demonstrate its ability to answer questions without cloud resources. You will be running this notebook from the skillable VM. Please open the folder `C:\Users\LabUser\Desktop\lab\Build25-LAB329\Lab329\Notebook` which is located on the desktop of your VM called `lab`.
+
+We have also provided a downloaded version of the model in the `C:\Users\LabUser\Desktop\lab\fine-tuning-phi-4-mini-onnx-int4-cpu` this can be accessed via the `lab` folder on the desktop.
 
 # Local Model Inference
 

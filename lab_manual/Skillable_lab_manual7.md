@@ -2,7 +2,10 @@
 
 **Notebook:** `07.Local_inference_AIFoundry.ipynb`
 
-**Purpose:** Deploy and test your optimized, distilled model on your local machine using Azure Foundry Local. This step demonstrates how to serve and interact with your model in a production-like, resource-constrained environment. You will be running this notebook from the skillable VM. Please open the folder `notebooks` which is located on the desktop of your VM.
+**Purpose:** Deploy and test your optimized, distilled model on your local machine using Azure Foundry Local. This step demonstrates how to serve and interact with your model in a production-like, resource-constrained environment. You will be running this notebook from the skillable VM. Please open the folder `C:\Users\LabUser\Desktop\lab\Build25-LAB329\Lab329\Notebook` which is located on the desktop of your VM called `lab`.
+
+
+We have also provided a downloaded version of the model in the `C:\Users\LabUser\Desktop\lab\fine-tuning-phi-4-mini-onnx-int4-cpu` this can be accessed via the `lab` folder on the desktop.
 
 #### Instructions:
 

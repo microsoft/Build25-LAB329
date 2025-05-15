@@ -60,15 +60,6 @@ This is a **practical, code-first workshop**. You'll work through six Jupyter no
 
 Each notebook is designed to be completed in 5-15 minutes, with clear instructions at each step.
 
-## Prerequisites Check
-
-Before you start, ensure you have:
-
-- [x] **Azure ML Studio access** with compute resources allocated
-- [x] **Python 3.10+** installed (already in Azure ML Studio)
-- [x] **Basic Python knowledge** (understanding of functions, loops, and imports)
-- [x] **Terminal/command line familiarity** (basic git commands)
-- [x] **Internet connectivity** (to access datasets and models)
 
 > **Important:** This workshop uses Azure ML Studio and requires access to a deployed Azure AI model endpoint. You should have already been provided with the necessary credentials.
 
@@ -132,7 +123,7 @@ Save the file in root of your your user folder as in the image above save and cl
 
 4. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
 
-```bash
+```
 cd Build-Lab329/Lab329/Notebook
 ```
 

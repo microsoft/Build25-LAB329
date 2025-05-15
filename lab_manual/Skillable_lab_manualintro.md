@@ -102,30 +102,18 @@ cd Users &&
 
 Press the refresh icon on your notebooks panel. You should now see your Build25-Lab329 folder within your users folder.
 
-3. Create Your Environment File: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution in the users folder. The local environment file is used to store your Azure credentials:
+3. Upload your local.env file. We have a provided 'local.env' file in the lab folder on the desktop of the VM. We need to upload this to the noetbooks environment. Using Azure ML Studio UI https://ml.azure.com
 
-We provide a `sample.env` file in the `notebooks` folder you will need to create a `local.env` file and save this to your user folder 
-
-![Localenv](./images/localenv.png)
-
-Add your credentials to the file these are provided in the resouce tab:
-
-```
-TEACHER_MODEL_NAME=DeepSeek-V3
-TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
-TEACHER_MODEL_KEY=your-api-key-here
-AZUREML_SUBSCRIPTION_ID=your-subscription-id
-AZUREML_RESOURCE_GROUP=your-resource-group
-AZUREML_WS_NAME=your-workspace-name
-```
-
-Save the file in root of your your user folder as in the image above save and close the `local.env`.
-
+- Open Azure ML Studio.
+- Navigate to Notebooks in your workspace.
+- Click on the Upload button.
+- Select the file from your local system and upload the local.env file into the root of the users home folder within user.
+ 
 
 4. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
 
 ```
-cd Build-Lab329/Lab329/Notebook
+Build-Lab329/Lab329/Notebook
 ```
 
 ## Notebook-by-Notebook Guide

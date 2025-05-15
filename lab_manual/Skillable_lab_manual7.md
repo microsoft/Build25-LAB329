@@ -23,16 +23,17 @@ This notebook guides you through running local inference with your optimized mod
    - Open a terminal in your model directory.
    - Start the server:
 
-     ```sh
+     ```
      foundry model run ./inference_model.json
      ```
+
    - The server will load your model and provide a local endpoint for inference.
 
 2. **Test Inference via CLI or Python SDK**
    - **CLI:** Use the interactive chat or send prompts directly in the terminal.
    - **Python SDK:** Install the Foundry Python SDK and run:
      
-     ```python
+     ```
      from foundry import FoundryClient
      client = FoundryClient(local_url="http://localhost:8080")
      response = client.chat("What is the capital of France? A) Berlin B) London C) Paris D) Madrid E) Rome")

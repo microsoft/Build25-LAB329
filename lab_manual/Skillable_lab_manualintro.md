@@ -100,6 +100,7 @@ cd Users &&
       cd Build25-LAB329
 ```
 
+Press the refresh icon on your notebooks panel. You should now see your Build25-Lab329 folder within your users folder.
 
 3. Create Your Environment File: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution in the users folder. The local environment file is used to store your Azure credentials:
 

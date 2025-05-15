@@ -6,15 +6,16 @@
 - **Hands-On Activities**: 60 minutes
 - **Discussion Time**: 5 minutes
 
+
 ## Table of Contents
 - Workshop Overview
 - Notebook-by-Notebook Guide
   - Step 1: Generate Training Data
   - Step 2: Fine-tune and Optimize
-  - Step 3: Test Your ONNX Model 
-  - Step 4: Register to Azure ML 
-  - Step 5: Download the Model 
-  - Step 6: Local Inference 
+  - Step 3: Test Your ONNX Model
+  - Step 4: Register to Azure ML
+  - Step 5: Download the Model
+  - Step 6: Local Inference
   - Step 7: Local Inference with Foundry Local
 - What You've Learned
 - Next Steps
@@ -102,33 +103,35 @@ Select Terminal
 To clone the repository and set up your environment for the lab, follow these steps:
 
 1. **Ensure you navigate to the user folder as we want to clone the workshop to our user home folder**
-      ```bash 
-      ls
-      ```
+
+```bash 
+ls
+```
 
    ### Move to user folder   
-   ```bash
-   cd users 
-   ```
-   ### Ensure you navigate to your specifc user folder
-   ```bash 
-   cd user*** 
-   ```
+
+``bash
+cd users 
+```
+   ### Ensure you navigate to your specifc user folder in the user directory
+
+```bash 
+cd user*** 
+```
+
 2. **Clone the Repository**: Use the `git clone` command followed by the repository URL:
-   ```bash
-   git clone https://github.com/microsoft/Build25-LAB329 
-   ```
+
+```bash
+git clone https://github.com/microsoft/Build25-LAB329 
+```
 
 3. **Access the Cloned Repository**: Navigate to the directory of the cloned repository:
-   ```bash
-   cd Build25-LAB329
-   ```
+ 
+```bash
+cd Build25-LAB329
+```
 
-4. **Create Your Environment File**: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution. The local environment file is used to store your Azure credentials:
-
-   ```bash
-   cp sample.env local.env
-   ```
+4. **Create Your Environment File**: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution in the users folder. The local environment file is used to store your Azure credentials:
 
 We provide a `sample.env` file in the `notebooks` folder you will need to create a `local.env` file and save this to your user folder 
 
@@ -149,9 +152,10 @@ Save the file in root of your your user folder as in the image above save and cl
 
 
 5. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
-   ```bash
-   cd Build-Lab329/Lab329/Notebook
-   ```
+
+```bash
+cd Build-Lab329/Lab329/Notebook
+```
 
 ## Notebook-by-Notebook Guide
 

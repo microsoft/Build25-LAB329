@@ -1,8 +1,9 @@
-### Step 5: Download the Model (5 min)
+
+# Step 5: Download the Model (5 min)
 
 **Notebook:** `05.Local_Download.ipynb`
 
-**Purpose:** Download the registered model from Azure ML to your skillable VM for local deployment and inference. You will be running this notebook from the skillable VM. Please open the folder `C:\Users\LabUser\Desktop\lab\Build25-LAB329\Lab329\Notebook` which is located on the desktop of your VM in a folder called `lab`.
+**Purpose:** Download the registered model from Azure ML to your Skillable VM for local deployment and inference. You will be running this notebook from the Skillable VM. Please open the folder `C:\Users\LabUser\Desktop\lab\Build25-LAB329\Lab329\Notebook` which is located on the desktop of your VM in a folder called `lab`.
 
 # Local Model Download
 
@@ -27,23 +28,19 @@ After fine-tuning and optimizing our model in the cloud, this notebook enables y
    - Install required Python packages (`azure-ai-ml`, `azure-identity`, `python-dotenv`, etc.)
    - Import necessary libraries for Azure ML operations
    - Configure environment variables for Azure authentication
-
 2. **Azure Authentication**
    - Connect to Azure using the Azure CLI authentication
    - Load credentials from a local environment file (`local.env`)
    - Establish connection to the Azure ML workspace
-
 3. **Model Discovery**
    - List available models in the Azure ML workspace
    - Display model names and versions for selection
    - Validate access permissions and connection status
-
 4. **Model Download**
    - Download the specified model version from Azure ML
    - Track download progress with text-based indicators
    - Handle download errors with informative messages
    - Support both synchronous and asynchronous download methods
-
 5. **Download Verification**
    - Calculate model size and file count statistics
    - Format and display model details (size in appropriate units)

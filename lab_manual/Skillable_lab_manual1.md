@@ -1,39 +1,37 @@
-## Step 1: Generate Training Data (15 min)
+
+# Step 1: Generate Training Data (15 min)
 
 **Notebook:** `01.AzureML_Distillation.ipynb`
 
 **Purpose:** Create a training dataset by asking a large teacher model (DeepSeek-V3) to answer multiple-choice questions.
 
-#### Instructions:
+#### Instructions
 
-1. **Open the notebook** from the left file explorer panel in Azure ML Studio
+1. **Open the notebook** from the left file explorer panel in Azure ML Studio.
+2. **Read the purpose and overview** at the top of the notebook.
+3. **Install required packages:**
+   - Run the first cell to install dependencies.
+   - Look for successful installation messages before continuing.
+4. **Load environment variables:**
+   - Run the environment variables cell.
+   - Verify your teacher model endpoint is correctly loaded.
+5. **Load the dataset:**
+   - Run the cell to load the CommonSenseQA dataset.
+   - You should see output showing the dataset was successfully loaded.
+6. **Process questions and get teacher responses:**
+   - Run the cells that process questions for the teacher model.
+   - Watch the progress as the teacher model generates answers.
+   - Note: This may take 5-10 minutes depending on the number of questions.
+7. **Save the teacher's responses:**
+   - Run the final cells to save responses to `data/train_data.jsonl`.
+   - Verify the file was created successfully.
 
-2. **Read the purpose and overview** at the top of the notebook 
+#### Key Outputs
 
-3. **Install required packages**
-   - Run the first cell to install dependencies
-   - Look for successful installation messages before continuing
-
-4. **Load environment variables**
-   - Run the environment variables cell
-   - Verify your teacher model endpoint is correctly loaded
-
-5. **Load the dataset**
-   - Run the cell to load the CommonSenseQA dataset
-   - You should see output showing the dataset was successfully loaded
-
-6. **Process questions and get teacher responses**
-   - Run the cells that process questions for the teacher model
-   - Watch the progress as the teacher model generates answers
-   - Note: This may take 5-10 minutes depending on the number of questions
-
-7. **Save the teacher's responses**
-   - Run the final cells to save responses to `data/train_data.jsonl`
-   - Verify the file was created successfully
-
-#### Key Outputs:
 - A JSONL file with questions and expert answers from the teacher model
 - This file will be used to train your student model in the next notebook
+
+---
 
 # Knowledge Distillation with Azure ML
 
@@ -96,6 +94,7 @@ Knowledge distillation enables transferring knowledge from a large, powerful mod
 ## Code Highlights
 
 ### Dataset Loading
+
 ```python
 train, val, _ = input_dataset.load_hf_dataset(
     dataset_name=dataset_name,
@@ -107,6 +106,7 @@ train, val, _ = input_dataset.load_hf_dataset(
 ```
 
 ### Azure AI Model Configuration
+
 ```python
 endpoint = teacher_model_endpoint_url
 model_name = teacher_model_name
@@ -115,6 +115,7 @@ client = ChatCompletionsClient(endpoint=endpoint, credential=AzureKeyCredential(
 ```
 
 ### Question Processing Function
+
 ```python
 def process_question(question_data):
     try:

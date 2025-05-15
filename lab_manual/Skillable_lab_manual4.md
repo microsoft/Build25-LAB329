@@ -1,16 +1,19 @@
-### Step 4: Register to Azure ML (5 min)
+
+# Step 4: Register to Azure ML (5 min)
 
 **Notebook:** `04.AzureML_RegisterToAzureML.ipynb`
 
 **Purpose:** Register your optimized model to Azure ML for version tracking, sharing, and future deployment.
 
-#### Instructions:
+#### Instructions
 
-1. **Open the notebook** from the file explorer
+1. **Open the notebook** from the file explorer.
+
+---
 
 # Model Registration to Azure Machine Learning
 
-This notebook `04.AzureML_RegisterToAzureML.ipynb` implements the fourth phase of our model distillation pipeline: registering the optimized model to Azure Machine Learning. This step ensures the model is properly cataloged and available for deployment or sharing with other users.
+This notebook (`04.AzureML_RegisterToAzureML.ipynb`) implements the fourth phase of our model distillation pipeline: registering the optimized model to Azure Machine Learning. This step ensures the model is properly cataloged and available for deployment or sharing with other users.
 
 ## Purpose
 

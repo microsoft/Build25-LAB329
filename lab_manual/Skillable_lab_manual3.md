@@ -1,16 +1,19 @@
-### Step 3: Test Your ONNX Model (10 min)
+
+# Step 3: Test Your ONNX Model (10 min)
 
 **Notebook:** `03.AzureML_RuningByORTGenAI.ipynb`
 
 **Purpose:** Test the optimized model using ONNX Runtime GenAI to verify its performance on multiple-choice questions.
 
-#### Instructions:
+#### Instructions
 
-1. **Open the notebook** from the file explorer
+1. **Open the notebook** from the file explorer.
+
+---
 
 # Model Inference with ONNX Runtime GenAI
 
-This notebook `03.AzureML_RuningByORTGenAI.ipynb` implements the third phase of our model distillation pipeline: running inference with the optimized ONNX model using ONNX Runtime GenAI. This demonstrates how the fine-tuned and optimized model performs on our target task.
+This notebook (`03.AzureML_RuningByORTGenAI.ipynb`) implements the third phase of our model distillation pipeline: running inference with the optimized ONNX model using ONNX Runtime GenAI. This demonstrates how the fine-tuned and optimized model performs on our target task.
 
 ## Purpose
 

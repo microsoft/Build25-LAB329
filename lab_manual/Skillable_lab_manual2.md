@@ -1,16 +1,19 @@
-### Step 2: Fine-tune and Optimize (15 min)
+
+# Step 2: Fine-tune and Optimize (15 min)
 
 **Notebook:** `02.AzureML_FineTuningAndConvertByMSOlive.ipynb`
 
 **Purpose:** Transform the small student model by fine-tuning it on the training data generated from the teacher model, and optimize it for deployment.
 
-#### Instructions:
+#### Instructions
 
-1. **Open the notebook** from the file explorer in Azure ML Studio
+1. **Open the notebook** from the file explorer in Azure ML Studio.
+
+---
 
 # Fine-Tuning and Model Conversion with Microsoft Olive
 
-This notebook `02.AzureML_FineTuningAndConvertByMSOlive.ipynb` implements the second critical phase in our model distillation pipeline: fine-tuning the student model with the knowledge captured from the teacher model, and then optimizing it for efficient deployment.
+This notebook (`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`) implements the second critical phase in our model distillation pipeline: fine-tuning the student model with the knowledge captured from the teacher model, and then optimizing it for efficient deployment.
 
 ## Workflow Overview
 

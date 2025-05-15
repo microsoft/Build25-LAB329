@@ -32,60 +32,6 @@ This notebook demonstrates practical inference with the distilled model by:
 4. **Inference Parameters**: Configuring generation parameters
 5. **Sample Inference**: Running inference on example questions
 
-## Technical Components
-
-### Environment Setup
-- Installation of `onnxruntime-genai` package for inference with optimized models
-- Setting up necessary imports for NumPy and OS operations
-
-### Model Loading
-- Loading the ONNX model from the output directory of the previous notebook
-- Using `og.Model()` to initialize the model
-- Setting up adapters to integrate the fine-tuned weights with the base model
-
-### Tokenizer Configuration
-- Creating a tokenizer instance for the model
-- Initializing a tokenizer stream for efficient token processing
-- Setting up a chat template to properly format inputs
-
-### Inference Parameters
-- Configuring generation parameters:
-  - `max_length`: Setting maximum generation length
-  - `past_present_share_buffer`: Memory optimization option
-- Defining the proper prompt structure with system instructions
-
-### Sample Inference
-- Preparing sample question input
-- Tokenizing the input with appropriate chat formatting
-- Running the generator with the correct adapter
-- Processing and displaying the model's output
-
-## Code Highlights
-
-```python
-# Load the ONNX model and adapter
-model = og.Model(model_folder)
-adapters = og.Adapters(model)
-adapters.load('./models/phi-4-mini/onnx/model/adapter_weights.onnx_adapter', "qa_choice")
-
-# Set up tokenizer
-tokenizer = og.Tokenizer(model)
-tokenizer_stream = tokenizer.create_stream()
-
-# Format input with chat template
-chat_template = "</s>You are a helpful assistant. Your output should only be one of the five choices: 'A', 'B', 'C', 'D', or 'E'.<|end|><|user|>{input}<|end|><|assistant|>"
-prompt = f'{chat_template.format(input=input)}'
-input_tokens = tokenizer.encode(prompt)
-
-# Configure inference parameters
-params = og.GeneratorParams(model)
-params.set_search_options(**search_options)
-generator = og.Generator(model, params)
-generator.set_active_adapter(adapters, "qa_choice")
-
-# Run inference
-generator.append_tokens(input_tokens)
-```
 
 ## Benefits of This Approach
 

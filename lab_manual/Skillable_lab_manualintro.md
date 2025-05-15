@@ -100,38 +100,16 @@ Select Terminal
 
 ![SelectTerminal](./images/ML_Terminal.png)
 
-To clone the repository and set up your environment for the lab, follow these steps:
+2. To clone the repository and set up your environment for the lab, follow these steps in the terminal:
 
-1. Ensure you navigate to the user folder as we want to clone the workshop to our user home folder**
+cd Users &&
+      cd User1-* &&
+      git clone https://github.com/microsoft/Build25-LAB329 &&
+      cd Build25-LAB329
 
-``` 
-ls
-```
 
-   ### Move to user folder   
 
-```
-cd users 
-```
-   ### Ensure you navigate to your specifc user folder in the user directory
-
-``` 
-cd user*** 
-```
-
-2. Clone the Repository: Use the `git clone` command followed by the repository URL:
-
-```
-git clone https://github.com/microsoft/Build25-LAB329 
-```
-
-3. Access the Cloned Repository: Navigate to the directory of the cloned repository:
- 
-```
-cd Build25-LAB329
-```
-
-4. Create Your Environment File: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution in the users folder. The local environment file is used to store your Azure credentials:
+3. Create Your Environment File: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution in the users folder. The local environment file is used to store your Azure credentials:
 
 We provide a `sample.env` file in the `notebooks` folder you will need to create a `local.env` file and save this to your user folder 
 
@@ -151,7 +129,7 @@ AZUREML_WS_NAME=your-workspace-name
 Save the file in root of your your user folder as in the image above save and close the `local.env`.
 
 
-5. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
+4. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
 
 ```bash
 cd Build-Lab329/Lab329/Notebook

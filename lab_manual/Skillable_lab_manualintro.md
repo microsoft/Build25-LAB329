@@ -102,13 +102,15 @@ cd Users &&
 
 Press the refresh icon on your notebooks panel. You should now see your Build25-Lab329 folder within your users folder.
 
-3. Upload your local.env file. We have a provided 'local.env' file in the lab folder on the desktop of the VM. We need to upload this to the noetbooks environment. Using Azure ML Studio UI https://ml.azure.com
+3. Upload your local.env file. We have a provided 'local.env' file in the lab folder on the desktop of the VM. We need to upload this to the noetbooks environment. Using Azure ML Studio UI https://ml.azure.com to the users folder 
+
 
 - Open Azure ML Studio.
 - Navigate to Notebooks in your workspace.
 - Click on the Upload button.
 - Select the file from your local system and upload the local.env file into the root of the users home folder within user.
- 
+
+![Localenv location in ML Workspace](./images/localenv.png) 
 
 4. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
 

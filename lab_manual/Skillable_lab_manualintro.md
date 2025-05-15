@@ -102,36 +102,36 @@ Select Terminal
 
 To clone the repository and set up your environment for the lab, follow these steps:
 
-1. **Ensure you navigate to the user folder as we want to clone the workshop to our user home folder**
+1. Ensure you navigate to the user folder as we want to clone the workshop to our user home folder**
 
-```bash 
+``` 
 ls
 ```
 
    ### Move to user folder   
 
-``bash
+```
 cd users 
 ```
    ### Ensure you navigate to your specifc user folder in the user directory
 
-```bash 
+``` 
 cd user*** 
 ```
 
-2. **Clone the Repository**: Use the `git clone` command followed by the repository URL:
+2. Clone the Repository: Use the `git clone` command followed by the repository URL:
 
-```bash
+```
 git clone https://github.com/microsoft/Build25-LAB329 
 ```
 
-3. **Access the Cloned Repository**: Navigate to the directory of the cloned repository:
+3. Access the Cloned Repository: Navigate to the directory of the cloned repository:
  
-```bash
+```
 cd Build25-LAB329
 ```
 
-4. **Create Your Environment File**: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution in the users folder. The local environment file is used to store your Azure credentials:
+4. Create Your Environment File: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution in the users folder. The local environment file is used to store your Azure credentials:
 
 We provide a `sample.env` file in the `notebooks` folder you will need to create a `local.env` file and save this to your user folder 
 

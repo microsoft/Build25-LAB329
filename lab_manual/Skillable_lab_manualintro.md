@@ -102,11 +102,12 @@ Select Terminal
 
 2. To clone the repository and set up your environment for the lab, follow these steps in the terminal:
 
+```
 cd Users &&
       cd User1-* &&
       git clone https://github.com/microsoft/Build25-LAB329 &&
       cd Build25-LAB329
-
+```
 
 
 3. Create Your Environment File: Copy the `sample.env` in the `notebooks` environment file and rename it to local.env in the root of your solution in the users folder. The local environment file is used to store your Azure credentials:

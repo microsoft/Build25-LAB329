@@ -67,13 +67,13 @@ From the terminal, you will clone the GitHub repository and set up your environm
 
 1. **Clone and Navigate to the Workshop**: 
 
-      +++
+      ```
       cd Users &&
       cd User1-* &&
       git clone https://github.com/microsoft/Build25-LAB329 &&
       touch local.env &&
       cd Build25-LAB329
-      +++
+      ```
 
 2. Select the **Refresh** icon in the file explorer pane to see the `local.env` file and cloned repository.
 

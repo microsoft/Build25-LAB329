@@ -55,7 +55,7 @@ Open Azure ML Studio by:
 3. Select **workspaces** from the left navigation pane
 4. **Select** your workspace (provided by your instructor)
 5. Select **Notebooks** from the left navigation pane
-6. Familiarize yourself with Notebooks menu.
+6. Familiarize yourself with **Notebooks Menu**.
 
    ![Notebooks](./images/Notebooks_Menu.png)
 
@@ -68,78 +68,70 @@ From the terminal, you will clone the GitHub repository and set up your environm
 1. **Clone and Navigate to the Workshop**: 
 
       ```bash
+      +++
       cd Users &&
       cd User1-* &&
       git clone https://github.com/microsoft/Build25-LAB329 &&
-      cp Build25-LAB329/Lab329/Notebook/sample.env local.env &&
+      touch local.env &&
       cd Build25-LAB329
+      +++
       ```
 
-2. Select the **Refresh** icon in the file explorer pane to see the new `local.env` file.
-
-      ![Localenv](./images/update-env.png)
-
-3. Select the **local.env** file to open it in the editor.
-
-      ```text
-      TEACHER_MODEL_NAME=DeepSeek-V3
-      TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
-      TEACHER_MODEL_KEY=your-api-key-here
-      AZUREML_SUBSCRIPTION_ID=your-subscription-id
-      AZUREML_RESOURCE_GROUP=your-resource-group
-      AZUREML_WS_NAME=your-workspace-name
-      ```
+2. Select the **Refresh** icon in the file explorer pane to see the `local.env` file and cloned repository.
 
 
-### Environment Variables
+### Open the Lab Configuration File
 
-You'll need the following environment variables to run the notebooks:
+1. Open **File Explorer**. It's pinned to the Windows taskbar.
+2. Navigate to the **C:\Users\LabUser\Desktop\lab** folder.
+3. Right-click on the **local.env** file, select **Open with**, and then select **Notepad**.
+4. Copy the contents of the **local.env** file to your clipboard.
 
-- `AZUREML_SUBSCRIPTION_ID`: Your Azure Subscription ID. Get this from the **Resources** tab of the Skillable VM.
+### Update the ML Environment Variables
 
-From the Azure Portal
+1. Switch back to the **Azure ML Studio**.
+2. From the **Notebooks** menu, select the **local.env** file in the **Build25-LAB329** folder.
+3. Paste the contents of the **local.env** file into the **local.env** file in Azure ML Studio.
+4. Select the **Save** icon to save the changes.
+5. Close the **local.env** file by selecting the **X** on the **local.env** tab.
 
+## Open the Lab Notebooks Folder
 
+This workshop uses 7 Jupyter notebooks in sequence. Complete them in order: use Azure ML for notebooks 1–4, then switch to the Skillable VM for notebooks 5–7.
 
+1. From the **Notebooks** file explorer, select the **Build-Lab329** folder.
+2. Select the **Lab329** folder.
+3. Select the **Notebook** folder.
 
-
-<!-- We provide a `sample.env` file in the `notebooks` folder you will need to create a `local.env` file and save this to your user folder
-
-![Localenv](./images/localenv.png) -->
-
-Update the environment file using the information from the **Resources** tab of the Skillable VM. Open the `local.env` file in your favorite text editor and update the following variables:
-
-```
-TEACHER_MODEL_NAME=DeepSeek-V3
-TEACHER_MODEL_ENDPOINT=https://your-endpoint.services.ai.azure.com/models
-TEACHER_MODEL_KEY=your-api-key-here
-AZUREML_SUBSCRIPTION_ID=your-subscription-id
-AZUREML_RESOURCE_GROUP=your-resource-group
-AZUREML_WS_NAME=your-workspace-name
-```
-
-Save the file in root of your your user folder as in the image above save and close the `local.env`.
-
-
-1. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
-   ```bash
-   cd Build-Lab329/Lab329/Notebook
-   ```
 
 ## Notebook-by-Notebook Guide
 
-This workshop uses 7 Jupyter notebooks that you'll run in sequence. Each notebook builds on the previous one, so it's important to complete them in order. We will be your Azure ML workspace Notebook environment for notebooks 1 - 4 you will then be using the Skillable VM for notebooks 5 - 7.
-
 Let's look at each notebook and what you'll do:
 
-| Notebook                                 | Purpose                                     | Duration |
-| ---------------------------------------- | ------------------------------------------- | -------- |
-| 01_AzureML_Distillation                  | Generate training data using DeepSeek-V3    | 15 min   |
-| 02_AzureML_FineTuningAndConvertByMSOlive | Fine-tune Phi-4-mini with LoRA and optimize | 15 min   |
-| 03_AzureML_RuningByORTGenAI              | Test model inference with ONNX Runtime      | 10 min   |
-| 04_AzureML_RegisterToAzureML             | Register model to Azure ML                  | 5 min    |
-| 05_Local_Download                        | Download model for local deployment         | 5 min    |
-| 06_Local_Inference                       | Run inference locally                       | 10 min   |
-| 07_Local_Inference                       | Run inference locally with Foundry Local    | 10 min   |
+Notebook 01_AzureML_Distillation  
+- **Purpose:** Generate training data using DeepSeek-V3  
+- **Time:** 15 min  
 
-Now you’re ready to work with the repository on your Azure ML Studio +++https://ml.azure.com+++
+Notebook 02_AzureML_FineTuningAndConvertByMSOlive  
+- **Purpose:** Fine-tune Phi-4-mini with LoRA and optimize  
+- **Time:** 15 min  
+
+Notebook 03_AzureML_RuningByORTGenAI  
+- **Purpose:** Test model inference with ONNX Runtime  
+- **Time:** 10 min  
+
+Notebook 04_AzureML_RegisterToAzureML  
+- **Purpose:** Register model to Azure ML  
+- **Time:** 5 min  
+
+Notebook 05_Local_Download  
+- **Purpose:** Download model for local deployment  
+- **Time:** 5 min  
+
+Notebook 06_Local_Inference  
+- **Purpose:** Run inference locally  
+- **Time:** 10 min  
+
+Notebook 07_Local_Inference  
+- **Purpose:** Run inference locally with Foundry Local  
+- **Time:** 10 min  

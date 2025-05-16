@@ -3,11 +3,11 @@
 
 Create a training dataset by asking a large teacher model (DeepSeek-V3) to answer multiple-choice questions.
 
-**Notebook:** `01.AzureML_Distillation.ipynb`
+**Notebook:** 01.AzureML_Distillation.ipynb
 
 **Time:** 15 min
 
-#### Instructions
+## Instructions
 
 When you open the notebook, you'll see an instruction for **Kernel Selection**. It's **very important** to select the **correct kernel** for your environment.
 

@@ -81,7 +81,7 @@ From the terminal, you will clone the GitHub repository and set up your environm
 
 ### Open the Lab Configuration File
 
-1. Open **File Explorer**. It's pinned to the Windows taskbar.
+1. Open **Windows File Explorer**. It's pinned to the Windows taskbar.
 2. Navigate to the **C:\Users\LabUser\Desktop\lab** folder.
 3. Right-click on the **local.env** file, select **Open with**, and then select **Notepad**.
 4. Copy the contents of the **local.env** file to your clipboard.

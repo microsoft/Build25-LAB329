@@ -97,7 +97,7 @@ From the terminal, you will clone the GitHub repository and set up your environm
 
 ## Open the Lab Notebooks Folder
 
-This workshop uses 7 Jupyter notebooks in sequence. Complete them in order: use Azure ML for notebooks 1–4, then switch to the Skillable VM for notebooks 5–7.
+Complete the Jupyter Notebooks in order: use Azure ML for 1–4, then the Skillable VM for 5–7.
 
 1. From the **Notebooks** file explorer, select the **Build-Lab329** folder.
 2. Select the **Lab329** folder.

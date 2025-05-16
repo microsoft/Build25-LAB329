@@ -66,7 +66,7 @@ From the terminal, you will clone the GitHub repository and set up your environm
 
 1. Select **Terminal** from the **Notebooks Menu** to open a terminal window.
 
-1. Copy and paste the following commands into the terminal to clone the GitHub repository and create a local environment file:
+2. Select [T] to copy the following commands to the Terminal and then press [Enter] to run them:
 
       ```
       cd Users &&
@@ -76,7 +76,7 @@ From the terminal, you will clone the GitHub repository and set up your environm
       cd Build25-LAB329
       ```
 
-1. Select the **Refresh** icon in the file explorer pane to see the `local.env` file and cloned repository.
+3. Select the **Refresh** icon in the file explorer pane to see the **local.env** file and cloned repository.
 
 
 ### Open the Lab Configuration File

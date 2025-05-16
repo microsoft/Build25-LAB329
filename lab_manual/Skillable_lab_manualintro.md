@@ -47,7 +47,7 @@ By the end of this workshop, you'll create a compact language model that:
 - Can be deployed on **edge devices** or embedded systems
 - Maintains most of the **capabilities** of the larger model
 
-### Workshop Flow
+<!-- ### Workshop Flow
 
 This is a **practical, code-first workshop**. You'll work through six Jupyter notebooks that guide you step-by-step through:
 
@@ -58,7 +58,7 @@ This is a **practical, code-first workshop**. You'll work through six Jupyter no
 5. **Registration**: Register your model with Azure ML
 6. **Deployment**: Download and run the model locally
 
-Each notebook is designed to be completed in 5-15 minutes, with clear instructions at each step.
+Each notebook is designed to be completed in 5-15 minutes, with clear instructions at each step. -->
 
 
 > **Important:** This workshop uses Azure ML Studio and requires access to a deployed Azure AI model endpoint. You should have already been provided with the necessary credentials.

@@ -55,11 +55,11 @@ Open Azure ML Studio by:
 3. Select **workspaces** from the left navigation pane
 4. **Select** your workspace (provided by your instructor)
 5. Select **Notebooks** from the left navigation pane
-6. Select **Terminal** to open a terminal window
+6. Familiarize yourself with Notebooks menu.
 
-   ![SelectTerminal](./images/ML_Terminal.png)
+   ![Notebooks](./images/Notebooks_Menu.png)
 
-<!-- Let's start with the first notebook! -->
+7. Select **Terminal** to open a terminal window
 
 ### Clone the GitHub Repo and resources to your Azure ML Studio
 

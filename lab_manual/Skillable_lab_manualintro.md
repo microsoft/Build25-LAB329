@@ -112,6 +112,11 @@ Press the refresh icon on your notebooks panel. You should now see your Build25-
 
 ![Localenv location in ML Workspace](./images/localenv.png) 
 
+Ensure the TEACHER_MODEL_ENDPOINT is correct including/models
+TEACHER_MODEL_ENDPOINT="https://westus3.api.cognitive.microsoft.com/
+Update to be:
+TEACHER_MODEL_ENDPOINT="https://westus3.api.cognitive.microsoft.com/models 
+
 4. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
 
 ```

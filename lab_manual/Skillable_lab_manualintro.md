@@ -52,11 +52,13 @@ Open Azure ML Studio by:
 
 1. **Opening** your web browser.
 2. **Navigate** to Azure ML Studio `https://ml.azure.com`.
-3. Sign in to Azure using the credentials provided in the **Resources** tab of the Skillable VM.
-4. Select **workspaces** from the left navigation pane.
-5. **Select** your workspace (provided by your instructor).
-6. Select **Notebooks** from the left navigation pane.
-7. Familiarize yourself with **Notebooks Menu**.
+
+   You may be prompted to sign in. Use the **Azure Portal** credentials provided in the **Resources** tab of the Skillable VM.
+
+3. Select **workspaces** from the left navigation pane.
+4. **Select** your workspace (provided by your instructor).
+5. Select **Notebooks** from the left navigation pane.
+6. Familiarize yourself with **Notebooks Menu**.
 
    ![Notebooks](./images/Notebooks_Menu.png)
 

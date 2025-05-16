@@ -50,7 +50,7 @@ Let's start by setting up your environment and cloning the code repository to yo
 
 Open Azure ML Studio by:
 
-1. **Opening** your web browser.
+1. **Opening** your web browser in the Skillable VM.
 2. **Navigate** to Azure ML Studio `https://ml.azure.com`.
 
    You may be prompted to sign in. Use the **Azure Portal** credentials provided in the **Resources** tab of the Skillable VM.

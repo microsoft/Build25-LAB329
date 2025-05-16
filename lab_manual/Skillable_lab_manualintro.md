@@ -3,6 +3,7 @@
 ## Teaching Small Models to Be Smart
 
 ## Workshop Duration and Timing
+
 - **Total Workshop Time**: 70 minutes
 - **Setup Time**: 5 minutes
 - **Hands-On Activities**: 60 minutes
@@ -50,7 +51,7 @@ Let's start by setting up your environment and cloning the code repository to yo
 Open Azure ML Studio by:
 
 1. **Opening** your web browser.
-1. **Navigate** to Azure ML Studio +++https://ml.azure.com+++.
+1. **Navigate** to Azure ML Studio +++<https://ml.azure.com+++>.
 2. Sign in to Azure using the credentials provided in the **Resources** tab of the Skillable VM.
 3. Select **workspaces** from the left navigation pane.
 4. **Select** your workspace (provided by your instructor).
@@ -58,7 +59,6 @@ Open Azure ML Studio by:
 6. Familiarize yourself with **Notebooks Menu**.
 
    ![Notebooks](./images/Notebooks_Menu.png)
-
 
 ### Clone the GitHub Repo to your Azure ML Studio
 
@@ -77,7 +77,6 @@ From the terminal, you will clone the GitHub repository and set up your environm
     ```
 
 3. Select the **Refresh** icon in the file explorer pane to see the **local.env** file and cloned repository.
-
 
 ### Open the Lab Configuration File
 
@@ -102,35 +101,41 @@ This workshop uses 7 Jupyter notebooks in sequence. Complete them in order: use 
 2. Select the **Lab329** folder.
 3. Select the **Notebook** folder.
 
-
 ## Notebook-by-Notebook Guide
 
 Let's look at each notebook and what you'll do:
 
-**Notebook** 01.AzureML_Distillation 
+**Notebook** 01.AzureML_Distillation
+
 - **Purpose:** Generate training data using DeepSeek-V3  
 - **Time:** 15 min  
 
 **Notebook** 02.AzureML_FineTuningAndConvertByMSOlive
+
 - **Purpose:** Fine-tune Phi-4-mini with LoRA and optimize  
 - **Time:** 15 min  
 
 **Notebook** 03.AzureML_RuningByORTGenAI  
+
 - **Purpose:** Test model inference with ONNX Runtime  
 - **Time:** 10 min  
 
 **Notebook** 04.AzureML_RegisterToAzureML  
+
 - **Purpose:** Register model to Azure ML  
 - **Time:** 5 min  
 
 **Notebook** 05.Local_Download  
+
 - **Purpose:** Download model for local deployment  
 - **Time:** 5 min  
 
 **Notebook** 06.Local_Inference  
+
 - **Purpose:** Run inference locally  
 - **Time:** 10 min  
 
 **Notebook** 07.Local_inference_AIFoundry  
+
 - **Purpose:** Run inference locally with Foundry Local  
 - **Time:** 10 min  

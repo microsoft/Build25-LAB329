@@ -107,30 +107,30 @@ This workshop uses 7 Jupyter notebooks in sequence. Complete them in order: use 
 
 Let's look at each notebook and what you'll do:
 
-Notebook 01_AzureML_Distillation  
+**Notebook** 01.AzureML_Distillation 
 - **Purpose:** Generate training data using DeepSeek-V3  
 - **Time:** 15 min  
 
-Notebook 02_AzureML_FineTuningAndConvertByMSOlive  
+**Notebook** 02.AzureML_FineTuningAndConvertByMSOlive
 - **Purpose:** Fine-tune Phi-4-mini with LoRA and optimize  
 - **Time:** 15 min  
 
-Notebook 03_AzureML_RuningByORTGenAI  
+**Notebook** 03.AzureML_RuningByORTGenAI  
 - **Purpose:** Test model inference with ONNX Runtime  
 - **Time:** 10 min  
 
-Notebook 04_AzureML_RegisterToAzureML  
+**Notebook** 04.AzureML_RegisterToAzureML  
 - **Purpose:** Register model to Azure ML  
 - **Time:** 5 min  
 
-Notebook 05_Local_Download  
+**Notebook** 05.Local_Download  
 - **Purpose:** Download model for local deployment  
 - **Time:** 5 min  
 
-Notebook 06_Local_Inference  
+**Notebook** 06.Local_Inference  
 - **Purpose:** Run inference locally  
 - **Time:** 10 min  
 
-Notebook 07_Local_Inference  
+**Notebook** 07.Local_inference_AIFoundry  
 - **Purpose:** Run inference locally with Foundry Local  
 - **Time:** 10 min  

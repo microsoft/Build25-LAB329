@@ -49,23 +49,24 @@ Let's start by setting up your environment and cloning the code repository to yo
 
 Open Azure ML Studio by:
 
-1. **Opening** your web browser
-1. **Navigate** to Azure ML Studio +++https://ml.azure.com+++
+1. **Opening** your web browser.
+1. **Navigate** to Azure ML Studio +++https://ml.azure.com+++.
 2. Sign in to Azure using the credentials provided in the **Resources** tab of the Skillable VM.
-3. Select **workspaces** from the left navigation pane
-4. **Select** your workspace (provided by your instructor)
-5. Select **Notebooks** from the left navigation pane
+3. Select **workspaces** from the left navigation pane.
+4. **Select** your workspace (provided by your instructor).
+5. Select **Notebooks** from the left navigation pane.
 6. Familiarize yourself with **Notebooks Menu**.
 
    ![Notebooks](./images/Notebooks_Menu.png)
 
-7. Select **Terminal** to open a terminal window
 
-### Clone the GitHub Repo and resources to your Azure ML Studio
+### Clone the GitHub Repo to your Azure ML Studio
 
 From the terminal, you will clone the GitHub repository and set up your environment for the lab. Follow these steps:
 
-1. **Clone and Navigate to the Workshop**: 
+1. Select **Terminal** from the **Notebooks Menu** to open a terminal window.
+
+1. Copy and paste the following commands into the terminal to clone the GitHub repository and create a local environment file:
 
       ```
       cd Users &&
@@ -75,7 +76,7 @@ From the terminal, you will clone the GitHub repository and set up your environm
       cd Build25-LAB329
       ```
 
-2. Select the **Refresh** icon in the file explorer pane to see the `local.env` file and cloned repository.
+1. Select the **Refresh** icon in the file explorer pane to see the `local.env` file and cloned repository.
 
 
 ### Open the Lab Configuration File

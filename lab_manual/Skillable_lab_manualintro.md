@@ -68,7 +68,7 @@ From the terminal, you will clone the GitHub repository and set up your environm
 
 2. Select [T] to copy the following commands to the Terminal and then press [Enter] to run them:
 
-      ```
+      ```bash
       cd Users &&
       cd User1-* &&
       git clone https://github.com/microsoft/Build25-LAB329 &&

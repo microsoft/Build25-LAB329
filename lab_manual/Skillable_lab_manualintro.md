@@ -90,7 +90,7 @@ From the terminal, you will clone the GitHub repository and set up your environm
 
 1. Switch back to the **Azure ML Studio**.
 2. From the **Notebooks** menu, select the **local.env** file in the **Build25-LAB329** folder.
-3. Paste the contents of the **local.env** file into the **local.env** file in Azure ML Studio.
+3. Paste the contents of the clipboard into the **local.env** file in Azure ML Studio.
 4. Select the **Save** icon to save the changes.
 5. Close the **local.env** file by selecting the **X** on the **local.env** tab.
 

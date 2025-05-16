@@ -1,6 +1,18 @@
 
 # Conclusion
 
+## End the Skillable Lab
+
+Be sure to **End** the lab session in Skillable. This will stop the VM and release any resources allocated to your session.
+
+1. Select the **Skillable** Burger Menu in the top right corner of the screen.
+
+   ![](./images/Skillable_Burger_Menu.png)
+
+1. Select **End**.
+1. Select **Yes, end my lab** to confirm.
+
+
 ## What You've Learned
 
 Congratulations! You've successfully completed the Model Distillation Workshop. Here's what you've accomplished:
@@ -13,6 +25,7 @@ Congratulations! You've successfully completed the Model Distillation Workshop. 
 6. **Downloaded and run the model locally**
 
 You've learned:
+
 - How knowledge distillation transfers intelligence from large to small models
 - How to use Microsoft Olive for fine-tuning and optimization
 - How to use ONNX Runtime GenAI for efficient inference
@@ -41,4 +54,12 @@ Here are some ways to build on what you've learned:
 
 Thank you for participating in this workshop! Your feedback is valuable for improving future sessions.
 
-If you would like to retry this lab or access the resources, these are available at [Build Lab329](https://github.com/microsoft/Build25_Lab329).
+## Star the GitHub Repository
+
+If you have a GitHub account, you can "star" this repository to make it easy for you to find again in the future.
+
+- Visit the GitHub repository at: [https://github.com/microsoft/Build25-LAB329](https://github.com/microsoft/Build25-LAB329)
+- Log into your GitHub account
+- Click **Star** in the top right
+
+To find this workshop again in the future, click your GitHub profile picture in the top-right and click **Your stars**.

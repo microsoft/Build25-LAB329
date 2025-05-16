@@ -1,24 +1,13 @@
-# Model Distillation Lab Manual: Teaching Small Models to Be Smart
+# Model Distillation Lab Manual
+
+## Teaching Small Models to Be Smart
 
 ## Workshop Duration and Timing
+
 - **Total Workshop Time**: 70 minutes
 - **Setup Time**: 5 minutes
 - **Hands-On Activities**: 60 minutes
 - **Discussion Time**: 5 minutes
-
-
-## Table of Contents
-- Workshop Overview
-- Notebook-by-Notebook Guide
-  - Step 1: Generate Training Data
-  - Step 2: Fine-tune and Optimize
-  - Step 3: Test Your ONNX Model
-  - Step 4: Register to Azure ML
-  - Step 5: Download the Model
-  - Step 6: Local Inference
-  - Step 7: Local Inference with Foundry Local
-- What You've Learned
-- Next Steps
 
 ## Workshop Overview
 
@@ -28,20 +17,22 @@ Welcome to the Model Distillation Workshop! In this hands-on session, you'll lea
 
 **Scenario: Edge AI for Education — Efficient Question Answering on Resource-Constrained Devices**
 
-Imagine you are an AI engineer at an EdTech company. Your goal is to deliver an intelligent question-answering assistant that can run on affordable, resource-constrained devices in schools, such as laptops or edge servers, without requiring constant cloud connectivity. However, the best-performing language models are large and expensive to run locally.
+Imagine you are an AI engineer at an EdTech company. You need to deliver an intelligent question-answering assistant that runs efficiently on low-cost, resource-constrained devices like laptops or edge servers in schools, without constant cloud access. The challenge is that the best-performing language models are large and expensive to run locally.
 
 In this workshop, you will:
-- Use a large, cloud-hosted language model (the "teacher") to generate high-quality answers for a multiple-choice question dataset (CommonsenseQA).
-- Distill this knowledge into a much smaller, efficient "student" model (Phi-4-mini) using knowledge distillation and fine-tuning techniques.
-- Optimize and quantize the student model (using Microsoft Olive and ONNX) so it can run efficiently on local hardware.
-- Register, download, and deploy the optimized model to an edge device using Azure AI Foundry Local.
-- Validate that your compact model can answer questions with high accuracy and low latency, even on limited hardware.
 
-This scenario reflects real-world needs for deploying AI in education, healthcare, manufacturing, and other sectors where cost, privacy, and offline capability are critical. By the end of the lab, you will have built an end-to-end workflow for distilling, optimizing, and deploying advanced AI models from the cloud to the edge.
+- Use a large cloud model (*teacher*) to generate answers for a multiple-choice dataset (**CommonsenseQA**).
+- Distill its knowledge into a smaller *student* model (**Phi-4-mini**) using knowledge distillation and fine-tuning.
+- Optimize and quantize the student model with **Microsoft Olive** and **ONNX** for efficient local execution.
+- Register, download, and deploy the optimized model to an edge device using **Azure AI Foundry Local**.
+- Validate that the compact model answers accurately and quickly on limited hardware.
+
+This scenario reflects real-world needs for cost-effective, private, and offline AI in education, healthcare, manufacturing, and more. By the end of the lab, you’ll have built an end-to-end workflow to distill, optimize, and deploy AI models from cloud to edge.
 
 ### What You'll Build
 
 By the end of this workshop, you'll create a compact language model that:
+
 - Is **75% smaller** than the original teacher model
 - Runs on **standard hardware** without specialized GPUs
 - Can be deployed on **edge devices** or embedded systems
@@ -49,94 +40,108 @@ By the end of this workshop, you'll create a compact language model that:
 
 ### Workshop Flow
 
-This is a **practical, code-first workshop**. You'll work through six Jupyter notebooks that guide you step-by-step through:
-
-1. **Data Generation**: Create training examples using a large "teacher" model
-2. **Fine-Tuning**: Train a smaller "student" model on this data
-3. **Optimization**: Convert and compress the model for efficiency
-4. **Testing**: Verify the model works correctly
-5. **Registration**: Register your model with Azure ML
-6. **Deployment**: Download and run the model locally
-
-Each notebook is designed to be completed in 5-15 minutes, with clear instructions at each step.
-
-
-> **Important:** This workshop uses Azure ML Studio and requires access to a deployed Azure AI model endpoint. You should have already been provided with the necessary credentials.
+This is a **practical, code-first workshop**. You’ll complete several Jupyter notebooks that guide you step by step. Each notebook takes 5–15 minutes, includes clear instructions and should be completed in order.
 
 ## Environment Setup
 
 Let's start by setting up your environment and cloning the code repository to your Azure Machine Learning Workspace.
 
-### 1. Access Azure ML Studio
+### Access Azure ML Studio
 
 Open Azure ML Studio by:
-1. Go to Azure ML Studio +++https://ml.azure.com+++
-2. Sign in with your Azure credentials
-3. Select your workspace (provided by your instructor)
-4. Navigate to the "Notebooks" section
 
-Let's start with the first notebook!
+1. **Opening** your web browser in the Skillable VM.
+2. **Navigate** to Azure ML Studio `https://ml.azure.com`.
 
-## Clone the GitHub Repo and resources to your Azure ML Studio 
+   You may be prompted to sign in. Use the **Azure Portal** credentials provided in the **Resources** tab of the Skillable VM.
 
-Open your Azure ML Studio +++https://ml.azure.com+++
+3. Select **workspaces** from the left navigation pane.
+4. **Select** your workspace (provided by your instructor).
+5. Select **Notebooks** from the left navigation pane.
+6. Familiarize yourself with **Notebooks Menu**.
 
-![MLStudio](./images/ML_Studio.png)
+   ![Notebooks](./images/Notebooks_Menu.png)
 
-Select Notebooks
+### Clone the GitHub Repo to your Azure ML Studio
 
-![MLStudioNotebooks](./images/Notebook_Terminal.png)
+From the terminal, you will clone the GitHub repository and set up your environment for the lab. Follow these steps:
 
-Select Terminal
+1. Select **Terminal** from the **Notebooks Menu** to open a terminal window.
 
-![SelectTerminal](./images/ML_Terminal.png)
+2. Select [T] to copy the following commands to the Terminal and then press [Enter] to run them:
 
-2. To clone the repository and set up your environment for the lab, follow these steps in the terminal:
+    ```bash
+    cd Users &&
+    cd User1-* &&
+    git clone https://github.com/microsoft/Build25-LAB329 &&
+    touch local.env &&
+    cd Build25-LAB329
+    ```
 
-```
-cd Users &&
-      cd User1-* &&
-      git clone https://github.com/microsoft/Build25-LAB329 &&
-      cd Build25-LAB329
-```
+3. Select **Refresh** from the **Notebooks Menu** to view the **local.env** file and cloned repository.
 
-Press the refresh icon on your notebooks panel. You should now see your Build25-Lab329 folder within your users folder.
+### Open the Lab Configuration File
 
-3. Upload your local.env file. We have a provided 'local.env' file in the lab folder on the desktop of the VM. We need to upload this to the noetbooks environment. Using Azure ML Studio UI https://ml.azure.com to the users folder 
+1. Open **Windows File Explorer**. It's pinned to the Windows taskbar.
+2. Navigate to the **C:\Users\LabUser\Desktop\lab** folder.
+3. Right-click on the **local.env** file, select **Open with**, and then select **Notepad**.
+4. Copy the contents of the **local.env** file to your clipboard.
 
+### Update the ML Environment Variables
 
-- Open Azure ML Studio.
-- Navigate to Notebooks in your workspace.
-- Click on the Upload button.
-- Select the file from your local system and upload the local.env file into the root of the users home folder within user.
+1. Switch back to the **Azure ML Studio**.
+2. From the **Notebooks** menu, select the **local.env** file in the **Build25-LAB329** folder.
+3. Paste the contents of the clipboard into the **local.env** file in Azure ML Studio.
+4. Update the TEACHER_MODEL_ENDPOINT endpoint to the following and append the **/models** path:
 
-![Localenv location in ML Workspace](./images/localenv.png) 
+    TEACHER_MODEL_ENDPOINT="https://westus3.api.cognitive.microsoft.com/**models**"
 
-Ensure the TEACHER_MODEL_ENDPOINT is correct including/models
-TEACHER_MODEL_ENDPOINT="https://westus3.api.cognitive.microsoft.com/
-Update to be:
-TEACHER_MODEL_ENDPOINT="https://westus3.api.cognitive.microsoft.com/models 
+5. Select the **Save** icon to save the changes.
+6. Close the **local.env** file by selecting the **X** on the **local.env** tab.
 
-4. **Navigate to the Lab Directory**: Go to the Lab329 folder containing the notebooks:
+## Open the Lab Notebooks Folder
 
-```
-Build-Lab329/Lab329/Notebook
-```
+Complete the Jupyter Notebooks in order: use Azure ML for 1–4, then the Skillable VM for 5–7.
+
+1. From the **Notebooks** file explorer, select the **Build-Lab329** folder.
+2. Select the **Lab329** folder.
+3. Select the **Notebook** folder.
 
 ## Notebook-by-Notebook Guide
 
-This workshop uses 7 Jupyter notebooks that you'll run in sequence. Each notebook builds on the previous one, so it's important to complete them in order. We will be your Azure ML workspace Notebook environment for notebooks 1 - 4 you will then be using the Skillable VM for notebooks 5 - 7.
-
 Let's look at each notebook and what you'll do:
 
-| Notebook | Purpose | Duration |
-|----------|---------|----------|
-| 01_AzureML_Distillation | Generate training data using DeepSeek-V3 | 15 min |
-| 02_AzureML_FineTuningAndConvertByMSOlive | Fine-tune Phi-4-mini with LoRA and optimize | 15 min |
-| 03_AzureML_RuningByORTGenAI | Test model inference with ONNX Runtime | 10 min |
-| 04_AzureML_RegisterToAzureML | Register model to Azure ML | 5 min |
-| 05_Local_Download | Download model for local deployment | 5 min |
-| 06_Local_Inference | Run inference locally | 10 min |
-| 07_Local_Inference | Run inference locally with Foundry Local | 10 min |
+**Notebook** 01.AzureML_Distillation
 
-Now you’re ready to work with the repository on your Azure ML Studio +++https://ml.azure.com+++
+- **Purpose:** Generate training data using DeepSeek-V3  
+- **Time:** 15 min  
+
+**Notebook** 02.AzureML_FineTuningAndConvertByMSOlive
+
+- **Purpose:** Fine-tune Phi-4-mini with LoRA and optimize  
+- **Time:** 15 min  
+
+**Notebook** 03.AzureML_RuningByORTGenAI  
+
+- **Purpose:** Test model inference with ONNX Runtime  
+- **Time:** 10 min  
+
+**Notebook** 04.AzureML_RegisterToAzureML  
+
+- **Purpose:** Register model to Azure ML  
+- **Time:** 5 min  
+
+**Notebook** 05.Local_Download  
+
+- **Purpose:** Download model for local deployment  
+- **Time:** 5 min  
+
+**Notebook** 06.Local_Inference  
+
+- **Purpose:** Run inference locally  
+- **Time:** 10 min  
+
+**Notebook** 07.Local_inference_AIFoundry  
+
+- **Purpose:** Run inference locally with Foundry Local  
+- **Time:** 10 min  

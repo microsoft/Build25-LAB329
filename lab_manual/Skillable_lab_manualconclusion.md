@@ -1,6 +1,18 @@
 
 # Conclusion
 
+## End the Skillable Lab
+
+Be sure to **End** the lab session in Skillable. This will stop the VM and release any resources allocated to your session.
+
+1. Select the **Skillable** Burger Menu in the top right corner of the screen.
+
+   ![](./images/Skillable_Burger_Menu.png)
+
+1. Select **End**.
+1. Select **Yes, end my lab** to confirm.
+
+
 ## What You've Learned
 
 Congratulations! You've successfully completed the Model Distillation Workshop. Here's what you've accomplished:

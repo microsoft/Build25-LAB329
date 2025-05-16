@@ -78,7 +78,7 @@ From the terminal, you will clone the GitHub repository and set up your environm
     cd Build25-LAB329
     ```
 
-3. Select the **Refresh** icon in the file explorer pane to see the **local.env** file and cloned repository.
+3. Select **Refresh** from the **Notebooks Menu** to view the **local.env** file and cloned repository.
 
 ### Open the Lab Configuration File
 

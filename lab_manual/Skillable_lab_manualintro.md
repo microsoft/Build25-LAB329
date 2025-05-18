@@ -17,6 +17,8 @@ Welcome to the Model Distillation Workshop! In this hands-on session, you'll lea
 
 **Scenario: Edge AI for Education — Efficient Question Answering on Resource-Constrained Devices**
 
+![AI in Education](./images/classroom.jpeg)
+
 Imagine you are an AI engineer at an EdTech company. You need to deliver an intelligent question-answering assistant that runs efficiently on low-cost, resource-constrained devices like laptops or edge servers in schools, without constant cloud access. The challenge is that the best-performing language models are large and expensive to run locally.
 
 In this workshop, you will:

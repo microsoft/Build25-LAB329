@@ -29,6 +29,8 @@ In this workshop, you will:
 - Register, download, and deploy the optimized model to an edge device using **Azure AI Foundry Local**.
 - Validate that the compact model answers accurately and quickly on limited hardware.
 
+![Overview](./images/overview.png)
+
 This scenario reflects real-world needs for cost-effective, private, and offline AI in education, healthcare, manufacturing, and more. By the end of the lab, you’ll have built an end-to-end workflow to distill, optimize, and deploy AI models from cloud to edge.
 
 ### What You'll Build
@@ -114,6 +116,8 @@ Complete the Jupyter Notebooks in order: use Azure ML for 1–4, then the Skilla
 ## Notebook-by-Notebook Guide
 
 Let's look at each notebook and what you'll do:
+
+![](./images/steps.png)
 
 **Notebook** 01.AzureML_Distillation
 

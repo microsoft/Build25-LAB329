@@ -109,6 +109,8 @@ Complete the Jupyter Notebooks in order: use Azure ML for 1–4, then the Skilla
 2. Select the **Lab329** folder.
 3. Select the **Notebook** folder.
 
+**🚨 Important 🚨**: If after opening the notebook, you're asked to authenticate to Azure, please accept.
+
 ## Notebook-by-Notebook Guide
 
 Let's look at each notebook and what you'll do:

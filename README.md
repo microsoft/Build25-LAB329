@@ -4,13 +4,14 @@
 
 # Build 2025 Lab329 
 
-## Fine-Tune End-to-End Distillation Models with Azure AI Foundry Models
+## Fine-Tune End-to-End Distillation Models with Azure AI Foundry Models and Foundry Local
 This workshop provides an in-depth journey into fine-tuning an end-to-end distillation process utilizing DeepSeek V3 as a teacher model and Phi4-mini as a student model. Participants will explore the theoretical underpinnings, practical applications, and engage in hands-on exercises to perfect the art of implementing and optimizing distillation techniques in AI projects.
 
-Key topics include the concept of model distillation and its significance in modern AI, an overview of DeepSeek V3 and Phi4-mini, step-by-step demonstrations of the fine-tuning process, real-world case studies, and discussions of best practices and optimization strategies. Attendees will gain insights into leveraging the Azure AI Foundry, and the Azure AI Foundry Models to streamline model selection, enhance fine-tuning efficiency, and optimize deployment strategies.
+Key topics include the concept of model distillation and its significance in modern AI, an overview of DeepSeek V3 and Phi4-mini, step-by-step demonstrations of the fine-tuning process, real-world case studies, and discussions of best practices and optimization strategies. Attendees will gain insights into leveraging the Azure AI Foundry, and the Azure AI Foundry Models to streamline model selection, enhance fine-tuning efficiency, and optimize deployment strategies and consumption of Local model with ONNX and Foundry Local.
+
 Tailored for data scientists, machine learning engineers, and AI enthusiasts, this session equips attendees with critical skills to elevate their AI solutions through advanced distillation techniques and Azure-powered tooling.
 
-This workshop provides hands-on experience with model distillation using Microsoft Azure AI Foundry. Learn how to extract knowledge from Large Language Models (LLMs) and transfer it to Smaller Language Models (SLMs) while maintaining good performance.
+This workshop provides hands-on experience with model distillation using Microsoft Azure AI Foundry. Learn how to extract knowledge from Large Language Models (LLMs) and transfer it to Smaller Language Models (SLMs) while maintaining good performance and validate the model with the ONNX GenAI Runtime and Foundry Local.
 
 ## Workshop Overview
 

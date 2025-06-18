@@ -17,6 +17,8 @@ Welcome to the Model Distillation Workshop! In this hands-on session, you'll lea
 
 **Scenario: Edge AI for Education — Efficient Question Answering on Resource-Constrained Devices**
 
+![AI in Education](./images/classroom.jpeg)
+
 Imagine you are an AI engineer at an EdTech company. You need to deliver an intelligent question-answering assistant that runs efficiently on low-cost, resource-constrained devices like laptops or edge servers in schools, without constant cloud access. The challenge is that the best-performing language models are large and expensive to run locally.
 
 In this workshop, you will:
@@ -26,6 +28,8 @@ In this workshop, you will:
 - Optimize and quantize the student model with **Microsoft Olive** and **ONNX** for efficient local execution.
 - Register, download, and deploy the optimized model to an edge device using **Azure AI Foundry Local**.
 - Validate that the compact model answers accurately and quickly on limited hardware.
+
+![Overview](./images/overview.png)
 
 This scenario reflects real-world needs for cost-effective, private, and offline AI in education, healthcare, manufacturing, and more. By the end of the lab, you’ll have built an end-to-end workflow to distill, optimize, and deploy AI models from cloud to edge.
 
@@ -107,9 +111,13 @@ Complete the Jupyter Notebooks in order: use Azure ML for 1–4, then the Skilla
 2. Select the **Lab329** folder.
 3. Select the **Notebook** folder.
 
+**🚨 Important 🚨**: If after opening the notebook, you're asked to authenticate to Azure, please accept.
+
 ## Notebook-by-Notebook Guide
 
 Let's look at each notebook and what you'll do:
+
+![](./images/steps.png)
 
 **Notebook** 01.AzureML_Distillation
 

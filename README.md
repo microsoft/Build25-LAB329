@@ -54,6 +54,14 @@ The workshop follows these key steps:
    - Download registered models for local development or deployment
    - [Overview](./Lab329/Notebook/05.Overview.md)
 
+6. **Local Inference** ([`06.Local_Inference.ipynb`](./Lab329/Notebook/06.Local_Inference.ipynb)):
+   - Run the optimized ONNX model locally for inference using ONNX GenAI Runtime
+   - Test model performance and capabilities
+
+7. **Local Inference with Foundry Local** ([`07.Local_inference_AIFoundry.ipynb`](./Lab329/Notebook/07.Local_inference_AIFoundry.ipynb)):
+   - Use Azure AI Foundry for local model inference
+   - Explore integration with the Microsoft [Foundry Local](https://github.com/microsoft/foundry-local) platform
+
 ## Session Resources 
 
 | Resources          | Links                             | Description        |

@@ -32,28 +32,23 @@ The workshop follows these key steps:
    - Load a commonsense QA dataset from Hugging Face
    - Prepare data for knowledge distillation
    - Use a "teacher" model to generate high-quality answers for training the "student" model
-   - [Overview](./Lab329/Notebook/01.Overview.md)
-
+ 
 2. **Model Fine-tuning and Conversion** ([`02.AzureML_FineTuningAndConvertByMSOlive.ipynb`](./Lab329/Notebook/02.AzureML_FineTuningAndConvertByMSOlive.ipynb)):
    - Fine-tune the Phi-4-mini model using the LoRA (Low-Rank Adaptation) method
    - Use Microsoft Olive tools to optimize and convert the model to ONNX format
    - Apply quantization techniques (int4 precision) to decrease model size
-   - [Overview](./Lab329/Notebook/02.Overview.md)
-
+ 
 3. **Model Inference Using ONNX Runtime GenAI** ([`03.AzureML_RuningByORTGenAI.ipynb`](./Lab329/Notebook/03.AzureML_RuningByORTGenAI.ipynb)):
    - Load the optimized model in ONNX format
    - Configure adapters and tokenizers
    - Perform inference and generate responses
-   - [Overview](./Lab329/Notebook/03.Overview.md)
 
 4. **Model Registration to AzureML** ([`04.AzureML_RegisterToAzureML.ipynb`](./Lab329/Notebook/04.AzureML_RegisterToAzureML.ipynb)):
    - Register the optimized model to the Azure Machine Learning workspace
    - Set appropriate model metadata for deployment
-   - [Overview](./Lab329/Notebook/04.Overview.md)
 
 5. **Local Model Download** ([`05.Local_Download.ipynb`](./Lab329/Notebook/05.Local_Download.ipynb)):
    - Download registered models for local development or deployment
-   - [Overview](./Lab329/Notebook/05.Overview.md)
 
 6. **Local Inference** ([`06.Local_Inference.ipynb`](./Lab329/Notebook/06.Local_Inference.ipynb)):
    - Run the optimized ONNX model locally for inference using ONNX GenAI Runtime

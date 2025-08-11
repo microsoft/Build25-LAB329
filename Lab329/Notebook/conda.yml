@@ -40,6 +40,7 @@ dependencies:
     - scikit-learn==1.3.0
     - matplotlib==3.7.2
     - python-dotenv==1.0.0
+    - urllib3<2
     
     # Notebook utilities
     - ipykernel==6.25.0
